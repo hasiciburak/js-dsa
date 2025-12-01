@@ -125,6 +125,47 @@
       background: var(--glow-yellow);
     }
 
+    .help-btn {
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .help-btn:hover {
+      color: var(--accent-yellow);
+      background: var(--glow-yellow);
+      border-color: var(--accent-yellow);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(247, 201, 75, 0.2);
+    }
+
+    .help-btn::before {
+      content: '?';
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: #ffffff;
+      border-radius: 50%;
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+
     /* Hero Section */
     .hero {
       padding: 140px 2rem 80px;
@@ -518,6 +559,167 @@
     section:nth-child(6) { animation-delay: 0.35s; }
     section:nth-child(7) { animation-delay: 0.4s; }
 
+    /* Popup Modal */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .popup-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .popup-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-overlay.show .popup-content {
+      transform: scale(1);
+    }
+
+    .popup-header {
+      padding: 1.5rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .popup-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .popup-title::before {
+      content: '📖';
+      font-size: 1.5rem;
+    }
+
+    .popup-close {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .popup-close:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .popup-body {
+      padding: 1.5rem;
+    }
+
+    .instruction-item {
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+      position: relative;
+    }
+
+    .instruction-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .instruction-item::before {
+      content: counter(instruction-counter);
+      counter-increment: instruction-counter;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--glow-yellow);
+      color: var(--accent-yellow);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .instruction-list {
+      counter-reset: instruction-counter;
+      list-style: none;
+    }
+
+    .instruction-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .instruction-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .instruction-desc code {
+      background: var(--bg-code);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      color: var(--accent-cyan);
+    }
+
+    .popup-content::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .popup-content::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+
+    .popup-content::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+
+    .popup-content::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       nav {
@@ -526,6 +728,32 @@
 
       .nav-links {
         display: none;
+      }
+
+      .help-btn {
+        padding: 0.65rem 1.25rem;
+        font-size: 0.85rem;
+        margin-top: 1.5rem;
+      }
+
+      .popup-overlay {
+        padding: 1rem;
+      }
+
+      .popup-content {
+        max-height: 90vh;
+      }
+
+      .popup-header {
+        padding: 1.25rem 1.25rem 0.75rem;
+      }
+
+      .popup-title {
+        font-size: 1.25rem;
+      }
+
+      .popup-body {
+        padding: 1.25rem;
       }
 
       .hero {
@@ -582,6 +810,56 @@
     </div>
   </nav>
 
+  <!-- Popup Modal -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h2 class="popup-title">How to Use This Website</h2>
+        <button class="popup-close" id="popupClose">&times;</button>
+      </div>
+      <div class="popup-body">
+        <ol class="instruction-list">
+          <li class="instruction-item">
+            <div class="instruction-title">Browse Methods by Category</div>
+            <div class="instruction-desc">
+              Use the navigation links at the top to jump to different sections: Arrays, Strings, Objects, Map, Set, Math, Patterns, and Reference.
+            </div>
+          </li>
+          <li class="instruction-item">
+            <div class="instruction-title">Copy Code Examples</div>
+            <div class="instruction-desc">
+              Hover over any code block to reveal the <code>Copy</code> button. Click it to copy the entire code snippet to your clipboard.
+            </div>
+          </li>
+          <li class="instruction-item">
+            <div class="instruction-title">Learn Method Details</div>
+            <div class="instruction-desc">
+              Hover over any highlighted method name (like <code>push()</code>, <code>map()</code>, etc.) to see a tooltip with a description and a link to the official MDN documentation.
+            </div>
+          </li>
+          <li class="instruction-item">
+            <div class="instruction-title">Understand Complexity</div>
+            <div class="instruction-desc">
+              Check the colored badges on each card to see time complexity (O(1), O(n), O(n log n), etc.) and whether methods mutate the original array or return a new one.
+            </div>
+          </li>
+          <li class="instruction-item">
+            <div class="instruction-title">Quick Reference Table</div>
+            <div class="instruction-desc">
+              Scroll to the bottom to see the Quick Reference table with time complexities and use cases for all major methods and patterns.
+            </div>
+          </li>
+          <li class="instruction-item">
+            <div class="instruction-title">Practice DSA Patterns</div>
+            <div class="instruction-desc">
+              Explore the DSA Patterns section for common interview patterns like Two Pointers, Sliding Window, Binary Search, and Graph Traversal with ready-to-use code examples.
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
   <header class="hero">
     <h1>JavaScript <span class="highlight">Methods</span> Cheatsheet</h1>
     <p>Essential methods and patterns for DSA interviews. Copy, learn, and ace your technical interviews.</p>
@@ -591,6 +869,7 @@
       <span class="hero-tag">Map & Set</span>
       <span class="hero-tag">DSA Patterns</span>
     </div>
+    <button class="help-btn" id="helpBtn">How to Use</button>
   </header>
 
   <main>
@@ -1612,6 +1891,38 @@ queue.<span class="function">shift</span>();             <span class="comment">/
 
     window.addEventListener('scroll', updateActiveNav);
     updateActiveNav();
+
+    // Popup functionality
+    const helpBtn = document.getElementById('helpBtn');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupClose = document.getElementById('popupClose');
+
+    function openPopup() {
+      popupOverlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup() {
+      popupOverlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    helpBtn.addEventListener('click', openPopup);
+    popupClose.addEventListener('click', closePopup);
+
+    // Close popup when clicking outside
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) {
+        closePopup();
+      }
+    });
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popupOverlay.classList.contains('show')) {
+        closePopup();
+      }
+    });
   </script>
 </body>
 </html>
