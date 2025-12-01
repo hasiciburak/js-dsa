@@ -1,939 +1,1003 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JavaScript DSA Cheatsheet</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-card: #16161f;
-      --bg-code: #1a1a24;
-      --text-primary: #e8e8ed;
-      --text-secondary: #8b8b9e;
-      --text-muted: #5a5a6e;
-      --accent-yellow: #f7c94b;
-      --accent-cyan: #4ecdc4;
-      --accent-pink: #ff6b9d;
-      --accent-purple: #a78bfa;
-      --accent-orange: #fb923c;
-      --accent-green: #34d399;
-      --border-color: #2a2a3a;
-      --glow-yellow: rgba(247, 201, 75, 0.15);
-      --glow-cyan: rgba(78, 205, 196, 0.15);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    /* Noise texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      pointer-events: none;
-      z-index: 1000;
-    }
-
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(10, 10, 15, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-color);
-      z-index: 100;
-      padding: 0 2rem;
-    }
-
-    .nav-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo span {
-      color: var(--accent-yellow);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.25rem;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .nav-links::-webkit-scrollbar {
-      display: none;
-    }
-
-    .nav-link {
-      padding: 0.5rem 0.875rem;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-      font-weight: 500;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-      background: var(--bg-card);
-    }
-
-    .nav-link.active {
-      color: var(--accent-yellow);
-      background: var(--glow-yellow);
-    }
-
-    .help-btn {
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      font-size: 0.95rem;
-      color: var(--text-primary);
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      position: relative;
-      z-index: 10;
-    }
-
-    .help-btn:hover {
-      color: var(--accent-yellow);
-      background: var(--glow-yellow);
-      border-color: var(--accent-yellow);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(247, 201, 75, 0.2);
-    }
-
-    .help-btn::before {
-      content: '?';
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      color: #ffffff;
-      border-radius: 50%;
-      font-weight: 600;
-      font-size: 1.5rem;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 140px 2rem 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 600px;
-      background: radial-gradient(ellipse, var(--glow-yellow) 0%, transparent 70%);
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--text-secondary);
-      max-width: 500px;
-      margin: 0 auto 2rem;
-      font-weight: 300;
-    }
-
-    .hero-tags {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .hero-tag {
-      padding: 0.5rem 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 100px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Main Content */
-    main {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem 4rem;
-    }
-
-    /* Section Styles */
-    section {
-      margin-bottom: 4rem;
-      scroll-margin-top: 80px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      font-size: 1.5rem;
-    }
-
-    .section-icon.yellow { background: var(--glow-yellow); }
-    .section-icon.cyan { background: var(--glow-cyan); }
-    .section-icon.pink { background: rgba(255, 107, 157, 0.15); }
-    .section-icon.purple { background: rgba(167, 139, 250, 0.15); }
-    .section-icon.orange { background: rgba(251, 146, 60, 0.15); }
-    .section-icon.green { background: rgba(52, 211, 153, 0.15); }
-
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    /* Cards Grid */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-      gap: 1.25rem;
-    }
-
-    @media (max-width: 480px) {
-      .cards-grid {
-        grid-template-columns: 1fr;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript DSA Cheatsheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-primary: #0a0a0f;
+        --bg-secondary: #12121a;
+        --bg-card: #16161f;
+        --bg-code: #1a1a24;
+        --text-primary: #e8e8ed;
+        --text-secondary: #8b8b9e;
+        --text-muted: #5a5a6e;
+        --accent-yellow: #f7c94b;
+        --accent-cyan: #4ecdc4;
+        --accent-pink: #ff6b9d;
+        --accent-purple: #a78bfa;
+        --accent-orange: #fb923c;
+        --accent-green: #34d399;
+        --border-color: #2a2a3a;
+        --glow-yellow: rgba(247, 201, 75, 0.15);
+        --glow-cyan: rgba(78, 205, 196, 0.15);
       }
-    }
 
-    /* Card */
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      border-color: var(--text-muted);
-      transform: translateY(-2px);
-    }
-
-    .card-header {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .card-badge {
-      font-size: 0.7rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 100px;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 500;
-    }
-
-    .card-badge.yellow { background: var(--glow-yellow); color: var(--accent-yellow); }
-    .card-badge.cyan { background: var(--glow-cyan); color: var(--accent-cyan); }
-    .card-badge.pink { background: rgba(255, 107, 157, 0.15); color: var(--accent-pink); }
-    .card-badge.purple { background: rgba(167, 139, 250, 0.15); color: var(--accent-purple); }
-    .card-badge.orange { background: rgba(251, 146, 60, 0.15); color: var(--accent-orange); }
-    .card-badge.green { background: rgba(52, 211, 153, 0.15); color: var(--accent-green); }
-
-    /* Code Block */
-    .code-block {
-      position: relative;
-    }
-
-    .code-block pre {
-      margin: 0;
-      padding: 1.25rem;
-      background: var(--bg-code);
-      overflow-x: auto;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      line-height: 1.7;
-      color: var(--text-primary);
-    }
-
-    .code-block pre::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .code-block pre::-webkit-scrollbar-track {
-      background: var(--bg-secondary);
-    }
-
-    .code-block pre::-webkit-scrollbar-thumb {
-      background: var(--border-color);
-      border-radius: 3px;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      padding: 0.4rem 0.7rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      color: var(--text-secondary);
-      font-size: 0.7rem;
-      cursor: pointer;
-      opacity: 0;
-      transition: all 0.2s ease;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .code-block:hover .copy-btn {
-      opacity: 1;
-    }
-
-    .copy-btn:hover {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-
-    .copy-btn.copied {
-      color: var(--accent-green);
-      border-color: var(--accent-green);
-    }
-
-    /* Syntax Highlighting */
-    .keyword { color: var(--accent-pink); }
-    .function { 
-      color: var(--accent-cyan); 
-      cursor: help;
-      position: relative;
-      text-decoration: underline;
-      text-decoration-color: var(--accent-cyan);
-      text-decoration-style: dotted;
-      text-underline-offset: 2px;
-    }
-    .string { color: var(--accent-green); }
-    .number { color: var(--accent-orange); }
-    .comment { color: var(--text-muted); font-style: italic; }
-    .operator { color: var(--accent-yellow); }
-    .property { 
-      color: var(--accent-purple);
-      cursor: help;
-      position: relative;
-      text-decoration: underline;
-      text-decoration-color: var(--accent-purple);
-      text-decoration-style: dotted;
-      text-underline-offset: 2px;
-    }
-
-    /* Tooltip */
-    .tooltip {
-      position: absolute;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      max-width: 320px;
-      z-index: 10000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-
-    .tooltip.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .tooltip-title {
-      font-weight: 600;
-      color: var(--accent-cyan);
-      margin-bottom: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-    }
-
-    .tooltip-desc {
-      color: var(--text-secondary);
-      margin-bottom: 0.75rem;
-      font-size: 0.8rem;
-    }
-
-    .tooltip-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--accent-yellow);
-      text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 500;
-      padding: 0.4rem 0.6rem;
-      background: var(--glow-yellow);
-      border-radius: 4px;
-      transition: all 0.2s ease;
-    }
-
-    .tooltip-link:hover {
-      background: rgba(247, 201, 75, 0.25);
-      transform: translateY(-1px);
-    }
-
-    .tooltip-link::after {
-      content: '↗';
-      font-size: 0.7rem;
-    }
-
-    /* Quick Reference Table */
-    .table-container {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th {
-      padding: 1rem 1.25rem;
-      text-align: left;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-secondary);
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    td {
-      padding: 1rem 1.25rem;
-      font-size: 0.9rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    tr:hover td {
-      background: var(--bg-secondary);
-    }
-
-    td:first-child {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--accent-cyan);
-    }
-
-    td:nth-child(2) {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--accent-orange);
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 3rem 2rem;
-      border-top: 1px solid var(--border-color);
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    footer span {
-      color: var(--accent-yellow);
-    }
-
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      html {
+        scroll-behavior: smooth;
       }
-    }
 
-    section {
-      animation: fadeInUp 0.6s ease forwards;
-    }
+      body {
+        font-family: 'Outfit', sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
 
-    section:nth-child(1) { animation-delay: 0.1s; }
-    section:nth-child(2) { animation-delay: 0.15s; }
-    section:nth-child(3) { animation-delay: 0.2s; }
-    section:nth-child(4) { animation-delay: 0.25s; }
-    section:nth-child(5) { animation-delay: 0.3s; }
-    section:nth-child(6) { animation-delay: 0.35s; }
-    section:nth-child(7) { animation-delay: 0.4s; }
+      /* Noise texture overlay */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 1000;
+      }
 
-    /* Popup Modal */
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .popup-overlay.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .popup-content {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      max-width: 600px;
-      width: 100%;
-      max-height: 80vh;
-      overflow-y: auto;
-      position: relative;
-      transform: scale(0.95);
-      transition: transform 0.3s ease;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }
-
-    .popup-overlay.show .popup-content {
-      transform: scale(1);
-    }
-
-    .popup-header {
-      padding: 1.5rem 1.5rem 1rem;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .popup-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .popup-title::before {
-      content: '📖';
-      font-size: 1.5rem;
-    }
-
-    .popup-close {
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 1.5rem;
-      cursor: pointer;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-
-    .popup-close:hover {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-
-    .popup-body {
-      padding: 1.5rem;
-    }
-
-    .instruction-item {
-      margin-bottom: 1.5rem;
-      padding-left: 2rem;
-      position: relative;
-    }
-
-    .instruction-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .instruction-item::before {
-      content: counter(instruction-counter);
-      counter-increment: instruction-counter;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--glow-yellow);
-      color: var(--accent-yellow);
-      border-radius: 50%;
-      font-size: 0.85rem;
-      font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .instruction-list {
-      counter-reset: instruction-counter;
-      list-style: none;
-    }
-
-    .instruction-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .instruction-desc {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .instruction-desc code {
-      background: var(--bg-code);
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85em;
-      color: var(--accent-cyan);
-    }
-
-    .popup-content::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .popup-content::-webkit-scrollbar-track {
-      background: var(--bg-secondary);
-    }
-
-    .popup-content::-webkit-scrollbar-thumb {
-      background: var(--border-color);
-      border-radius: 4px;
-    }
-
-    .popup-content::-webkit-scrollbar-thumb:hover {
-      background: var(--text-muted);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
+      /* Navigation */
       nav {
-        padding: 0 1rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 15, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-color);
+        z-index: 100;
+        padding: 0 2rem;
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo span {
+        color: var(--accent-yellow);
       }
 
       .nav-links {
+        display: flex;
+        gap: 0.25rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar {
         display: none;
       }
 
+      .nav-link {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        font-weight: 500;
+      }
+
+      .nav-link:hover {
+        color: var(--text-primary);
+        background: var(--bg-card);
+      }
+
+      .nav-link.active {
+        color: var(--accent-yellow);
+        background: var(--glow-yellow);
+      }
+
       .help-btn {
-        padding: 0.65rem 1.25rem;
-        font-size: 0.85rem;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+        background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+        border: 1px solid transparent;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        position: relative;
+        z-index: 10;
+        box-shadow: 0 4px 16px rgba(247, 201, 75, 0.3);
       }
 
-      .popup-overlay {
-        padding: 1rem;
+      .help-btn:hover {
+        background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(247, 201, 75, 0.4);
       }
 
-      .popup-content {
-        max-height: 90vh;
+      .help-btn::before {
+        content: '?';
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        color: var(--text-primary);
+        border-radius: 50%;
+        font-weight: 600;
+        font-size: 1.5rem;
       }
 
-      .popup-header {
-        padding: 1.25rem 1.25rem 0.75rem;
-      }
-
-      .popup-title {
-        font-size: 1.25rem;
-      }
-
-      .popup-body {
-        padding: 1.25rem;
-      }
-
+      /* Hero Section */
       .hero {
-        padding: 120px 1rem 60px;
+        padding: 140px 2rem 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
       }
 
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 800px;
+        height: 600px;
+        background: radial-gradient(ellipse, var(--glow-yellow) 0%, transparent 70%);
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+
+      .hero h1 .highlight {
+        background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero p {
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+        max-width: 500px;
+        margin: 0 auto 2rem;
+        font-weight: 300;
+      }
+
+      .hero-tags {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero-tag {
+        padding: 0.5rem 1rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 100px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* Main Content */
       main {
-        padding: 0 1rem 3rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem 4rem;
+      }
+
+      /* Section Styles */
+      section {
+        margin-bottom: 4rem;
+        scroll-margin-top: 80px;
       }
 
       .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
       }
 
-      .table-container {
+      .section-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 1.5rem;
+      }
+
+      .section-icon.yellow {
+        background: var(--glow-yellow);
+      }
+      .section-icon.cyan {
+        background: var(--glow-cyan);
+      }
+      .section-icon.pink {
+        background: rgba(255, 107, 157, 0.15);
+      }
+      .section-icon.purple {
+        background: rgba(167, 139, 250, 0.15);
+      }
+      .section-icon.orange {
+        background: rgba(251, 146, 60, 0.15);
+      }
+      .section-icon.green {
+        background: rgba(52, 211, 153, 0.15);
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      /* Cards Grid */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 1.25rem;
+      }
+
+      @media (max-width: 480px) {
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Card */
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .card:hover {
+        border-color: var(--text-muted);
+        transform: translateY(-2px);
+      }
+
+      .card-header {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .card-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .card-badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.6rem;
+        border-radius: 100px;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 500;
+      }
+
+      .card-badge.yellow {
+        background: var(--glow-yellow);
+        color: var(--accent-yellow);
+      }
+      .card-badge.cyan {
+        background: var(--glow-cyan);
+        color: var(--accent-cyan);
+      }
+      .card-badge.pink {
+        background: rgba(255, 107, 157, 0.15);
+        color: var(--accent-pink);
+      }
+      .card-badge.purple {
+        background: rgba(167, 139, 250, 0.15);
+        color: var(--accent-purple);
+      }
+      .card-badge.orange {
+        background: rgba(251, 146, 60, 0.15);
+        color: var(--accent-orange);
+      }
+      .card-badge.green {
+        background: rgba(52, 211, 153, 0.15);
+        color: var(--accent-green);
+      }
+
+      /* Code Block */
+      .code-block {
+        position: relative;
+      }
+
+      .code-block pre {
+        margin: 0;
+        padding: 1.25rem;
+        background: var(--bg-code);
         overflow-x: auto;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        line-height: 1.7;
+        color: var(--text-primary);
       }
 
-      table {
-        min-width: 600px;
+      .code-block pre::-webkit-scrollbar {
+        height: 6px;
       }
 
+      .code-block pre::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+      }
+
+      .code-block pre::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 3px;
+      }
+
+      .copy-btn {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        padding: 0.4rem 0.7rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        color: var(--text-secondary);
+        font-size: 0.7rem;
+        cursor: pointer;
+        opacity: 0;
+        transition: all 0.2s ease;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .code-block:hover .copy-btn {
+        opacity: 1;
+      }
+
+      .copy-btn:hover {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+      }
+
+      .copy-btn.copied {
+        color: var(--accent-green);
+        border-color: var(--accent-green);
+      }
+
+      /* Syntax Highlighting */
+      .keyword {
+        color: var(--accent-pink);
+      }
+      .function {
+        color: var(--accent-cyan);
+        cursor: help;
+        position: relative;
+        text-decoration: underline;
+        text-decoration-color: var(--accent-cyan);
+        text-decoration-style: dotted;
+        text-underline-offset: 2px;
+      }
+      .string {
+        color: var(--accent-green);
+      }
+      .number {
+        color: var(--accent-orange);
+      }
+      .comment {
+        color: var(--text-muted);
+        font-style: italic;
+      }
+      .operator {
+        color: var(--accent-yellow);
+      }
+      .property {
+        color: var(--accent-purple);
+        cursor: help;
+        position: relative;
+        text-decoration: underline;
+        text-decoration-color: var(--accent-purple);
+        text-decoration-style: dotted;
+        text-underline-offset: 2px;
+      }
+
+      /* Tooltip */
       .tooltip {
-        max-width: 280px;
-        font-size: 0.75rem;
+        position: absolute;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        max-width: 320px;
+        z-index: 10000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+
+      .tooltip.show {
+        opacity: 1;
+        pointer-events: auto;
       }
 
       .tooltip-title {
-        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--accent-cyan);
+        margin-bottom: 0.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
       }
 
       .tooltip-desc {
+        color: var(--text-secondary);
+        margin-bottom: 0.75rem;
+        font-size: 0.8rem;
+      }
+
+      .tooltip-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        color: var(--accent-yellow);
+        text-decoration: none;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 0.4rem 0.6rem;
+        background: var(--glow-yellow);
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .tooltip-link:hover {
+        background: rgba(247, 201, 75, 0.25);
+        transform: translateY(-1px);
+      }
+
+      .tooltip-link::after {
+        content: '↗';
         font-size: 0.7rem;
       }
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <div class="nav-container">
-      <div class="logo">JS<span>DSA</span></div>
-      <div class="nav-links">
-        <a href="#arrays" class="nav-link">Arrays</a>
-        <a href="#strings" class="nav-link">Strings</a>
-        <a href="#objects" class="nav-link">Objects</a>
-        <a href="#map" class="nav-link">Map</a>
-        <a href="#set" class="nav-link">Set</a>
-        <a href="#math" class="nav-link">Math</a>
-        <a href="#patterns" class="nav-link">Patterns</a>
-        <a href="#reference" class="nav-link">Reference</a>
+
+      /* Quick Reference Table */
+      .table-container {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        padding: 1rem 1.25rem;
+        text-align: left;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-secondary);
+        background: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      td {
+        padding: 1rem 1.25rem;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tr:hover td {
+        background: var(--bg-secondary);
+      }
+
+      td:first-child {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        color: var(--accent-cyan);
+      }
+
+      td:nth-child(2) {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--accent-orange);
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 3rem 2rem;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      footer span {
+        color: var(--accent-yellow);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      section {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      section:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      section:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      section:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      section:nth-child(4) {
+        animation-delay: 0.25s;
+      }
+      section:nth-child(5) {
+        animation-delay: 0.3s;
+      }
+      section:nth-child(6) {
+        animation-delay: 0.35s;
+      }
+      section:nth-child(7) {
+        animation-delay: 0.4s;
+      }
+
+      /* Popup Modal */
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .popup-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .popup-content {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        max-width: 600px;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+        transform: scale(0.95);
+        transition: transform 0.3s ease;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .popup-overlay.show .popup-content {
+        transform: scale(1);
+      }
+
+      .popup-header {
+        padding: 1.5rem 1.5rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .popup-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .popup-title::before {
+        content: '📖';
+        font-size: 1.5rem;
+      }
+
+      .popup-close {
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+      }
+
+      .popup-close:hover {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+      }
+
+      .popup-body {
+        padding: 1.5rem;
+      }
+
+      .instruction-item {
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+        position: relative;
+      }
+
+      .instruction-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .instruction-item::before {
+        content: counter(instruction-counter);
+        counter-increment: instruction-counter;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--glow-yellow);
+        color: var(--accent-yellow);
+        border-radius: 50%;
+        font-size: 0.85rem;
+        font-weight: 600;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .instruction-list {
+        counter-reset: instruction-counter;
+        list-style: none;
+      }
+
+      .instruction-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .instruction-desc {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .instruction-desc code {
+        background: var(--bg-code);
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85em;
+        color: var(--accent-cyan);
+      }
+
+      .popup-content::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .popup-content::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+      }
+
+      .popup-content::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 4px;
+      }
+
+      .popup-content::-webkit-scrollbar-thumb:hover {
+        background: var(--text-muted);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        nav {
+          padding: 0 1rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .help-btn {
+          padding: 0.65rem 1.25rem;
+          font-size: 0.85rem;
+          margin-top: 1.5rem;
+        }
+
+        .popup-overlay {
+          padding: 1rem;
+        }
+
+        .popup-content {
+          max-height: 90vh;
+        }
+
+        .popup-header {
+          padding: 1.25rem 1.25rem 0.75rem;
+        }
+
+        .popup-title {
+          font-size: 1.25rem;
+        }
+
+        .popup-body {
+          padding: 1.25rem;
+        }
+
+        .hero {
+          padding: 120px 1rem 60px;
+        }
+
+        main {
+          padding: 0 1rem 3rem;
+        }
+
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.75rem;
+        }
+
+        .table-container {
+          overflow-x: auto;
+        }
+
+        table {
+          min-width: 600px;
+        }
+
+        .tooltip {
+          max-width: 280px;
+          font-size: 0.75rem;
+        }
+
+        .tooltip-title {
+          font-size: 0.8rem;
+        }
+
+        .tooltip-desc {
+          font-size: 0.7rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <div class="logo">JS<span>DSA</span></div>
+        <div class="nav-links">
+          <a href="#arrays" class="nav-link">Arrays</a>
+          <a href="#strings" class="nav-link">Strings</a>
+          <a href="#objects" class="nav-link">Objects</a>
+          <a href="#map" class="nav-link">Map</a>
+          <a href="#set" class="nav-link">Set</a>
+          <a href="#math" class="nav-link">Math</a>
+          <a href="#patterns" class="nav-link">Patterns</a>
+          <a href="#reference" class="nav-link">Reference</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Popup Modal -->
+    <div class="popup-overlay" id="popupOverlay">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h2 class="popup-title">How to Use This Website</h2>
+          <button class="popup-close" id="popupClose">&times;</button>
+        </div>
+        <div class="popup-body">
+          <ol class="instruction-list">
+            <li class="instruction-item">
+              <div class="instruction-title">Browse Methods by Category</div>
+              <div class="instruction-desc">
+                Use the navigation links at the top to jump to different sections: Arrays, Strings, Objects, Map, Set,
+                Math, Patterns, and Reference.
+              </div>
+            </li>
+            <li class="instruction-item">
+              <div class="instruction-title">Copy Code Examples</div>
+              <div class="instruction-desc">
+                Hover over any code block to reveal the
+                <code>Copy</code> button. Click it to copy the entire code snippet to your clipboard.
+              </div>
+            </li>
+            <li class="instruction-item">
+              <div class="instruction-title">Learn Method Details</div>
+              <div class="instruction-desc">
+                Hover over any highlighted method name (like
+                <code>push()</code>, <code>map()</code>, etc.) to see a tooltip with a description and a link to the
+                official MDN documentation.
+              </div>
+            </li>
+            <li class="instruction-item">
+              <div class="instruction-title">Understand Complexity</div>
+              <div class="instruction-desc">
+                Check the colored badges on each card to see time complexity (O(1), O(n), O(n log n), etc.) and whether
+                methods mutate the original array or return a new one.
+              </div>
+            </li>
+            <li class="instruction-item">
+              <div class="instruction-title">Quick Reference Table</div>
+              <div class="instruction-desc">
+                Scroll to the bottom to see the Quick Reference table with time complexities and use cases for all major
+                methods and patterns.
+              </div>
+            </li>
+            <li class="instruction-item">
+              <div class="instruction-title">Practice DSA Patterns</div>
+              <div class="instruction-desc">
+                Explore the DSA Patterns section for common interview patterns like Two Pointers, Sliding Window, Binary
+                Search, and Graph Traversal with ready-to-use code examples.
+              </div>
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
-  </nav>
 
-  <!-- Popup Modal -->
-  <div class="popup-overlay" id="popupOverlay">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h2 class="popup-title">How to Use This Website</h2>
-        <button class="popup-close" id="popupClose">&times;</button>
+    <header class="hero">
+      <h1>JavaScript <span class="highlight">Methods</span> Cheatsheet</h1>
+      <p>Essential methods and patterns for DSA interviews. Copy, learn, and ace your technical interviews.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Arrays</span>
+        <span class="hero-tag">Strings</span>
+        <span class="hero-tag">Map & Set</span>
+        <span class="hero-tag">DSA Patterns</span>
       </div>
-      <div class="popup-body">
-        <ol class="instruction-list">
-          <li class="instruction-item">
-            <div class="instruction-title">Browse Methods by Category</div>
-            <div class="instruction-desc">
-              Use the navigation links at the top to jump to different sections: Arrays, Strings, Objects, Map, Set, Math, Patterns, and Reference.
-            </div>
-          </li>
-          <li class="instruction-item">
-            <div class="instruction-title">Copy Code Examples</div>
-            <div class="instruction-desc">
-              Hover over any code block to reveal the <code>Copy</code> button. Click it to copy the entire code snippet to your clipboard.
-            </div>
-          </li>
-          <li class="instruction-item">
-            <div class="instruction-title">Learn Method Details</div>
-            <div class="instruction-desc">
-              Hover over any highlighted method name (like <code>push()</code>, <code>map()</code>, etc.) to see a tooltip with a description and a link to the official MDN documentation.
-            </div>
-          </li>
-          <li class="instruction-item">
-            <div class="instruction-title">Understand Complexity</div>
-            <div class="instruction-desc">
-              Check the colored badges on each card to see time complexity (O(1), O(n), O(n log n), etc.) and whether methods mutate the original array or return a new one.
-            </div>
-          </li>
-          <li class="instruction-item">
-            <div class="instruction-title">Quick Reference Table</div>
-            <div class="instruction-desc">
-              Scroll to the bottom to see the Quick Reference table with time complexities and use cases for all major methods and patterns.
-            </div>
-          </li>
-          <li class="instruction-item">
-            <div class="instruction-title">Practice DSA Patterns</div>
-            <div class="instruction-desc">
-              Explore the DSA Patterns section for common interview patterns like Two Pointers, Sliding Window, Binary Search, and Graph Traversal with ready-to-use code examples.
-            </div>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </div>
+      <button class="help-btn" id="helpBtn">How to Use</button>
+    </header>
 
-  <header class="hero">
-    <h1>JavaScript <span class="highlight">Methods</span> Cheatsheet</h1>
-    <p>Essential methods and patterns for DSA interviews. Copy, learn, and ace your technical interviews.</p>
-    <div class="hero-tags">
-      <span class="hero-tag">Arrays</span>
-      <span class="hero-tag">Strings</span>
-      <span class="hero-tag">Map & Set</span>
-      <span class="hero-tag">DSA Patterns</span>
-    </div>
-    <button class="help-btn" id="helpBtn">How to Use</button>
-  </header>
-
-  <main>
-    <!-- Arrays Section -->
-    <section id="arrays">
-      <div class="section-header">
-        <div class="section-icon yellow">[ ]</div>
-        <h2 class="section-title">Arrays</h2>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Adding / Removing</span>
-            <span class="card-badge yellow">mutates</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+    <main>
+      <!-- Arrays Section -->
+      <section id="arrays">
+        <div class="section-header">
+          <div class="section-icon yellow">[ ]</div>
+          <h2 class="section-title">Arrays</h2>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Adding / Removing</span>
+              <span class="card-badge yellow">mutates</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
 arr.<span class="function">push</span>(<span class="number">4</span>);           <span class="comment">// [1, 2, 3, 4]</span>
 arr.<span class="function">pop</span>();             <span class="comment">// [1, 2, 3], returns 4</span>
 arr.<span class="function">unshift</span>(<span class="number">0</span>);        <span class="comment">// [0, 1, 2, 3]</span>
 arr.<span class="function">shift</span>();           <span class="comment">// [1, 2, 3], returns 0</span>
 arr.<span class="function">splice</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="string">'a'</span>); <span class="comment">// [1, 'a', 3]</span></pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Searching</span>
-            <span class="card-badge cyan">O(n)</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">const</span> nums = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">20</span>];
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Searching</span>
+              <span class="card-badge cyan">O(n)</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">const</span> nums = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">20</span>];
 nums.<span class="function">indexOf</span>(<span class="number">20</span>);           <span class="comment">// 1</span>
 nums.<span class="function">lastIndexOf</span>(<span class="number">20</span>);       <span class="comment">// 3</span>
 nums.<span class="function">includes</span>(<span class="number">30</span>);          <span class="comment">// true</span>
 nums.<span class="function">find</span>(x <span class="operator">=></span> x > <span class="number">15</span>);     <span class="comment">// 20</span>
 nums.<span class="function">findIndex</span>(x <span class="operator">=></span> x > <span class="number">15</span>); <span class="comment">// 1</span></pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Transforming</span>
-            <span class="card-badge green">new array</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">map</span>(x <span class="operator">=></span> x * <span class="number">2</span>);             <span class="comment">// [2, 4, 6]</span>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Transforming</span>
+              <span class="card-badge green">new array</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">map</span>(x <span class="operator">=></span> x * <span class="number">2</span>);             <span class="comment">// [2, 4, 6]</span>
 [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>].<span class="function">filter</span>(x <span class="operator">=></span> x % <span class="number">2</span> === <span class="number">0</span>); <span class="comment">// [2, 4]</span>
 [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">reduce</span>((sum, x) <span class="operator">=></span> sum + x, <span class="number">0</span>); <span class="comment">// 6</span>
 [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, [<span class="number">4</span>]]].<span class="function">flat</span>(<span class="number">2</span>);         <span class="comment">// [1, 2, 3, 4]</span></pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Sorting & Slicing</span>
-            <span class="card-badge orange">O(n log n)</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">const</span> unsorted = [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>];
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Sorting & Slicing</span>
+              <span class="card-badge orange">O(n log n)</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">const</span> unsorted = [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>];
 unsorted.<span class="function">sort</span>((a, b) <span class="operator">=></span> a - b);  <span class="comment">// ascending</span>
 unsorted.<span class="function">sort</span>((a, b) <span class="operator">=></span> b - a);  <span class="comment">// descending</span>
 
@@ -941,42 +1005,42 @@ unsorted.<span class="function">sort</span>((a, b) <span class="operator">=></sp
 letters.<span class="function">slice</span>(<span class="number">1</span>, <span class="number">3</span>);   <span class="comment">// ['b', 'c']</span>
 letters.<span class="function">concat</span>([<span class="string">'e'</span>]); <span class="comment">// ['a','b','c','d','e']</span>
 letters.<span class="function">join</span>(<span class="string">'-'</span>);     <span class="comment">// 'a-b-c-d'</span></pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Iteration & Utilities</span>
-            <span class="card-badge purple">boolean</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">every</span>(x <span class="operator">=></span> x > <span class="number">0</span>);  <span class="comment">// true (all pass)</span>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Iteration & Utilities</span>
+              <span class="card-badge purple">boolean</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">every</span>(x <span class="operator">=></span> x > <span class="number">0</span>);  <span class="comment">// true (all pass)</span>
 [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">some</span>(x <span class="operator">=></span> x > <span class="number">2</span>);   <span class="comment">// true (any passes)</span>
 
 <span class="property">Array</span>.<span class="function">from</span>(<span class="string">'abc'</span>);                     <span class="comment">// ['a','b','c']</span>
 <span class="property">Array</span>.<span class="function">from</span>({<span class="property">length</span>: <span class="number">3</span>}, (_, i) <span class="operator">=></span> i);  <span class="comment">// [0, 1, 2]</span>
 [...<span class="keyword">new</span> <span class="function">Set</span>([<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>])];               <span class="comment">// [1, 2]</span></pre>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Strings Section -->
-    <section id="strings">
-      <div class="section-header">
-        <div class="section-icon cyan">" "</div>
-        <h2 class="section-title">Strings</h2>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Accessing & Searching</span>
-            <span class="card-badge cyan">O(n)</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">const</span> str = <span class="string">'hello'</span>;
+      <!-- Strings Section -->
+      <section id="strings">
+        <div class="section-header">
+          <div class="section-icon cyan">" "</div>
+          <h2 class="section-title">Strings</h2>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Accessing & Searching</span>
+              <span class="card-badge cyan">O(n)</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">const</span> str = <span class="string">'hello'</span>;
 str[<span class="number">0</span>];                <span class="comment">// 'h'</span>
 str.<span class="function">charAt</span>(<span class="number">1</span>);         <span class="comment">// 'e'</span>
 str.<span class="function">charCodeAt</span>(<span class="number">0</span>);     <span class="comment">// 104</span>
@@ -985,17 +1049,17 @@ str.<span class="function">charCodeAt</span>(<span class="number">0</span>);    
 <span class="string">'hello world'</span>.<span class="function">includes</span>(<span class="string">'world'</span>);  <span class="comment">// true</span>
 <span class="string">'filename.js'</span>.<span class="function">startsWith</span>(<span class="string">'file'</span>); <span class="comment">// true</span>
 <span class="string">'filename.js'</span>.<span class="function">endsWith</span>(<span class="string">'.js'</span>);    <span class="comment">// true</span></pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Extracting & Transforming</span>
-            <span class="card-badge green">new string</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="string">'hello world'</span>.<span class="function">slice</span>(<span class="number">0</span>, <span class="number">5</span>);      <span class="comment">// 'hello'</span>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Extracting & Transforming</span>
+              <span class="card-badge green">new string</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="string">'hello world'</span>.<span class="function">slice</span>(<span class="number">0</span>, <span class="number">5</span>);      <span class="comment">// 'hello'</span>
 <span class="string">'hello world'</span>.<span class="function">split</span>(<span class="string">' '</span>);       <span class="comment">// ['hello', 'world']</span>
 <span class="string">'a,b,c'</span>.<span class="function">split</span>(<span class="string">','</span>);             <span class="comment">// ['a', 'b', 'c']</span>
 
@@ -1004,40 +1068,40 @@ str.<span class="function">charCodeAt</span>(<span class="number">0</span>);    
 <span class="string">'foo bar'</span>.<span class="function">replace</span>(<span class="string">'bar'</span>, <span class="string">'baz'</span>);<span class="comment">// 'foo baz'</span>
 <span class="string">'ha'</span>.<span class="function">repeat</span>(<span class="number">3</span>);                 <span class="comment">// 'hahaha'</span>
 <span class="string">'5'</span>.<span class="function">padStart</span>(<span class="number">3</span>, <span class="string">'0'</span>);           <span class="comment">// '005'</span></pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Regex</span>
-            <span class="card-badge pink">pattern</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="string">'test123'</span>.<span class="function">match</span>(<span class="operator">/\d+/</span>);         <span class="comment">// ['123']</span>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Regex</span>
+              <span class="card-badge pink">pattern</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="string">'test123'</span>.<span class="function">match</span>(<span class="operator">/\d+/</span>);         <span class="comment">// ['123']</span>
 <span class="string">'abc123def456'</span>.<span class="function">match</span>(<span class="operator">/\d+/g</span>);   <span class="comment">// ['123', '456']</span>
 <span class="string">'hello'</span>.<span class="function">search</span>(<span class="operator">/l+/</span>);           <span class="comment">// 2</span>
 <span class="string">'a1b2c3'</span>.<span class="function">replace</span>(<span class="operator">/\d/g</span>, <span class="string">'X'</span>);  <span class="comment">// 'aXbXcX'</span></pre>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Objects Section -->
-    <section id="objects">
-      <div class="section-header">
-        <div class="section-icon pink">{ }</div>
-        <h2 class="section-title">Objects</h2>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Object Methods</span>
-            <span class="card-badge pink">static</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">const</span> obj = { <span class="property">a</span>: <span class="number">1</span>, <span class="property">b</span>: <span class="number">2</span>, <span class="property">c</span>: <span class="number">3</span> };
+      <!-- Objects Section -->
+      <section id="objects">
+        <div class="section-header">
+          <div class="section-icon pink">{ }</div>
+          <h2 class="section-title">Objects</h2>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Object Methods</span>
+              <span class="card-badge pink">static</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">const</span> obj = { <span class="property">a</span>: <span class="number">1</span>, <span class="property">b</span>: <span class="number">2</span>, <span class="property">c</span>: <span class="number">3</span> };
 
 <span class="property">Object</span>.<span class="function">keys</span>(obj);      <span class="comment">// ['a', 'b', 'c']</span>
 <span class="property">Object</span>.<span class="function">values</span>(obj);    <span class="comment">// [1, 2, 3]</span>
@@ -1051,26 +1115,26 @@ obj.<span class="function">hasOwnProperty</span>(<span class="string">'a'</span>
 <span class="keyword">const</span> clone = { ...obj };
 <span class="keyword">const</span> merged = <span class="property">Object</span>.<span class="function">assign</span>({}, obj, { <span class="property">d</span>: <span class="number">4</span> });
 <span class="keyword">delete</span> obj.<span class="property">c</span>;          <span class="comment">// removes property c</span></pre>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Map Section -->
-    <section id="map">
-      <div class="section-header">
-        <div class="section-icon purple">⟨⟩</div>
-        <h2 class="section-title">Map</h2>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Map (ordered key-value, any key type)</span>
-            <span class="card-badge purple">O(1) avg</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="function">Map</span>();
+      <!-- Map Section -->
+      <section id="map">
+        <div class="section-header">
+          <div class="section-icon purple">⟨⟩</div>
+          <h2 class="section-title">Map</h2>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Map (ordered key-value, any key type)</span>
+              <span class="card-badge purple">O(1) avg</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="function">Map</span>();
 
 map.<span class="function">set</span>(<span class="string">'name'</span>, <span class="string">'Burak'</span>);
 map.<span class="function">set</span>(<span class="string">'age'</span>, <span class="number">25</span>);
@@ -1089,26 +1153,26 @@ map.<span class="function">delete</span>(<span class="string">'age'</span>);
 <span class="comment">// From/To object</span>
 <span class="keyword">const</span> fromObj = <span class="keyword">new</span> <span class="function">Map</span>(<span class="property">Object</span>.<span class="function">entries</span>({ <span class="property">a</span>: <span class="number">1</span> }));
 <span class="keyword">const</span> toObj = <span class="property">Object</span>.<span class="function">fromEntries</span>(map);</pre>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Set Section -->
-    <section id="set">
-      <div class="section-header">
-        <div class="section-icon orange">∪</div>
-        <h2 class="section-title">Set</h2>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Set (unique values)</span>
-            <span class="card-badge orange">O(1) avg</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="function">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// {1, 2, 3}</span>
+      <!-- Set Section -->
+      <section id="set">
+        <div class="section-header">
+          <div class="section-icon orange">∪</div>
+          <h2 class="section-title">Set</h2>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Set (unique values)</span>
+              <span class="card-badge orange">O(1) avg</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="function">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// {1, 2, 3}</span>
 
 set.<span class="function">add</span>(<span class="number">4</span>);            <span class="comment">// {1, 2, 3, 4}</span>
 set.<span class="function">has</span>(<span class="number">2</span>);            <span class="comment">// true</span>
@@ -1125,26 +1189,26 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
 <span class="keyword">const</span> union = <span class="keyword">new</span> <span class="function">Set</span>([...a, ...b]);            <span class="comment">// {1,2,3,4}</span>
 <span class="keyword">const</span> intersect = <span class="keyword">new</span> <span class="function">Set</span>([...a].<span class="function">filter</span>(x <span class="operator">=></span> b.<span class="function">has</span>(x))); <span class="comment">// {2,3}</span>
 <span class="keyword">const</span> diff = <span class="keyword">new</span> <span class="function">Set</span>([...a].<span class="function">filter</span>(x <span class="operator">=></span> !b.<span class="function">has</span>(x))); <span class="comment">// {1}</span></pre>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Math Section -->
-    <section id="math">
-      <div class="section-header">
-        <div class="section-icon green">π</div>
-        <h2 class="section-title">Math & Number</h2>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Math Methods</span>
-            <span class="card-badge green">static</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="property">Math</span>.<span class="function">max</span>(<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>);     <span class="comment">// 5</span>
+      <!-- Math Section -->
+      <section id="math">
+        <div class="section-header">
+          <div class="section-icon green">π</div>
+          <h2 class="section-title">Math & Number</h2>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Math Methods</span>
+              <span class="card-badge green">static</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="property">Math</span>.<span class="function">max</span>(<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>);     <span class="comment">// 5</span>
 <span class="property">Math</span>.<span class="function">min</span>(...[<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>]); <span class="comment">// 1 (spread for arrays)</span>
 <span class="property">Math</span>.<span class="function">abs</span>(<span class="number">-5</span>);          <span class="comment">// 5</span>
 <span class="property">Math</span>.<span class="function">floor</span>(<span class="number">3.7</span>);       <span class="comment">// 3</span>
@@ -1157,17 +1221,17 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
 
 <span class="comment">// Random int in range [min, max]</span>
 <span class="property">Math</span>.<span class="function">floor</span>(<span class="property">Math</span>.<span class="function">random</span>() * (max - min + <span class="number">1</span>)) + min;</pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Number Methods</span>
-            <span class="card-badge green">parsing</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="property">Number</span>.<span class="function">isInteger</span>(<span class="number">5</span>);   <span class="comment">// true</span>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Number Methods</span>
+              <span class="card-badge green">parsing</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="property">Number</span>.<span class="function">isInteger</span>(<span class="number">5</span>);   <span class="comment">// true</span>
 <span class="property">Number</span>.<span class="function">isNaN</span>(<span class="property">NaN</span>);     <span class="comment">// true</span>
 <span class="property">Number</span>.<span class="function">isFinite</span>(<span class="number">100</span>);  <span class="comment">// true</span>
 
@@ -1177,26 +1241,26 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
 
 <span class="comment">// BigInt for large numbers</span>
 <span class="keyword">const</span> big = <span class="number">9007199254740991n</span> + <span class="number">1n</span>;</pre>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- DSA Patterns Section -->
-    <section id="patterns">
-      <div class="section-header">
-        <div class="section-icon yellow">⚡</div>
-        <h2 class="section-title">DSA Patterns</h2>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Stack & Queue</span>
-            <span class="card-badge yellow">O(1)</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="comment">// Stack (LIFO)</span>
+      <!-- DSA Patterns Section -->
+      <section id="patterns">
+        <div class="section-header">
+          <div class="section-icon yellow">⚡</div>
+          <h2 class="section-title">DSA Patterns</h2>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Stack & Queue</span>
+              <span class="card-badge yellow">O(1)</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="comment">// Stack (LIFO)</span>
 <span class="keyword">const</span> stack = [];
 stack.<span class="function">push</span>(<span class="number">1</span>);             <span class="comment">// [1]</span>
 stack.<span class="function">push</span>(<span class="number">2</span>);             <span class="comment">// [1, 2]</span>
@@ -1208,17 +1272,17 @@ stack[stack.<span class="property">length</span> - <span class="number">1</span>
 queue.<span class="function">push</span>(<span class="number">1</span>);             <span class="comment">// enqueue</span>
 queue.<span class="function">push</span>(<span class="number">2</span>);
 queue.<span class="function">shift</span>();             <span class="comment">// dequeue: 1</span></pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Frequency Counter</span>
-            <span class="card-badge purple">Map</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">function</span> <span class="function">charFrequency</span>(str) {
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Frequency Counter</span>
+              <span class="card-badge purple">Map</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">function</span> <span class="function">charFrequency</span>(str) {
   <span class="keyword">const</span> freq = <span class="keyword">new</span> <span class="function">Map</span>();
   <span class="keyword">for</span> (<span class="keyword">const</span> char <span class="keyword">of</span> str) {
     freq.<span class="function">set</span>(char, (freq.<span class="function">get</span>(char) || <span class="number">0</span>) + <span class="number">1</span>);
@@ -1227,17 +1291,17 @@ queue.<span class="function">shift</span>();             <span class="comment">/
 }
 <span class="function">charFrequency</span>(<span class="string">'hello'</span>);
 <span class="comment">// Map { 'h'=>1, 'e'=>1, 'l'=>2, 'o'=>1 }</span></pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Two Pointers</span>
-            <span class="card-badge cyan">O(n)</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="comment">// Palindrome Check</span>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Two Pointers</span>
+              <span class="card-badge cyan">O(n)</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="comment">// Palindrome Check</span>
 <span class="keyword">function</span> <span class="function">isPalindrome</span>(s) {
   <span class="keyword">let</span> left = <span class="number">0</span>, right = s.<span class="property">length</span> - <span class="number">1</span>;
   <span class="keyword">while</span> (left < right) {
@@ -1259,17 +1323,17 @@ queue.<span class="function">shift</span>();             <span class="comment">/
   }
   <span class="keyword">return</span> [<span class="number">-1</span>, <span class="number">-1</span>];
 }</pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Sliding Window</span>
-            <span class="card-badge orange">O(n)</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="comment">// Max Sum of K consecutive elements</span>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Sliding Window</span>
+              <span class="card-badge orange">O(n)</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="comment">// Max Sum of K consecutive elements</span>
 <span class="keyword">function</span> <span class="function">maxSumSubarray</span>(arr, k) {
   <span class="keyword">let</span> windowSum = <span class="number">0</span>;
   <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < k; i++) windowSum += arr[i];
@@ -1280,17 +1344,17 @@ queue.<span class="function">shift</span>();             <span class="comment">/
   }
   <span class="keyword">return</span> maxSum;
 }</pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Binary Search</span>
-            <span class="card-badge green">O(log n)</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">function</span> <span class="function">binarySearch</span>(arr, target) {
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Binary Search</span>
+              <span class="card-badge green">O(log n)</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">function</span> <span class="function">binarySearch</span>(arr, target) {
   <span class="keyword">let</span> lo = <span class="number">0</span>, hi = arr.<span class="property">length</span> - <span class="number">1</span>;
   <span class="keyword">while</span> (lo <= hi) {
     <span class="keyword">const</span> mid = <span class="property">Math</span>.<span class="function">floor</span>((lo + hi) / <span class="number">2</span>);
@@ -1300,17 +1364,17 @@ queue.<span class="function">shift</span>();             <span class="comment">/
   }
   <span class="keyword">return</span> <span class="number">-1</span>;
 }</pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Graph Traversal - BFS</span>
-            <span class="card-badge pink">O(V+E)</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">function</span> <span class="function">bfs</span>(graph, start) {
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Graph Traversal - BFS</span>
+              <span class="card-badge pink">O(V+E)</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">function</span> <span class="function">bfs</span>(graph, start) {
   <span class="keyword">const</span> visited = <span class="keyword">new</span> <span class="function">Set</span>([start]);
   <span class="keyword">const</span> queue = [start];
   <span class="keyword">while</span> (queue.<span class="property">length</span> > <span class="number">0</span>) {
@@ -1324,17 +1388,17 @@ queue.<span class="function">shift</span>();             <span class="comment">/
   }
   <span class="keyword">return</span> visited;
 }</pre>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header">
-            <span class="card-title">Graph Traversal - DFS</span>
-            <span class="card-badge pink">O(V+E)</span>
-          </div>
-          <div class="code-block">
-            <button class="copy-btn">Copy</button>
-            <pre><span class="keyword">function</span> <span class="function">dfs</span>(graph, start, visited = <span class="keyword">new</span> <span class="function">Set</span>()) {
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Graph Traversal - DFS</span>
+              <span class="card-badge pink">O(V+E)</span>
+            </div>
+            <div class="code-block">
+              <button class="copy-btn">Copy</button>
+              <pre><span class="keyword">function</span> <span class="function">dfs</span>(graph, start, visited = <span class="keyword">new</span> <span class="function">Set</span>()) {
   visited.<span class="function">add</span>(start);
   <span class="keyword">for</span> (<span class="keyword">const</span> neighbor <span class="keyword">of</span> graph[start] || []) {
     <span class="keyword">if</span> (!visited.<span class="function">has</span>(neighbor)) {
@@ -1343,586 +1407,586 @@ queue.<span class="function">shift</span>();             <span class="comment">/
   }
   <span class="keyword">return</span> visited;
 }</pre>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Quick Reference Table -->
-    <section id="reference">
-      <div class="section-header">
-        <div class="section-icon cyan">📊</div>
-        <h2 class="section-title">Quick Reference</h2>
-      </div>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Method / Pattern</th>
-              <th>Time Complexity</th>
-              <th>Use Case</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>arr.push() / pop()</td>
-              <td>O(1)</td>
-              <td>Stack operations</td>
-            </tr>
-            <tr>
-              <td>arr.shift() / unshift()</td>
-              <td>O(n)</td>
-              <td>Queue (use linked list for O(1))</td>
-            </tr>
-            <tr>
-              <td>arr.sort()</td>
-              <td>O(n log n)</td>
-              <td>Sorting arrays</td>
-            </tr>
-            <tr>
-              <td>arr.indexOf() / includes()</td>
-              <td>O(n)</td>
-              <td>Linear search</td>
-            </tr>
-            <tr>
-              <td>Binary Search</td>
-              <td>O(log n)</td>
-              <td>Sorted array search</td>
-            </tr>
-            <tr>
-              <td>Two Pointers</td>
-              <td>O(n)</td>
-              <td>Pairs, palindromes, sorted arrays</td>
-            </tr>
-            <tr>
-              <td>Sliding Window</td>
-              <td>O(n)</td>
-              <td>Subarrays, consecutive elements</td>
-            </tr>
-            <tr>
-              <td>Map.get() / set() / has()</td>
-              <td>O(1) avg</td>
-              <td>Frequency counting, lookups</td>
-            </tr>
-            <tr>
-              <td>Set.add() / has() / delete()</td>
-              <td>O(1) avg</td>
-              <td>Uniqueness, membership</td>
-            </tr>
-            <tr>
-              <td>BFS / DFS</td>
-              <td>O(V + E)</td>
-              <td>Graph traversal</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </main>
+      <!-- Quick Reference Table -->
+      <section id="reference">
+        <div class="section-header">
+          <div class="section-icon cyan">📊</div>
+          <h2 class="section-title">Quick Reference</h2>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Method / Pattern</th>
+                <th>Time Complexity</th>
+                <th>Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>arr.push() / pop()</td>
+                <td>O(1)</td>
+                <td>Stack operations</td>
+              </tr>
+              <tr>
+                <td>arr.shift() / unshift()</td>
+                <td>O(n)</td>
+                <td>Queue (use linked list for O(1))</td>
+              </tr>
+              <tr>
+                <td>arr.sort()</td>
+                <td>O(n log n)</td>
+                <td>Sorting arrays</td>
+              </tr>
+              <tr>
+                <td>arr.indexOf() / includes()</td>
+                <td>O(n)</td>
+                <td>Linear search</td>
+              </tr>
+              <tr>
+                <td>Binary Search</td>
+                <td>O(log n)</td>
+                <td>Sorted array search</td>
+              </tr>
+              <tr>
+                <td>Two Pointers</td>
+                <td>O(n)</td>
+                <td>Pairs, palindromes, sorted arrays</td>
+              </tr>
+              <tr>
+                <td>Sliding Window</td>
+                <td>O(n)</td>
+                <td>Subarrays, consecutive elements</td>
+              </tr>
+              <tr>
+                <td>Map.get() / set() / has()</td>
+                <td>O(1) avg</td>
+                <td>Frequency counting, lookups</td>
+              </tr>
+              <tr>
+                <td>Set.add() / has() / delete()</td>
+                <td>O(1) avg</td>
+                <td>Uniqueness, membership</td>
+              </tr>
+              <tr>
+                <td>BFS / DFS</td>
+                <td>O(V + E)</td>
+                <td>Graph traversal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
 
-  <footer>
-    <p>Good luck with your interviews! <span>🚀</span></p>
-  </footer>
+    <footer>
+      <p>Good luck with your interviews! <span>🚀</span></p>
+    </footer>
 
-  <script>
-    // Method documentation and MDN links
-    const methodDocs = {
-      // Array methods
-      'push': {
-        desc: 'Adds one or more elements to the end of an array and returns the new length.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push'
-      },
-      'pop': {
-        desc: 'Removes the last element from an array and returns that element.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop'
-      },
-      'unshift': {
-        desc: 'Adds one or more elements to the beginning of an array and returns the new length.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift'
-      },
-      'shift': {
-        desc: 'Removes the first element from an array and returns that element.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift'
-      },
-      'splice': {
-        desc: 'Changes the contents of an array by removing or replacing existing elements and/or adding new elements.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice'
-      },
-      'indexOf': {
-        desc: 'Returns the first index at which a given element can be found in the array, or -1 if not present.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf'
-      },
-      'lastIndexOf': {
-        desc: 'Returns the last index at which a given element can be found in the array, or -1 if not present.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf'
-      },
-      'includes': {
-        desc: 'Determines whether an array includes a certain value, returning true or false.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes'
-      },
-      'find': {
-        desc: 'Returns the first element in the array that satisfies the provided testing function.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find'
-      },
-      'findIndex': {
-        desc: 'Returns the index of the first element in the array that satisfies the provided testing function.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex'
-      },
-      'map': {
-        desc: 'Creates a new array populated with the results of calling a provided function on every element.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map'
-      },
-      'filter': {
-        desc: 'Creates a new array with all elements that pass the test implemented by the provided function.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter'
-      },
-      'reduce': {
-        desc: 'Executes a reducer function on each element, resulting in a single output value.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce'
-      },
-      'flat': {
-        desc: 'Creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat'
-      },
-      'sort': {
-        desc: 'Sorts the elements of an array in place and returns the sorted array.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort'
-      },
-      'slice': {
-        desc: 'Returns a shallow copy of a portion of an array into a new array object.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice'
-      },
-      'concat': {
-        desc: 'Merges two or more arrays, returning a new array without modifying existing arrays.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat'
-      },
-      'join': {
-        desc: 'Creates and returns a new string by concatenating all elements in an array, separated by a specified separator.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join'
-      },
-      'every': {
-        desc: 'Tests whether all elements in the array pass the test implemented by the provided function.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every'
-      },
-      'some': {
-        desc: 'Tests whether at least one element in the array passes the test implemented by the provided function.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some'
-      },
-      'Array.from': {
-        desc: 'Creates a new, shallow-copied Array instance from an iterable or array-like object.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from'
-      },
-      // String methods
-      'charAt': {
-        desc: 'Returns the character at the specified index in a string.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt'
-      },
-      'charCodeAt': {
-        desc: 'Returns an integer between 0 and 65535 representing the UTF-16 code unit at the given index.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt'
-      },
-      'toLowerCase': {
-        desc: 'Returns the calling string value converted to lower case.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase'
-      },
-      'trim': {
-        desc: 'Removes whitespace from both ends of a string and returns a new string.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim'
-      },
-      'replace': {
-        desc: 'Returns a new string with some or all matches of a pattern replaced by a replacement.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace'
-      },
-      'repeat': {
-        desc: 'Constructs and returns a new string which contains the specified number of copies of the string.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat'
-      },
-      'padStart': {
-        desc: 'Pads the current string with another string (multiple times, if needed) until the resulting string reaches the given length.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart'
-      },
-      'startsWith': {
-        desc: 'Determines whether a string begins with the characters of a specified string.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith'
-      },
-      'endsWith': {
-        desc: 'Determines whether a string ends with the characters of a specified string.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith'
-      },
-      'split': {
-        desc: 'Divides a String into an ordered list of substrings, puts these substrings into an array, and returns the array.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split'
-      },
-      'match': {
-        desc: 'Retrieves the result of matching a string against a regular expression.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match'
-      },
-      'search': {
-        desc: 'Executes a search for a match between a regular expression and this String object.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search'
-      },
-      // Object methods
-      'Object.keys': {
-        desc: 'Returns an array of a given object\'s own enumerable property names.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys'
-      },
-      'Object.values': {
-        desc: 'Returns an array of a given object\'s own enumerable property values.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values'
-      },
-      'Object.entries': {
-        desc: 'Returns an array of a given object\'s own enumerable string-keyed property [key, value] pairs.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries'
-      },
-      'Object.fromEntries': {
-        desc: 'Transforms a list of key-value pairs into an object.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries'
-      },
-      'Object.assign': {
-        desc: 'Copies all enumerable own properties from one or more source objects to a target object.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign'
-      },
-      'hasOwnProperty': {
-        desc: 'Returns a boolean indicating whether the object has the specified property as its own property.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty'
-      },
-      // Map methods
-      'Map': {
-        desc: 'The Map object holds key-value pairs and remembers the original insertion order of the keys.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map'
-      },
-      'set': {
-        desc: 'Sets the value for the key in the Map object. Returns the Map object.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set'
-      },
-      'get': {
-        desc: 'Returns the value associated with the key, or undefined if there is none.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get'
-      },
-      'has': {
-        desc: 'Returns a boolean indicating whether an element with the specified key exists or not.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has'
-      },
-      'delete': {
-        desc: 'Removes the specified element from a Map object by key.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete'
-      },
-      // Set methods
-      'Set': {
-        desc: 'The Set object lets you store unique values of any type, whether primitive values or object references.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set'
-      },
-      'add': {
-        desc: 'Appends a new element with a specified value to the end of a Set object.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add'
-      },
-      // Math methods
-      'Math.max': {
-        desc: 'Returns the largest of zero or more numbers.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max'
-      },
-      'Math.min': {
-        desc: 'Returns the smallest of zero or more numbers.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min'
-      },
-      'Math.abs': {
-        desc: 'Returns the absolute value of a number.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs'
-      },
-      'Math.floor': {
-        desc: 'Returns the largest integer less than or equal to a given number.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor'
-      },
-      'Math.ceil': {
-        desc: 'Returns the smallest integer greater than or equal to a given number.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil'
-      },
-      'Math.round': {
-        desc: 'Returns the value of a number rounded to the nearest integer.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round'
-      },
-      'Math.trunc': {
-        desc: 'Returns the integer part of a number by removing any fractional digits.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc'
-      },
-      'Math.sqrt': {
-        desc: 'Returns the square root of a number.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt'
-      },
-      'Math.pow': {
-        desc: 'Returns the base to the exponent power, that is, base^exponent.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow'
-      },
-      'Math.random': {
-        desc: 'Returns a floating-point, pseudo-random number in the range 0 to less than 1.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random'
-      },
-      // Number methods
-      'Number.isInteger': {
-        desc: 'Determines whether the passed value is an integer.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger'
-      },
-      'Number.isNaN': {
-        desc: 'Determines whether the passed value is NaN and its type is Number.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN'
-      },
-      'Number.isFinite': {
-        desc: 'Determines whether the passed value is a finite number.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite'
-      },
-      'parseInt': {
-        desc: 'Parses a string argument and returns an integer of the specified radix.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt'
-      },
-      'parseFloat': {
-        desc: 'Parses an argument and returns a floating point number.',
-        mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat'
-      }
-    };
+    <script>
+      // Method documentation and MDN links
+      const methodDocs = {
+        // Array methods
+        push: {
+          desc: 'Adds one or more elements to the end of an array and returns the new length.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push',
+        },
+        pop: {
+          desc: 'Removes the last element from an array and returns that element.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop',
+        },
+        unshift: {
+          desc: 'Adds one or more elements to the beginning of an array and returns the new length.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift',
+        },
+        shift: {
+          desc: 'Removes the first element from an array and returns that element.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift',
+        },
+        splice: {
+          desc: 'Changes the contents of an array by removing or replacing existing elements and/or adding new elements.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice',
+        },
+        indexOf: {
+          desc: 'Returns the first index at which a given element can be found in the array, or -1 if not present.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf',
+        },
+        lastIndexOf: {
+          desc: 'Returns the last index at which a given element can be found in the array, or -1 if not present.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf',
+        },
+        includes: {
+          desc: 'Determines whether an array includes a certain value, returning true or false.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes',
+        },
+        find: {
+          desc: 'Returns the first element in the array that satisfies the provided testing function.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find',
+        },
+        findIndex: {
+          desc: 'Returns the index of the first element in the array that satisfies the provided testing function.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex',
+        },
+        map: {
+          desc: 'Creates a new array populated with the results of calling a provided function on every element.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map',
+        },
+        filter: {
+          desc: 'Creates a new array with all elements that pass the test implemented by the provided function.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter',
+        },
+        reduce: {
+          desc: 'Executes a reducer function on each element, resulting in a single output value.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce',
+        },
+        flat: {
+          desc: 'Creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat',
+        },
+        sort: {
+          desc: 'Sorts the elements of an array in place and returns the sorted array.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort',
+        },
+        slice: {
+          desc: 'Returns a shallow copy of a portion of an array into a new array object.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice',
+        },
+        concat: {
+          desc: 'Merges two or more arrays, returning a new array without modifying existing arrays.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat',
+        },
+        join: {
+          desc: 'Creates and returns a new string by concatenating all elements in an array, separated by a specified separator.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join',
+        },
+        every: {
+          desc: 'Tests whether all elements in the array pass the test implemented by the provided function.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every',
+        },
+        some: {
+          desc: 'Tests whether at least one element in the array passes the test implemented by the provided function.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some',
+        },
+        'Array.from': {
+          desc: 'Creates a new, shallow-copied Array instance from an iterable or array-like object.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from',
+        },
+        // String methods
+        charAt: {
+          desc: 'Returns the character at the specified index in a string.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt',
+        },
+        charCodeAt: {
+          desc: 'Returns an integer between 0 and 65535 representing the UTF-16 code unit at the given index.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt',
+        },
+        toLowerCase: {
+          desc: 'Returns the calling string value converted to lower case.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase',
+        },
+        trim: {
+          desc: 'Removes whitespace from both ends of a string and returns a new string.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim',
+        },
+        replace: {
+          desc: 'Returns a new string with some or all matches of a pattern replaced by a replacement.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace',
+        },
+        repeat: {
+          desc: 'Constructs and returns a new string which contains the specified number of copies of the string.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat',
+        },
+        padStart: {
+          desc: 'Pads the current string with another string (multiple times, if needed) until the resulting string reaches the given length.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart',
+        },
+        startsWith: {
+          desc: 'Determines whether a string begins with the characters of a specified string.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith',
+        },
+        endsWith: {
+          desc: 'Determines whether a string ends with the characters of a specified string.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith',
+        },
+        split: {
+          desc: 'Divides a String into an ordered list of substrings, puts these substrings into an array, and returns the array.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split',
+        },
+        match: {
+          desc: 'Retrieves the result of matching a string against a regular expression.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match',
+        },
+        search: {
+          desc: 'Executes a search for a match between a regular expression and this String object.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search',
+        },
+        // Object methods
+        'Object.keys': {
+          desc: "Returns an array of a given object's own enumerable property names.",
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys',
+        },
+        'Object.values': {
+          desc: "Returns an array of a given object's own enumerable property values.",
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values',
+        },
+        'Object.entries': {
+          desc: "Returns an array of a given object's own enumerable string-keyed property [key, value] pairs.",
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries',
+        },
+        'Object.fromEntries': {
+          desc: 'Transforms a list of key-value pairs into an object.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries',
+        },
+        'Object.assign': {
+          desc: 'Copies all enumerable own properties from one or more source objects to a target object.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign',
+        },
+        hasOwnProperty: {
+          desc: 'Returns a boolean indicating whether the object has the specified property as its own property.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty',
+        },
+        // Map methods
+        Map: {
+          desc: 'The Map object holds key-value pairs and remembers the original insertion order of the keys.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map',
+        },
+        set: {
+          desc: 'Sets the value for the key in the Map object. Returns the Map object.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set',
+        },
+        get: {
+          desc: 'Returns the value associated with the key, or undefined if there is none.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get',
+        },
+        has: {
+          desc: 'Returns a boolean indicating whether an element with the specified key exists or not.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has',
+        },
+        delete: {
+          desc: 'Removes the specified element from a Map object by key.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete',
+        },
+        // Set methods
+        Set: {
+          desc: 'The Set object lets you store unique values of any type, whether primitive values or object references.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set',
+        },
+        add: {
+          desc: 'Appends a new element with a specified value to the end of a Set object.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add',
+        },
+        // Math methods
+        'Math.max': {
+          desc: 'Returns the largest of zero or more numbers.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max',
+        },
+        'Math.min': {
+          desc: 'Returns the smallest of zero or more numbers.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min',
+        },
+        'Math.abs': {
+          desc: 'Returns the absolute value of a number.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs',
+        },
+        'Math.floor': {
+          desc: 'Returns the largest integer less than or equal to a given number.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor',
+        },
+        'Math.ceil': {
+          desc: 'Returns the smallest integer greater than or equal to a given number.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil',
+        },
+        'Math.round': {
+          desc: 'Returns the value of a number rounded to the nearest integer.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round',
+        },
+        'Math.trunc': {
+          desc: 'Returns the integer part of a number by removing any fractional digits.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc',
+        },
+        'Math.sqrt': {
+          desc: 'Returns the square root of a number.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt',
+        },
+        'Math.pow': {
+          desc: 'Returns the base to the exponent power, that is, base^exponent.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow',
+        },
+        'Math.random': {
+          desc: 'Returns a floating-point, pseudo-random number in the range 0 to less than 1.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random',
+        },
+        // Number methods
+        'Number.isInteger': {
+          desc: 'Determines whether the passed value is an integer.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger',
+        },
+        'Number.isNaN': {
+          desc: 'Determines whether the passed value is NaN and its type is Number.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN',
+        },
+        'Number.isFinite': {
+          desc: 'Determines whether the passed value is a finite number.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite',
+        },
+        parseInt: {
+          desc: 'Parses a string argument and returns an integer of the specified radix.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt',
+        },
+        parseFloat: {
+          desc: 'Parses an argument and returns a floating point number.',
+          mdn: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat',
+        },
+      };
 
-    // Create tooltip element
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    document.body.appendChild(tooltip);
+      // Create tooltip element
+      const tooltip = document.createElement('div');
+      tooltip.className = 'tooltip';
+      document.body.appendChild(tooltip);
 
-    let tooltipTimeout = null;
-    let hideTooltipTimeout = null;
-    let currentElement = null;
+      let tooltipTimeout = null;
+      let hideTooltipTimeout = null;
+      let currentElement = null;
 
-    // Function to get method name from element
-    function getMethodName(element) {
-      const text = element.textContent.trim();
-      
-      // Get the parent pre element to check context
-      const pre = element.closest('pre');
-      if (!pre) return text;
-      
-      // Get all text up to this element
-      const range = document.createRange();
-      range.setStart(pre, 0);
-      range.setEnd(element, 0);
-      const beforeText = range.toString();
-      
-      // Check for Object., Math., Number., Array. prefixes
-      const match = beforeText.match(/(Object|Math|Number|Array)\.\s*$/);
-      if (match) {
-        return match[1] + '.' + text;
-      }
-      
-      // Check for "new Map" or "new Set"
-      if (text === 'Map' || text === 'Set') {
-        const newMatch = beforeText.match(/new\s+$/);
-        if (newMatch) {
-          return text;
+      // Function to get method name from element
+      function getMethodName(element) {
+        const text = element.textContent.trim();
+
+        // Get the parent pre element to check context
+        const pre = element.closest('pre');
+        if (!pre) return text;
+
+        // Get all text up to this element
+        const range = document.createRange();
+        range.setStart(pre, 0);
+        range.setEnd(element, 0);
+        const beforeText = range.toString();
+
+        // Check for Object., Math., Number., Array. prefixes
+        const match = beforeText.match(/(Object|Math|Number|Array)\.\s*$/);
+        if (match) {
+          return match[1] + '.' + text;
         }
+
+        // Check for "new Map" or "new Set"
+        if (text === 'Map' || text === 'Set') {
+          const newMatch = beforeText.match(/new\s+$/);
+          if (newMatch) {
+            return text;
+          }
+        }
+
+        return text;
       }
-      
-      return text;
-    }
 
-    // Function to show tooltip
-    function showTooltip(element, methodName) {
-      const doc = methodDocs[methodName];
-      if (!doc) return;
+      // Function to show tooltip
+      function showTooltip(element, methodName) {
+        const doc = methodDocs[methodName];
+        if (!doc) return;
 
-      const rect = element.getBoundingClientRect();
-      tooltip.innerHTML = `
+        const rect = element.getBoundingClientRect();
+        tooltip.innerHTML = `
         <div class="tooltip-title">${methodName}()</div>
         <div class="tooltip-desc">${doc.desc}</div>
         <a href="${doc.mdn}" target="_blank" rel="noopener noreferrer" class="tooltip-link">View on MDN</a>
       `;
 
-      // Position tooltip with smaller gap for easier mouse movement
-      const tooltipRect = tooltip.getBoundingClientRect();
-      let top = rect.top - tooltipRect.height - 4;
-      let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+        // Position tooltip with smaller gap for easier mouse movement
+        const tooltipRect = tooltip.getBoundingClientRect();
+        let top = rect.top - tooltipRect.height - 4;
+        let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
 
-      // Adjust if tooltip goes off screen
-      if (top < 0) {
-        top = rect.bottom + 4;
+        // Adjust if tooltip goes off screen
+        if (top < 0) {
+          top = rect.bottom + 4;
+        }
+        if (left < 0) {
+          left = 8;
+        } else if (left + tooltipRect.width > window.innerWidth) {
+          left = window.innerWidth - tooltipRect.width - 8;
+        }
+
+        tooltip.style.top = `${top + window.scrollY}px`;
+        tooltip.style.left = `${left}px`;
+        tooltip.classList.add('show');
       }
-      if (left < 0) {
-        left = 8;
-      } else if (left + tooltipRect.width > window.innerWidth) {
-        left = window.innerWidth - tooltipRect.width - 8;
+
+      // Function to hide tooltip with delay
+      function hideTooltip(delay = 100) {
+        if (hideTooltipTimeout) {
+          clearTimeout(hideTooltipTimeout);
+        }
+        hideTooltipTimeout = setTimeout(() => {
+          tooltip.classList.remove('show');
+          currentElement = null;
+        }, delay);
       }
 
-      tooltip.style.top = `${top + window.scrollY}px`;
-      tooltip.style.left = `${left}px`;
-      tooltip.classList.add('show');
-    }
+      // Keep tooltip visible when hovering over it
+      tooltip.addEventListener('mouseenter', () => {
+        if (hideTooltipTimeout) {
+          clearTimeout(hideTooltipTimeout);
+          hideTooltipTimeout = null;
+        }
+      });
 
-    // Function to hide tooltip with delay
-    function hideTooltip(delay = 100) {
-      if (hideTooltipTimeout) {
-        clearTimeout(hideTooltipTimeout);
-      }
-      hideTooltipTimeout = setTimeout(() => {
-        tooltip.classList.remove('show');
-        currentElement = null;
-      }, delay);
-    }
+      tooltip.addEventListener('mouseleave', () => {
+        hideTooltip(100);
+      });
 
-    // Keep tooltip visible when hovering over it
-    tooltip.addEventListener('mouseenter', () => {
-      if (hideTooltipTimeout) {
-        clearTimeout(hideTooltipTimeout);
-        hideTooltipTimeout = null;
-      }
-    });
+      // Add event listeners to function and property elements
+      document.querySelectorAll('.function, .property').forEach((el) => {
+        const methodName = getMethodName(el);
 
-    tooltip.addEventListener('mouseleave', () => {
-      hideTooltip(100);
-    });
+        if (methodDocs[methodName]) {
+          el.addEventListener('mouseenter', (e) => {
+            // Don't show tooltip if hovering over copy button
+            if (e.target.closest('.copy-btn')) return;
 
-    // Add event listeners to function and property elements
-    document.querySelectorAll('.function, .property').forEach(el => {
-      const methodName = getMethodName(el);
-      
-      if (methodDocs[methodName]) {
-        el.addEventListener('mouseenter', (e) => {
-          // Don't show tooltip if hovering over copy button
-          if (e.target.closest('.copy-btn')) return;
-          
-          // Clear any existing timeouts
-          if (tooltipTimeout) {
-            clearTimeout(tooltipTimeout);
-          }
-          if (hideTooltipTimeout) {
-            clearTimeout(hideTooltipTimeout);
-            hideTooltipTimeout = null;
-          }
-          
-          currentElement = el;
-          
-          // Show tooltip after a short delay
-          tooltipTimeout = setTimeout(() => {
-            showTooltip(el, methodName);
-          }, 300);
-        });
-        
-        el.addEventListener('mouseleave', () => {
-          if (tooltipTimeout) {
-            clearTimeout(tooltipTimeout);
-            tooltipTimeout = null;
-          }
-          // Don't hide immediately - give time to move to tooltip
-          hideTooltip(150);
-        });
+            // Clear any existing timeouts
+            if (tooltipTimeout) {
+              clearTimeout(tooltipTimeout);
+            }
+            if (hideTooltipTimeout) {
+              clearTimeout(hideTooltipTimeout);
+              hideTooltipTimeout = null;
+            }
 
-        el.addEventListener('mousemove', (e) => {
-          // Don't update tooltip if hovering over copy button
-          if (e.target.closest('.copy-btn')) {
+            currentElement = el;
+
+            // Show tooltip after a short delay
+            tooltipTimeout = setTimeout(() => {
+              showTooltip(el, methodName);
+            }, 300);
+          });
+
+          el.addEventListener('mouseleave', () => {
             if (tooltipTimeout) {
               clearTimeout(tooltipTimeout);
               tooltipTimeout = null;
             }
-            hideTooltip(0);
-            return;
-          }
-          
-          // Update position on mouse move for better UX
-          if (tooltip.classList.contains('show')) {
-            const rect = el.getBoundingClientRect();
-            const tooltipRect = tooltip.getBoundingClientRect();
-            let top = rect.top - tooltipRect.height - 4;
-            let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+            // Don't hide immediately - give time to move to tooltip
+            hideTooltip(150);
+          });
 
-            if (top < 0) {
-              top = rect.bottom + 4;
-            }
-            if (left < 0) {
-              left = 8;
-            } else if (left + tooltipRect.width > window.innerWidth) {
-              left = window.innerWidth - tooltipRect.width - 8;
+          el.addEventListener('mousemove', (e) => {
+            // Don't update tooltip if hovering over copy button
+            if (e.target.closest('.copy-btn')) {
+              if (tooltipTimeout) {
+                clearTimeout(tooltipTimeout);
+                tooltipTimeout = null;
+              }
+              hideTooltip(0);
+              return;
             }
 
-            tooltip.style.top = `${top + window.scrollY}px`;
-            tooltip.style.left = `${left}px`;
-          }
-        });
-      }
-    });
+            // Update position on mouse move for better UX
+            if (tooltip.classList.contains('show')) {
+              const rect = el.getBoundingClientRect();
+              const tooltipRect = tooltip.getBoundingClientRect();
+              let top = rect.top - tooltipRect.height - 4;
+              let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
 
-    // Copy button functionality
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const codeBlock = btn.closest('.code-block');
-        const pre = codeBlock.querySelector('pre');
-        const text = pre.textContent;
-        
-        try {
-          await navigator.clipboard.writeText(text);
-          btn.textContent = 'Copied!';
-          btn.classList.add('copied');
-          setTimeout(() => {
-            btn.textContent = 'Copy';
-            btn.classList.remove('copied');
-          }, 2000);
-        } catch (err) {
-          btn.textContent = 'Failed';
-          setTimeout(() => btn.textContent = 'Copy', 2000);
-        }
-      });
-    });
+              if (top < 0) {
+                top = rect.bottom + 4;
+              }
+              if (left < 0) {
+                left = 8;
+              } else if (left + tooltipRect.width > window.innerWidth) {
+                left = window.innerWidth - tooltipRect.width - 8;
+              }
 
-    // Active nav link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    function updateActiveNav() {
-      const scrollPos = window.scrollY + 100;
-
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        const id = section.getAttribute('id');
-
-        if (scrollPos >= top && scrollPos < top + height) {
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
+              tooltip.style.top = `${top + window.scrollY}px`;
+              tooltip.style.left = `${left}px`;
             }
           });
         }
       });
-    }
 
-    window.addEventListener('scroll', updateActiveNav);
-    updateActiveNav();
+      // Copy button functionality
+      document.querySelectorAll('.copy-btn').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const codeBlock = btn.closest('.code-block');
+          const pre = codeBlock.querySelector('pre');
+          const text = pre.textContent;
 
-    // Popup functionality
-    const helpBtn = document.getElementById('helpBtn');
-    const popupOverlay = document.getElementById('popupOverlay');
-    const popupClose = document.getElementById('popupClose');
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+              btn.textContent = 'Copy';
+              btn.classList.remove('copied');
+            }, 2000);
+          } catch (err) {
+            btn.textContent = 'Failed';
+            setTimeout(() => (btn.textContent = 'Copy'), 2000);
+          }
+        });
+      });
 
-    function openPopup() {
-      popupOverlay.classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
+      // Active nav link on scroll
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
 
-    function closePopup() {
-      popupOverlay.classList.remove('show');
-      document.body.style.overflow = '';
-    }
+      function updateActiveNav() {
+        const scrollPos = window.scrollY + 100;
 
-    helpBtn.addEventListener('click', openPopup);
-    popupClose.addEventListener('click', closePopup);
+        sections.forEach((section) => {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          const id = section.getAttribute('id');
 
-    // Close popup when clicking outside
-    popupOverlay.addEventListener('click', (e) => {
-      if (e.target === popupOverlay) {
-        closePopup();
+          if (scrollPos >= top && scrollPos < top + height) {
+            navLinks.forEach((link) => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${id}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
       }
-    });
 
-    // Close popup with Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && popupOverlay.classList.contains('show')) {
-        closePopup();
+      window.addEventListener('scroll', updateActiveNav);
+      updateActiveNav();
+
+      // Popup functionality
+      const helpBtn = document.getElementById('helpBtn');
+      const popupOverlay = document.getElementById('popupOverlay');
+      const popupClose = document.getElementById('popupClose');
+
+      function openPopup() {
+        popupOverlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
       }
-    });
-  </script>
-</body>
+
+      function closePopup() {
+        popupOverlay.classList.remove('show');
+        document.body.style.overflow = '';
+      }
+
+      helpBtn.addEventListener('click', openPopup);
+      popupClose.addEventListener('click', closePopup);
+
+      // Close popup when clicking outside
+      popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) {
+          closePopup();
+        }
+      });
+
+      // Close popup with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popupOverlay.classList.contains('show')) {
+          closePopup();
+        }
+      });
+    </script>
+  </body>
 </html>
