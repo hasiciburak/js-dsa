@@ -651,6 +651,52 @@
         color: var(--accent-yellow);
       }
 
+      /* Back to Top Button */
+      .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+        border: 1px solid transparent;
+        border-radius: 50%;
+        color: var(--bg-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        z-index: 999;
+        box-shadow: 0 4px 16px rgba(247, 201, 75, 0.3);
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .back-to-top:hover {
+        background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(247, 201, 75, 0.4);
+      }
+
+      .back-to-top:focus {
+        outline: 3px solid var(--accent-cyan);
+        outline-offset: 3px;
+      }
+
+      .back-to-top::before {
+        content: '↑';
+        font-weight: 600;
+      }
+
       /* Animations */
       @keyframes fadeInUp {
         from {
@@ -926,6 +972,14 @@
 
         .tooltip-desc {
           font-size: 0.7rem;
+        }
+
+        .back-to-top {
+          bottom: 1.5rem;
+          right: 1.5rem;
+          width: 44px;
+          height: 44px;
+          font-size: 1.25rem;
         }
       }
     </style>
@@ -1605,6 +1659,14 @@ queue.<span class="function">shift</span>();             <span class="comment">/
       <p>Good luck with your interviews! <span>🚀</span></p>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button
+      class="back-to-top"
+      id="backToTop"
+      aria-label="Scroll to top"
+      title="Back to top"
+    ></button>
+
     <script>
       // Method documentation and MDN links
       const methodDocs = {
@@ -2106,6 +2168,27 @@ queue.<span class="function">shift</span>();             <span class="comment">/
           closePopup();
         }
       });
+
+      // Back to Top Button
+      const backToTopBtn = document.getElementById('backToTop');
+
+      function toggleBackToTop() {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add('show');
+        } else {
+          backToTopBtn.classList.remove('show');
+        }
+      }
+
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      });
+
+      window.addEventListener('scroll', toggleBackToTop);
+      toggleBackToTop();
     </script>
   </body>
 </html>
