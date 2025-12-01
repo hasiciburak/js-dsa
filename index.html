@@ -4,6 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JavaScript DSA Cheatsheet</title>
+    <meta
+      name="description"
+      content="Comprehensive JavaScript methods and DSA patterns cheatsheet. Essential reference for technical interviews with interactive tooltips, code examples, and time complexity guides."
+    />
+    <link rel="canonical" href="https://js-dsa-cheatsheet.com/" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="JavaScript DSA Cheatsheet" />
+    <meta
+      property="og:description"
+      content="Comprehensive JavaScript methods and DSA patterns cheatsheet. Essential reference for technical interviews with interactive tooltips, code examples, and time complexity guides."
+    />
+    <meta property="og:url" content="https://js-dsa-cheatsheet.com/" />
+    <meta property="og:image" content="https://js-dsa-cheatsheet.com/og-image.png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JavaScript DSA Cheatsheet" />
+    <meta
+      name="twitter:description"
+      content="Comprehensive JavaScript methods and DSA patterns cheatsheet. Essential reference for technical interviews."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -60,6 +81,27 @@
         opacity: 0.03;
         pointer-events: none;
         z-index: 1000;
+      }
+
+      /* Skip to main content link */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--accent-yellow);
+        color: var(--bg-primary);
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        font-weight: 600;
+        z-index: 10000;
+        border-radius: 0 0 4px 0;
+        transition: top 0.2s ease;
+      }
+
+      .skip-link:focus {
+        top: 0;
+        outline: 3px solid var(--accent-cyan);
+        outline-offset: 2px;
       }
 
       /* Navigation */
@@ -123,6 +165,13 @@
         background: var(--bg-card);
       }
 
+      .nav-link:focus {
+        outline: 3px solid var(--accent-cyan);
+        outline-offset: 2px;
+        color: var(--text-primary);
+        background: var(--bg-card);
+      }
+
       .nav-link.active {
         color: var(--accent-yellow);
         background: var(--glow-yellow);
@@ -152,6 +201,12 @@
         background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(247, 201, 75, 0.4);
+      }
+
+      .help-btn:focus {
+        outline: 3px solid var(--accent-cyan);
+        outline-offset: 3px;
+        background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
       }
 
       .help-btn::before {
@@ -412,6 +467,14 @@
         color: var(--text-primary);
       }
 
+      .copy-btn:focus {
+        outline: 3px solid var(--accent-cyan);
+        outline-offset: 2px;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        opacity: 1;
+      }
+
       .copy-btn.copied {
         color: var(--accent-green);
         border-color: var(--accent-green);
@@ -507,6 +570,12 @@
       .tooltip-link:hover {
         background: rgba(247, 201, 75, 0.25);
         transform: translateY(-1px);
+      }
+
+      .tooltip-link:focus {
+        outline: 3px solid var(--accent-cyan);
+        outline-offset: 2px;
+        background: rgba(247, 201, 75, 0.25);
       }
 
       .tooltip-link::after {
@@ -700,6 +769,13 @@
         color: var(--text-primary);
       }
 
+      .popup-close:focus {
+        outline: 3px solid var(--accent-cyan);
+        outline-offset: 2px;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+      }
+
       .popup-body {
         padding: 1.5rem;
       }
@@ -849,9 +925,37 @@
         }
       }
     </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "JavaScript DSA Cheatsheet",
+        "description": "Comprehensive JavaScript methods and DSA patterns cheatsheet. Essential reference for technical interviews with interactive tooltips, code examples, and time complexity guides.",
+        "url": "https://js-dsa-cheatsheet.com/",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "JavaScript DSA Cheatsheet"
+        },
+        "about": {
+          "@type": "Course",
+          "name": "JavaScript Data Structures and Algorithms",
+          "description": "Interactive reference guide for JavaScript methods and common DSA patterns used in technical interviews",
+          "educationalLevel": "Intermediate",
+          "teaches": [
+            "JavaScript Array Methods",
+            "JavaScript String Methods",
+            "Data Structures",
+            "Algorithm Patterns",
+            "Time Complexity Analysis"
+          ]
+        }
+      }
+    </script>
   </head>
   <body>
-    <nav>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <nav aria-label="Main navigation">
       <div class="nav-container">
         <div class="logo">JS<span>DSA</span></div>
         <div class="nav-links">
@@ -868,11 +972,18 @@
     </nav>
 
     <!-- Popup Modal -->
-    <div class="popup-overlay" id="popupOverlay">
+    <div
+      class="popup-overlay"
+      id="popupOverlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="popupTitle"
+      aria-expanded="false"
+    >
       <div class="popup-content">
         <div class="popup-header">
-          <h2 class="popup-title">How to Use This Website</h2>
-          <button class="popup-close" id="popupClose">&times;</button>
+          <h2 class="popup-title" id="popupTitle">How to Use This Website</h2>
+          <button class="popup-close" id="popupClose" aria-label="Close help dialog">&times;</button>
         </div>
         <div class="popup-body">
           <ol class="instruction-list">
@@ -933,14 +1044,16 @@
         <span class="hero-tag">Map & Set</span>
         <span class="hero-tag">DSA Patterns</span>
       </div>
-      <button class="help-btn" id="helpBtn">How to Use</button>
+      <button class="help-btn" id="helpBtn" aria-label="Open help dialog with instructions on how to use this website">
+        How to Use
+      </button>
     </header>
 
-    <main>
+    <main id="main-content">
       <!-- Arrays Section -->
       <section id="arrays">
         <div class="section-header">
-          <div class="section-icon yellow">[ ]</div>
+          <div class="section-icon yellow" aria-hidden="true">[ ]</div>
           <h2 class="section-title">Arrays</h2>
         </div>
         <div class="cards-grid">
@@ -950,7 +1063,7 @@
               <span class="card-badge yellow">mutates</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
 arr.<span class="function">push</span>(<span class="number">4</span>);           <span class="comment">// [1, 2, 3, 4]</span>
 arr.<span class="function">pop</span>();             <span class="comment">// [1, 2, 3], returns 4</span>
@@ -966,7 +1079,7 @@ arr.<span class="function">splice</span>(<span class="number">1</span>, <span cl
               <span class="card-badge cyan">O(n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">const</span> nums = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">20</span>];
 nums.<span class="function">indexOf</span>(<span class="number">20</span>);           <span class="comment">// 1</span>
 nums.<span class="function">lastIndexOf</span>(<span class="number">20</span>);       <span class="comment">// 3</span>
@@ -982,7 +1095,7 @@ nums.<span class="function">findIndex</span>(x <span class="operator">=></span> 
               <span class="card-badge green">new array</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">map</span>(x <span class="operator">=></span> x * <span class="number">2</span>);             <span class="comment">// [2, 4, 6]</span>
 [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>].<span class="function">filter</span>(x <span class="operator">=></span> x % <span class="number">2</span> === <span class="number">0</span>); <span class="comment">// [2, 4]</span>
 [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">reduce</span>((sum, x) <span class="operator">=></span> sum + x, <span class="number">0</span>); <span class="comment">// 6</span>
@@ -996,7 +1109,7 @@ nums.<span class="function">findIndex</span>(x <span class="operator">=></span> 
               <span class="card-badge orange">O(n log n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">const</span> unsorted = [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>];
 unsorted.<span class="function">sort</span>((a, b) <span class="operator">=></span> a - b);  <span class="comment">// ascending</span>
 unsorted.<span class="function">sort</span>((a, b) <span class="operator">=></span> b - a);  <span class="comment">// descending</span>
@@ -1014,7 +1127,7 @@ letters.<span class="function">join</span>(<span class="string">'-'</span>);    
               <span class="card-badge purple">boolean</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">every</span>(x <span class="operator">=></span> x > <span class="number">0</span>);  <span class="comment">// true (all pass)</span>
 [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">some</span>(x <span class="operator">=></span> x > <span class="number">2</span>);   <span class="comment">// true (any passes)</span>
 
@@ -1029,7 +1142,7 @@ letters.<span class="function">join</span>(<span class="string">'-'</span>);    
       <!-- Strings Section -->
       <section id="strings">
         <div class="section-header">
-          <div class="section-icon cyan">" "</div>
+          <div class="section-icon cyan" aria-hidden="true">" "</div>
           <h2 class="section-title">Strings</h2>
         </div>
         <div class="cards-grid">
@@ -1039,7 +1152,7 @@ letters.<span class="function">join</span>(<span class="string">'-'</span>);    
               <span class="card-badge cyan">O(n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">const</span> str = <span class="string">'hello'</span>;
 str[<span class="number">0</span>];                <span class="comment">// 'h'</span>
 str.<span class="function">charAt</span>(<span class="number">1</span>);         <span class="comment">// 'e'</span>
@@ -1058,7 +1171,7 @@ str.<span class="function">charCodeAt</span>(<span class="number">0</span>);    
               <span class="card-badge green">new string</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="string">'hello world'</span>.<span class="function">slice</span>(<span class="number">0</span>, <span class="number">5</span>);      <span class="comment">// 'hello'</span>
 <span class="string">'hello world'</span>.<span class="function">split</span>(<span class="string">' '</span>);       <span class="comment">// ['hello', 'world']</span>
 <span class="string">'a,b,c'</span>.<span class="function">split</span>(<span class="string">','</span>);             <span class="comment">// ['a', 'b', 'c']</span>
@@ -1077,7 +1190,7 @@ str.<span class="function">charCodeAt</span>(<span class="number">0</span>);    
               <span class="card-badge pink">pattern</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="string">'test123'</span>.<span class="function">match</span>(<span class="operator">/\d+/</span>);         <span class="comment">// ['123']</span>
 <span class="string">'abc123def456'</span>.<span class="function">match</span>(<span class="operator">/\d+/g</span>);   <span class="comment">// ['123', '456']</span>
 <span class="string">'hello'</span>.<span class="function">search</span>(<span class="operator">/l+/</span>);           <span class="comment">// 2</span>
@@ -1090,7 +1203,7 @@ str.<span class="function">charCodeAt</span>(<span class="number">0</span>);    
       <!-- Objects Section -->
       <section id="objects">
         <div class="section-header">
-          <div class="section-icon pink">{ }</div>
+          <div class="section-icon pink" aria-hidden="true">{ }</div>
           <h2 class="section-title">Objects</h2>
         </div>
         <div class="cards-grid">
@@ -1100,7 +1213,7 @@ str.<span class="function">charCodeAt</span>(<span class="number">0</span>);    
               <span class="card-badge pink">static</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">const</span> obj = { <span class="property">a</span>: <span class="number">1</span>, <span class="property">b</span>: <span class="number">2</span>, <span class="property">c</span>: <span class="number">3</span> };
 
 <span class="property">Object</span>.<span class="function">keys</span>(obj);      <span class="comment">// ['a', 'b', 'c']</span>
@@ -1123,7 +1236,7 @@ obj.<span class="function">hasOwnProperty</span>(<span class="string">'a'</span>
       <!-- Map Section -->
       <section id="map">
         <div class="section-header">
-          <div class="section-icon purple">⟨⟩</div>
+          <div class="section-icon purple" aria-hidden="true">⟨⟩</div>
           <h2 class="section-title">Map</h2>
         </div>
         <div class="cards-grid">
@@ -1133,7 +1246,7 @@ obj.<span class="function">hasOwnProperty</span>(<span class="string">'a'</span>
               <span class="card-badge purple">O(1) avg</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="function">Map</span>();
 
 map.<span class="function">set</span>(<span class="string">'name'</span>, <span class="string">'Burak'</span>);
@@ -1161,7 +1274,7 @@ map.<span class="function">delete</span>(<span class="string">'age'</span>);
       <!-- Set Section -->
       <section id="set">
         <div class="section-header">
-          <div class="section-icon orange">∪</div>
+          <div class="section-icon orange" aria-hidden="true">∪</div>
           <h2 class="section-title">Set</h2>
         </div>
         <div class="cards-grid">
@@ -1171,7 +1284,7 @@ map.<span class="function">delete</span>(<span class="string">'age'</span>);
               <span class="card-badge orange">O(1) avg</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="function">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// {1, 2, 3}</span>
 
 set.<span class="function">add</span>(<span class="number">4</span>);            <span class="comment">// {1, 2, 3, 4}</span>
@@ -1197,7 +1310,7 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
       <!-- Math Section -->
       <section id="math">
         <div class="section-header">
-          <div class="section-icon green">π</div>
+          <div class="section-icon green" aria-hidden="true">π</div>
           <h2 class="section-title">Math & Number</h2>
         </div>
         <div class="cards-grid">
@@ -1207,7 +1320,7 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
               <span class="card-badge green">static</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="property">Math</span>.<span class="function">max</span>(<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>);     <span class="comment">// 5</span>
 <span class="property">Math</span>.<span class="function">min</span>(...[<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>]); <span class="comment">// 1 (spread for arrays)</span>
 <span class="property">Math</span>.<span class="function">abs</span>(<span class="number">-5</span>);          <span class="comment">// 5</span>
@@ -1230,7 +1343,7 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
               <span class="card-badge green">parsing</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="property">Number</span>.<span class="function">isInteger</span>(<span class="number">5</span>);   <span class="comment">// true</span>
 <span class="property">Number</span>.<span class="function">isNaN</span>(<span class="property">NaN</span>);     <span class="comment">// true</span>
 <span class="property">Number</span>.<span class="function">isFinite</span>(<span class="number">100</span>);  <span class="comment">// true</span>
@@ -1249,7 +1362,7 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
       <!-- DSA Patterns Section -->
       <section id="patterns">
         <div class="section-header">
-          <div class="section-icon yellow">⚡</div>
+          <div class="section-icon yellow" aria-hidden="true">⚡</div>
           <h2 class="section-title">DSA Patterns</h2>
         </div>
         <div class="cards-grid">
@@ -1259,7 +1372,7 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
               <span class="card-badge yellow">O(1)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="comment">// Stack (LIFO)</span>
 <span class="keyword">const</span> stack = [];
 stack.<span class="function">push</span>(<span class="number">1</span>);             <span class="comment">// [1]</span>
@@ -1281,7 +1394,7 @@ queue.<span class="function">shift</span>();             <span class="comment">/
               <span class="card-badge purple">Map</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">function</span> <span class="function">charFrequency</span>(str) {
   <span class="keyword">const</span> freq = <span class="keyword">new</span> <span class="function">Map</span>();
   <span class="keyword">for</span> (<span class="keyword">const</span> char <span class="keyword">of</span> str) {
@@ -1300,7 +1413,7 @@ queue.<span class="function">shift</span>();             <span class="comment">/
               <span class="card-badge cyan">O(n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="comment">// Palindrome Check</span>
 <span class="keyword">function</span> <span class="function">isPalindrome</span>(s) {
   <span class="keyword">let</span> left = <span class="number">0</span>, right = s.<span class="property">length</span> - <span class="number">1</span>;
@@ -1332,7 +1445,7 @@ queue.<span class="function">shift</span>();             <span class="comment">/
               <span class="card-badge orange">O(n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="comment">// Max Sum of K consecutive elements</span>
 <span class="keyword">function</span> <span class="function">maxSumSubarray</span>(arr, k) {
   <span class="keyword">let</span> windowSum = <span class="number">0</span>;
@@ -1353,7 +1466,7 @@ queue.<span class="function">shift</span>();             <span class="comment">/
               <span class="card-badge green">O(log n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">function</span> <span class="function">binarySearch</span>(arr, target) {
   <span class="keyword">let</span> lo = <span class="number">0</span>, hi = arr.<span class="property">length</span> - <span class="number">1</span>;
   <span class="keyword">while</span> (lo <= hi) {
@@ -1373,7 +1486,7 @@ queue.<span class="function">shift</span>();             <span class="comment">/
               <span class="card-badge pink">O(V+E)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">function</span> <span class="function">bfs</span>(graph, start) {
   <span class="keyword">const</span> visited = <span class="keyword">new</span> <span class="function">Set</span>([start]);
   <span class="keyword">const</span> queue = [start];
@@ -1397,7 +1510,7 @@ queue.<span class="function">shift</span>();             <span class="comment">/
               <span class="card-badge pink">O(V+E)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn">Copy</button>
+              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
               <pre><span class="keyword">function</span> <span class="function">dfs</span>(graph, start, visited = <span class="keyword">new</span> <span class="function">Set</span>()) {
   visited.<span class="function">add</span>(start);
   <span class="keyword">for</span> (<span class="keyword">const</span> neighbor <span class="keyword">of</span> graph[start] || []) {
@@ -1415,7 +1528,7 @@ queue.<span class="function">shift</span>();             <span class="comment">/
       <!-- Quick Reference Table -->
       <section id="reference">
         <div class="section-header">
-          <div class="section-icon cyan">📊</div>
+          <div class="section-icon cyan" aria-hidden="true">📊</div>
           <h2 class="section-title">Quick Reference</h2>
         </div>
         <div class="table-container">
@@ -1963,11 +2076,13 @@ queue.<span class="function">shift</span>();             <span class="comment">/
 
       function openPopup() {
         popupOverlay.classList.add('show');
+        popupOverlay.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
       }
 
       function closePopup() {
         popupOverlay.classList.remove('show');
+        popupOverlay.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       }
 
