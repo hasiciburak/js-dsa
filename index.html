@@ -65,20 +65,35 @@
     <nav aria-label="Main navigation">
       <div class="nav-container">
         <div class="logo">JS<span>DSA</span></div>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile navigation menu" aria-expanded="false">
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          aria-label="Toggle mobile navigation menu"
+          aria-expanded="false"
+        >
           <span></span>
           <span></span>
           <span></span>
         </button>
         <div class="nav-links">
-          <a href="#arrays" class="nav-link">Arrays</a>
-          <a href="#strings" class="nav-link">Strings</a>
-          <a href="#objects" class="nav-link">Objects</a>
-          <a href="#map" class="nav-link">Map</a>
-          <a href="#set" class="nav-link">Set</a>
-          <a href="#math" class="nav-link">Math</a>
-          <a href="#patterns" class="nav-link">Patterns</a>
-          <a href="#reference" class="nav-link">Reference</a>
+          <a href="#arrays" class="nav-link" data-i18n="nav.arrays">Arrays</a>
+          <a href="#strings" class="nav-link" data-i18n="nav.strings">Strings</a>
+          <a href="#objects" class="nav-link" data-i18n="nav.objects">Objects</a>
+          <a href="#map" class="nav-link" data-i18n="nav.map">Map</a>
+          <a href="#set" class="nav-link" data-i18n="nav.set">Set</a>
+          <a href="#math" class="nav-link" data-i18n="nav.math">Math</a>
+          <a href="#patterns" class="nav-link" data-i18n="nav.patterns">Patterns</a>
+          <a href="#reference" class="nav-link" data-i18n="nav.reference">Reference</a>
+        </div>
+        <div class="lang-selector">
+          <button class="lang-btn" id="langBtn" aria-label="Select language" aria-expanded="false">
+            <span id="currentLang">EN</span>
+            <span class="lang-arrow">▼</span>
+          </button>
+          <div class="lang-dropdown" id="langDropdown" aria-hidden="true">
+            <button class="lang-option" data-lang="en">English</button>
+            <button class="lang-option" data-lang="tr">Türkçe</button>
+          </div>
         </div>
       </div>
     </nav>
@@ -86,14 +101,18 @@
     <!-- Mobile Navigation Menu -->
     <div class="mobile-menu-overlay" id="mobileMenuOverlay" aria-hidden="true">
       <div class="mobile-menu-content">
-        <a href="#arrays" class="mobile-nav-link">Arrays</a>
-        <a href="#strings" class="mobile-nav-link">Strings</a>
-        <a href="#objects" class="mobile-nav-link">Objects</a>
-        <a href="#map" class="mobile-nav-link">Map</a>
-        <a href="#set" class="mobile-nav-link">Set</a>
-        <a href="#math" class="mobile-nav-link">Math</a>
-        <a href="#patterns" class="mobile-nav-link">Patterns</a>
-        <a href="#reference" class="mobile-nav-link">Reference</a>
+        <a href="#arrays" class="mobile-nav-link" data-i18n="nav.arrays">Arrays</a>
+        <a href="#strings" class="mobile-nav-link" data-i18n="nav.strings">Strings</a>
+        <a href="#objects" class="mobile-nav-link" data-i18n="nav.objects">Objects</a>
+        <a href="#map" class="mobile-nav-link" data-i18n="nav.map">Map</a>
+        <a href="#set" class="mobile-nav-link" data-i18n="nav.set">Set</a>
+        <a href="#math" class="mobile-nav-link" data-i18n="nav.math">Math</a>
+        <a href="#patterns" class="mobile-nav-link" data-i18n="nav.patterns">Patterns</a>
+        <a href="#reference" class="mobile-nav-link" data-i18n="nav.reference">Reference</a>
+        <div class="mobile-lang-selector">
+          <button class="mobile-lang-btn" data-lang="en">English</button>
+          <button class="mobile-lang-btn" data-lang="tr">Türkçe</button>
+        </div>
       </div>
     </div>
 
@@ -108,50 +127,52 @@
     >
       <div class="popup-content">
         <div class="popup-header">
-          <h2 class="popup-title" id="popupTitle">How to Use This Website</h2>
-          <button class="popup-close" id="popupClose" aria-label="Close help dialog">&times;</button>
+          <h2 class="popup-title" id="popupTitle" data-i18n="popup.title">How to Use This Website</h2>
+          <button class="popup-close" id="popupClose" aria-label="Close help dialog" data-i18n-aria-label="popup.close">
+            ×
+          </button>
         </div>
         <div class="popup-body">
           <ol class="instruction-list">
             <li class="instruction-item">
-              <div class="instruction-title">Browse Methods by Category</div>
-              <div class="instruction-desc">
+              <div class="instruction-title" data-i18n="popup.instruction1.title">Browse Methods by Category</div>
+              <div class="instruction-desc" data-i18n="popup.instruction1.desc">
                 Use the navigation links at the top to jump to different sections: Arrays, Strings, Objects, Map, Set,
                 Math, Patterns, and Reference.
               </div>
             </li>
             <li class="instruction-item">
-              <div class="instruction-title">Copy Code Examples</div>
-              <div class="instruction-desc">
+              <div class="instruction-title" data-i18n="popup.instruction2.title">Copy Code Examples</div>
+              <div class="instruction-desc" data-i18n="popup.instruction2.desc">
                 Hover over any code block to reveal the
                 <code>Copy</code> button. Click it to copy the entire code snippet to your clipboard.
               </div>
             </li>
             <li class="instruction-item">
-              <div class="instruction-title">Learn Method Details</div>
-              <div class="instruction-desc">
+              <div class="instruction-title" data-i18n="popup.instruction3.title">Learn Method Details</div>
+              <div class="instruction-desc" data-i18n="popup.instruction3.desc">
                 Hover over any highlighted method name (like
                 <code>push()</code>, <code>map()</code>, etc.) to see a tooltip with a description and a link to the
                 official MDN documentation.
               </div>
             </li>
             <li class="instruction-item">
-              <div class="instruction-title">Understand Complexity</div>
-              <div class="instruction-desc">
+              <div class="instruction-title" data-i18n="popup.instruction4.title">Understand Complexity</div>
+              <div class="instruction-desc" data-i18n="popup.instruction4.desc">
                 Check the colored badges on each card to see time complexity (O(1), O(n), O(n log n), etc.) and whether
                 methods mutate the original array or return a new one.
               </div>
             </li>
             <li class="instruction-item">
-              <div class="instruction-title">Quick Reference Table</div>
-              <div class="instruction-desc">
+              <div class="instruction-title" data-i18n="popup.instruction5.title">Quick Reference Table</div>
+              <div class="instruction-desc" data-i18n="popup.instruction5.desc">
                 Scroll to the bottom to see the Quick Reference table with time complexities and use cases for all major
                 methods and patterns.
               </div>
             </li>
             <li class="instruction-item">
-              <div class="instruction-title">Practice DSA Patterns</div>
-              <div class="instruction-desc">
+              <div class="instruction-title" data-i18n="popup.instruction6.title">Practice DSA Patterns</div>
+              <div class="instruction-desc" data-i18n="popup.instruction6.desc">
                 Explore the DSA Patterns section for common interview patterns like Two Pointers, Sliding Window, Binary
                 Search, and Graph Traversal with ready-to-use code examples.
               </div>
@@ -162,15 +183,26 @@
     </div>
 
     <header class="hero">
-      <h1>JavaScript <span class="highlight">Methods</span> Cheatsheet</h1>
-      <p>Essential methods and patterns for DSA interviews. Copy, learn, and ace your technical interviews.</p>
+      <h1>
+        <span data-i18n="hero.title1">JavaScript</span> <span class="highlight" data-i18n="hero.title2">Methods</span>
+        <span data-i18n="hero.title3">Cheatsheet</span>
+      </h1>
+      <p data-i18n="hero.description">
+        Essential methods and patterns for DSA interviews. Copy, learn, and ace your technical interviews.
+      </p>
       <div class="hero-tags">
-        <span class="hero-tag">Arrays</span>
-        <span class="hero-tag">Strings</span>
-        <span class="hero-tag">Map & Set</span>
-        <span class="hero-tag">DSA Patterns</span>
+        <span class="hero-tag" data-i18n="hero.tag1">Arrays</span>
+        <span class="hero-tag" data-i18n="hero.tag2">Strings</span>
+        <span class="hero-tag" data-i18n="hero.tag3">Map & Set</span>
+        <span class="hero-tag" data-i18n="hero.tag4">DSA Patterns</span>
       </div>
-      <button class="help-btn" id="helpBtn" aria-label="Open help dialog with instructions on how to use this website">
+      <button
+        class="help-btn"
+        id="helpBtn"
+        aria-label="Open help dialog with instructions on how to use this website"
+        data-i18n="hero.helpBtn"
+        data-i18n-aria-label="hero.helpBtnAria"
+      >
         How to Use
       </button>
     </header>
@@ -180,17 +212,17 @@
       <section id="arrays">
         <div class="section-header">
           <div class="section-icon yellow" aria-hidden="true">[ ]</div>
-          <h2 class="section-title">Arrays</h2>
+          <h2 class="section-title" data-i18n="sections.arrays.title">Arrays</h2>
         </div>
         <div class="cards-grid">
-          <div class="card">
+          <div class="card" data-card="arrays.adding">
             <div class="card-header">
-              <span class="card-title">Adding / Removing</span>
-              <span class="card-badge yellow">mutates</span>
+              <span class="card-title" data-i18n="cards.arrays.adding.title">Adding / Removing</span>
+              <span class="card-badge yellow" data-i18n="cards.arrays.adding.badge">mutates</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="arrays.adding"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
 arr.<span class="function">push</span>(<span class="number">4</span>);           <span class="comment">// [1, 2, 3, 4]</span>
 arr.<span class="function">pop</span>();             <span class="comment">// [1, 2, 3], returns 4</span>
 arr.<span class="function">unshift</span>(<span class="number">0</span>);        <span class="comment">// [0, 1, 2, 3]</span>
@@ -199,14 +231,14 @@ arr.<span class="function">splice</span>(<span class="number">1</span>, <span cl
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="arrays.searching">
             <div class="card-header">
-              <span class="card-title">Searching</span>
+              <span class="card-title" data-i18n="cards.arrays.searching.title">Searching</span>
               <span class="card-badge cyan">O(n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">const</span> nums = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">20</span>];
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="arrays.searching"><span class="keyword">const</span> nums = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">20</span>];
 nums.<span class="function">indexOf</span>(<span class="number">20</span>);           <span class="comment">// 1</span>
 nums.<span class="function">lastIndexOf</span>(<span class="number">20</span>);       <span class="comment">// 3</span>
 nums.<span class="function">includes</span>(<span class="number">30</span>);          <span class="comment">// true</span>
@@ -215,28 +247,28 @@ nums.<span class="function">findIndex</span>(x <span class="operator">=></span> 
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="arrays.transforming">
             <div class="card-header">
-              <span class="card-title">Transforming</span>
-              <span class="card-badge green">new array</span>
+              <span class="card-title" data-i18n="cards.arrays.transforming.title">Transforming</span>
+              <span class="card-badge green" data-i18n="cards.arrays.transforming.badge">new array</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">map</span>(x <span class="operator">=></span> x * <span class="number">2</span>);             <span class="comment">// [2, 4, 6]</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="arrays.transforming">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">map</span>(x <span class="operator">=></span> x * <span class="number">2</span>);             <span class="comment">// [2, 4, 6]</span>
 [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>].<span class="function">filter</span>(x <span class="operator">=></span> x % <span class="number">2</span> === <span class="number">0</span>); <span class="comment">// [2, 4]</span>
 [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">reduce</span>((sum, x) <span class="operator">=></span> sum + x, <span class="number">0</span>); <span class="comment">// 6</span>
 [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, [<span class="number">4</span>]]].<span class="function">flat</span>(<span class="number">2</span>);         <span class="comment">// [1, 2, 3, 4]</span></pre>
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="arrays.sorting">
             <div class="card-header">
-              <span class="card-title">Sorting & Slicing</span>
+              <span class="card-title" data-i18n="cards.arrays.sorting.title">Sorting & Slicing</span>
               <span class="card-badge orange">O(n log n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">const</span> unsorted = [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>];
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="arrays.sorting"><span class="keyword">const</span> unsorted = [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>];
 unsorted.<span class="function">sort</span>((a, b) <span class="operator">=></span> a - b);  <span class="comment">// ascending</span>
 unsorted.<span class="function">sort</span>((a, b) <span class="operator">=></span> b - a);  <span class="comment">// descending</span>
 
@@ -247,14 +279,14 @@ letters.<span class="function">join</span>(<span class="string">'-'</span>);    
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="arrays.iteration">
             <div class="card-header">
-              <span class="card-title">Iteration & Utilities</span>
-              <span class="card-badge purple">boolean</span>
+              <span class="card-title" data-i18n="cards.arrays.iteration.title">Iteration & Utilities</span>
+              <span class="card-badge purple" data-i18n="cards.arrays.iteration.badge">boolean</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">every</span>(x <span class="operator">=></span> x > <span class="number">0</span>);  <span class="comment">// true (all pass)</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="arrays.iteration">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">every</span>(x <span class="operator">=></span> x > <span class="number">0</span>);  <span class="comment">// true (all pass)</span>
 [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].<span class="function">some</span>(x <span class="operator">=></span> x > <span class="number">2</span>);   <span class="comment">// true (any passes)</span>
 
 <span class="property">Array</span>.<span class="function">from</span>(<span class="string">'abc'</span>);                     <span class="comment">// ['a','b','c']</span>
@@ -269,17 +301,17 @@ letters.<span class="function">join</span>(<span class="string">'-'</span>);    
       <section id="strings">
         <div class="section-header">
           <div class="section-icon cyan" aria-hidden="true">" "</div>
-          <h2 class="section-title">Strings</h2>
+          <h2 class="section-title" data-i18n="sections.strings.title">Strings</h2>
         </div>
         <div class="cards-grid">
-          <div class="card">
+          <div class="card" data-card="strings.accessing">
             <div class="card-header">
-              <span class="card-title">Accessing & Searching</span>
+              <span class="card-title" data-i18n="cards.strings.accessing.title">Accessing & Searching</span>
               <span class="card-badge cyan">O(n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">const</span> str = <span class="string">'hello'</span>;
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="strings.accessing"><span class="keyword">const</span> str = <span class="string">'hello'</span>;
 str[<span class="number">0</span>];                <span class="comment">// 'h'</span>
 str.<span class="function">charAt</span>(<span class="number">1</span>);         <span class="comment">// 'e'</span>
 str.<span class="function">charCodeAt</span>(<span class="number">0</span>);     <span class="comment">// 104</span>
@@ -291,14 +323,14 @@ str.<span class="function">charCodeAt</span>(<span class="number">0</span>);    
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="strings.extracting">
             <div class="card-header">
-              <span class="card-title">Extracting & Transforming</span>
-              <span class="card-badge green">new string</span>
+              <span class="card-title" data-i18n="cards.strings.extracting.title">Extracting & Transforming</span>
+              <span class="card-badge green" data-i18n="cards.strings.extracting.badge">new string</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="string">'hello world'</span>.<span class="function">slice</span>(<span class="number">0</span>, <span class="number">5</span>);      <span class="comment">// 'hello'</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="strings.extracting"><span class="string">'hello world'</span>.<span class="function">slice</span>(<span class="number">0</span>, <span class="number">5</span>);      <span class="comment">// 'hello'</span>
 <span class="string">'hello world'</span>.<span class="function">split</span>(<span class="string">' '</span>);       <span class="comment">// ['hello', 'world']</span>
 <span class="string">'a,b,c'</span>.<span class="function">split</span>(<span class="string">','</span>);             <span class="comment">// ['a', 'b', 'c']</span>
 
@@ -310,14 +342,14 @@ str.<span class="function">charCodeAt</span>(<span class="number">0</span>);    
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="strings.regex">
             <div class="card-header">
-              <span class="card-title">Regex</span>
-              <span class="card-badge pink">pattern</span>
+              <span class="card-title" data-i18n="cards.strings.regex.title">Regex</span>
+              <span class="card-badge pink" data-i18n="cards.strings.regex.badge">pattern</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="string">'test123'</span>.<span class="function">match</span>(<span class="operator">/\d+/</span>);         <span class="comment">// ['123']</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="strings.regex"><span class="string">'test123'</span>.<span class="function">match</span>(<span class="operator">/\d+/</span>);         <span class="comment">// ['123']</span>
 <span class="string">'abc123def456'</span>.<span class="function">match</span>(<span class="operator">/\d+/g</span>);   <span class="comment">// ['123', '456']</span>
 <span class="string">'hello'</span>.<span class="function">search</span>(<span class="operator">/l+/</span>);           <span class="comment">// 2</span>
 <span class="string">'a1b2c3'</span>.<span class="function">replace</span>(<span class="operator">/\d/g</span>, <span class="string">'X'</span>);  <span class="comment">// 'aXbXcX'</span></pre>
@@ -330,17 +362,17 @@ str.<span class="function">charCodeAt</span>(<span class="number">0</span>);    
       <section id="objects">
         <div class="section-header">
           <div class="section-icon pink" aria-hidden="true">{ }</div>
-          <h2 class="section-title">Objects</h2>
+          <h2 class="section-title" data-i18n="sections.objects.title">Objects</h2>
         </div>
         <div class="cards-grid">
-          <div class="card">
+          <div class="card" data-card="objects.methods">
             <div class="card-header">
-              <span class="card-title">Object Methods</span>
-              <span class="card-badge pink">static</span>
+              <span class="card-title" data-i18n="cards.objects.methods.title">Object Methods</span>
+              <span class="card-badge pink" data-i18n="cards.objects.methods.badge">static</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">const</span> obj = { <span class="property">a</span>: <span class="number">1</span>, <span class="property">b</span>: <span class="number">2</span>, <span class="property">c</span>: <span class="number">3</span> };
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="objects.methods"><span class="keyword">const</span> obj = { <span class="property">a</span>: <span class="number">1</span>, <span class="property">b</span>: <span class="number">2</span>, <span class="property">c</span>: <span class="number">3</span> };
 
 <span class="property">Object</span>.<span class="function">keys</span>(obj);      <span class="comment">// ['a', 'b', 'c']</span>
 <span class="property">Object</span>.<span class="function">values</span>(obj);    <span class="comment">// [1, 2, 3]</span>
@@ -363,17 +395,17 @@ obj.<span class="function">hasOwnProperty</span>(<span class="string">'a'</span>
       <section id="map">
         <div class="section-header">
           <div class="section-icon purple" aria-hidden="true">⟨⟩</div>
-          <h2 class="section-title">Map</h2>
+          <h2 class="section-title" data-i18n="sections.map.title">Map</h2>
         </div>
         <div class="cards-grid">
-          <div class="card">
+          <div class="card" data-card="map.basic">
             <div class="card-header">
-              <span class="card-title">Map (ordered key-value, any key type)</span>
+              <span class="card-title" data-i18n="cards.map.basic.title">Map (ordered key-value, any key type)</span>
               <span class="card-badge purple">O(1) avg</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="function">Map</span>();
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="map.basic"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="function">Map</span>();
 
 map.<span class="function">set</span>(<span class="string">'name'</span>, <span class="string">'Burak'</span>);
 map.<span class="function">set</span>(<span class="string">'age'</span>, <span class="number">25</span>);
@@ -401,17 +433,17 @@ map.<span class="function">delete</span>(<span class="string">'age'</span>);
       <section id="set">
         <div class="section-header">
           <div class="section-icon orange" aria-hidden="true">∪</div>
-          <h2 class="section-title">Set</h2>
+          <h2 class="section-title" data-i18n="sections.set.title">Set</h2>
         </div>
         <div class="cards-grid">
-          <div class="card">
+          <div class="card" data-card="set.basic">
             <div class="card-header">
-              <span class="card-title">Set (unique values)</span>
+              <span class="card-title" data-i18n="cards.set.basic.title">Set (unique values)</span>
               <span class="card-badge orange">O(1) avg</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="function">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// {1, 2, 3}</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="set.basic"><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="function">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// {1, 2, 3}</span>
 
 set.<span class="function">add</span>(<span class="number">4</span>);            <span class="comment">// {1, 2, 3, 4}</span>
 set.<span class="function">has</span>(<span class="number">2</span>);            <span class="comment">// true</span>
@@ -437,17 +469,17 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
       <section id="math">
         <div class="section-header">
           <div class="section-icon green" aria-hidden="true">π</div>
-          <h2 class="section-title">Math & Number</h2>
+          <h2 class="section-title" data-i18n="sections.math.title">Math & Number</h2>
         </div>
         <div class="cards-grid">
-          <div class="card">
+          <div class="card" data-card="math.methods">
             <div class="card-header">
-              <span class="card-title">Math Methods</span>
-              <span class="card-badge green">static</span>
+              <span class="card-title" data-i18n="cards.math.methods.title">Math Methods</span>
+              <span class="card-badge green" data-i18n="cards.math.methods.badge">static</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="property">Math</span>.<span class="function">max</span>(<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>);     <span class="comment">// 5</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="math.methods"><span class="property">Math</span>.<span class="function">max</span>(<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>);     <span class="comment">// 5</span>
 <span class="property">Math</span>.<span class="function">min</span>(...[<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>]); <span class="comment">// 1 (spread for arrays)</span>
 <span class="property">Math</span>.<span class="function">abs</span>(<span class="number">-5</span>);          <span class="comment">// 5</span>
 <span class="property">Math</span>.<span class="function">floor</span>(<span class="number">3.7</span>);       <span class="comment">// 3</span>
@@ -463,14 +495,14 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="math.number">
             <div class="card-header">
-              <span class="card-title">Number Methods</span>
-              <span class="card-badge green">parsing</span>
+              <span class="card-title" data-i18n="cards.math.number.title">Number Methods</span>
+              <span class="card-badge green" data-i18n="cards.math.number.badge">parsing</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="property">Number</span>.<span class="function">isInteger</span>(<span class="number">5</span>);   <span class="comment">// true</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="math.number"><span class="property">Number</span>.<span class="function">isInteger</span>(<span class="number">5</span>);   <span class="comment">// true</span>
 <span class="property">Number</span>.<span class="function">isNaN</span>(<span class="property">NaN</span>);     <span class="comment">// true</span>
 <span class="property">Number</span>.<span class="function">isFinite</span>(<span class="number">100</span>);  <span class="comment">// true</span>
 
@@ -489,17 +521,17 @@ set.<span class="property">size</span>;              <span class="comment">// 3<
       <section id="patterns">
         <div class="section-header">
           <div class="section-icon yellow" aria-hidden="true">⚡</div>
-          <h2 class="section-title">DSA Patterns</h2>
+          <h2 class="section-title" data-i18n="sections.patterns.title">DSA Patterns</h2>
         </div>
         <div class="cards-grid">
-          <div class="card">
+          <div class="card" data-card="patterns.stack">
             <div class="card-header">
-              <span class="card-title">Stack & Queue</span>
+              <span class="card-title" data-i18n="cards.patterns.stack.title">Stack & Queue</span>
               <span class="card-badge yellow">O(1)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="comment">// Stack (LIFO)</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="patterns.stack"><span class="comment">// Stack (LIFO)</span>
 <span class="keyword">const</span> stack = [];
 stack.<span class="function">push</span>(<span class="number">1</span>);             <span class="comment">// [1]</span>
 stack.<span class="function">push</span>(<span class="number">2</span>);             <span class="comment">// [1, 2]</span>
@@ -514,14 +546,14 @@ queue.<span class="function">shift</span>();             <span class="comment">/
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="patterns.frequency">
             <div class="card-header">
-              <span class="card-title">Frequency Counter</span>
-              <span class="card-badge purple">Map</span>
+              <span class="card-title" data-i18n="cards.patterns.frequency.title">Frequency Counter</span>
+              <span class="card-badge purple" data-i18n="cards.patterns.frequency.badge">Map</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">function</span> <span class="function">charFrequency</span>(str) {
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="patterns.frequency"><span class="keyword">function</span> <span class="function">charFrequency</span>(str) {
   <span class="keyword">const</span> freq = <span class="keyword">new</span> <span class="function">Map</span>();
   <span class="keyword">for</span> (<span class="keyword">const</span> char <span class="keyword">of</span> str) {
     freq.<span class="function">set</span>(char, (freq.<span class="function">get</span>(char) || <span class="number">0</span>) + <span class="number">1</span>);
@@ -533,14 +565,14 @@ queue.<span class="function">shift</span>();             <span class="comment">/
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="patterns.twopointers">
             <div class="card-header">
-              <span class="card-title">Two Pointers</span>
+              <span class="card-title" data-i18n="cards.patterns.twopointers.title">Two Pointers</span>
               <span class="card-badge cyan">O(n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="comment">// Palindrome Check</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="patterns.twopointers"><span class="comment">// Palindrome Check</span>
 <span class="keyword">function</span> <span class="function">isPalindrome</span>(s) {
   <span class="keyword">let</span> left = <span class="number">0</span>, right = s.<span class="property">length</span> - <span class="number">1</span>;
   <span class="keyword">while</span> (left < right) {
@@ -565,14 +597,14 @@ queue.<span class="function">shift</span>();             <span class="comment">/
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="patterns.sliding">
             <div class="card-header">
-              <span class="card-title">Sliding Window</span>
+              <span class="card-title" data-i18n="cards.patterns.sliding.title">Sliding Window</span>
               <span class="card-badge orange">O(n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="comment">// Max Sum of K consecutive elements</span>
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="patterns.sliding"><span class="comment">// Max Sum of K consecutive elements</span>
 <span class="keyword">function</span> <span class="function">maxSumSubarray</span>(arr, k) {
   <span class="keyword">let</span> windowSum = <span class="number">0</span>;
   <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < k; i++) windowSum += arr[i];
@@ -586,14 +618,14 @@ queue.<span class="function">shift</span>();             <span class="comment">/
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="patterns.binary">
             <div class="card-header">
-              <span class="card-title">Binary Search</span>
+              <span class="card-title" data-i18n="cards.patterns.binary.title">Binary Search</span>
               <span class="card-badge green">O(log n)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">function</span> <span class="function">binarySearch</span>(arr, target) {
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="patterns.binary"><span class="keyword">function</span> <span class="function">binarySearch</span>(arr, target) {
   <span class="keyword">let</span> lo = <span class="number">0</span>, hi = arr.<span class="property">length</span> - <span class="number">1</span>;
   <span class="keyword">while</span> (lo <= hi) {
     <span class="keyword">const</span> mid = <span class="property">Math</span>.<span class="function">floor</span>((lo + hi) / <span class="number">2</span>);
@@ -606,14 +638,14 @@ queue.<span class="function">shift</span>();             <span class="comment">/
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="patterns.bfs">
             <div class="card-header">
-              <span class="card-title">Graph Traversal - BFS</span>
+              <span class="card-title" data-i18n="cards.patterns.bfs.title">Graph Traversal - BFS</span>
               <span class="card-badge pink">O(V+E)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">function</span> <span class="function">bfs</span>(graph, start) {
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="patterns.bfs"><span class="keyword">function</span> <span class="function">bfs</span>(graph, start) {
   <span class="keyword">const</span> visited = <span class="keyword">new</span> <span class="function">Set</span>([start]);
   <span class="keyword">const</span> queue = [start];
   <span class="keyword">while</span> (queue.<span class="property">length</span> > <span class="number">0</span>) {
@@ -630,14 +662,14 @@ queue.<span class="function">shift</span>();             <span class="comment">/
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" data-card="patterns.dfs">
             <div class="card-header">
-              <span class="card-title">Graph Traversal - DFS</span>
+              <span class="card-title" data-i18n="cards.patterns.dfs.title">Graph Traversal - DFS</span>
               <span class="card-badge pink">O(V+E)</span>
             </div>
             <div class="code-block">
-              <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
-              <pre><span class="keyword">function</span> <span class="function">dfs</span>(graph, start, visited = <span class="keyword">new</span> <span class="function">Set</span>()) {
+              <button class="copy-btn" aria-label="Copy code to clipboard" data-i18n="buttons.copy" data-i18n-aria-label="buttons.copyAria">Copy</button>
+              <pre data-code="patterns.dfs"><span class="keyword">function</span> <span class="function">dfs</span>(graph, start, visited = <span class="keyword">new</span> <span class="function">Set</span>()) {
   visited.<span class="function">add</span>(start);
   <span class="keyword">for</span> (<span class="keyword">const</span> neighbor <span class="keyword">of</span> graph[start] || []) {
     <span class="keyword">if</span> (!visited.<span class="function">has</span>(neighbor)) {
@@ -655,67 +687,67 @@ queue.<span class="function">shift</span>();             <span class="comment">/
       <section id="reference">
         <div class="section-header">
           <div class="section-icon cyan" aria-hidden="true">📊</div>
-          <h2 class="section-title">Quick Reference</h2>
+          <h2 class="section-title" data-i18n="sections.reference.title">Quick Reference</h2>
         </div>
         <div class="table-container">
           <table>
             <thead>
               <tr>
-                <th>Method / Pattern</th>
-                <th>Time Complexity</th>
-                <th>Use Case</th>
+                <th data-i18n="table.header1">Method / Pattern</th>
+                <th data-i18n="table.header2">Time Complexity</th>
+                <th data-i18n="table.header3">Use Case</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr data-i18n-row="table.row1">
                 <td>arr.push() / pop()</td>
                 <td>O(1)</td>
-                <td>Stack operations</td>
+                <td data-i18n="table.row1.usecase">Stack operations</td>
               </tr>
-              <tr>
+              <tr data-i18n-row="table.row2">
                 <td>arr.shift() / unshift()</td>
                 <td>O(n)</td>
-                <td>Queue (use linked list for O(1))</td>
+                <td data-i18n="table.row2.usecase">Queue (use linked list for O(1))</td>
               </tr>
-              <tr>
+              <tr data-i18n-row="table.row3">
                 <td>arr.sort()</td>
                 <td>O(n log n)</td>
-                <td>Sorting arrays</td>
+                <td data-i18n="table.row3.usecase">Sorting arrays</td>
               </tr>
-              <tr>
+              <tr data-i18n-row="table.row4">
                 <td>arr.indexOf() / includes()</td>
                 <td>O(n)</td>
-                <td>Linear search</td>
+                <td data-i18n="table.row4.usecase">Linear search</td>
               </tr>
-              <tr>
+              <tr data-i18n-row="table.row5">
                 <td>Binary Search</td>
                 <td>O(log n)</td>
-                <td>Sorted array search</td>
+                <td data-i18n="table.row5.usecase">Sorted array search</td>
               </tr>
-              <tr>
+              <tr data-i18n-row="table.row6">
                 <td>Two Pointers</td>
                 <td>O(n)</td>
-                <td>Pairs, palindromes, sorted arrays</td>
+                <td data-i18n="table.row6.usecase">Pairs, palindromes, sorted arrays</td>
               </tr>
-              <tr>
+              <tr data-i18n-row="table.row7">
                 <td>Sliding Window</td>
                 <td>O(n)</td>
-                <td>Subarrays, consecutive elements</td>
+                <td data-i18n="table.row7.usecase">Subarrays, consecutive elements</td>
               </tr>
-              <tr>
+              <tr data-i18n-row="table.row8">
                 <td>Map.get() / set() / has()</td>
                 <td>O(1) avg</td>
-                <td>Frequency counting, lookups</td>
+                <td data-i18n="table.row8.usecase">Frequency counting, lookups</td>
               </tr>
-              <tr>
+              <tr data-i18n-row="table.row9">
                 <td>Set.add() / has() / delete()</td>
                 <td>O(1) avg</td>
-                <td>Uniqueness, membership</td>
+                <td data-i18n="table.row9.usecase">Uniqueness, membership</td>
               </tr>
-              <tr>
+              <tr data-i18n-row="table.row10">
                 <td>BFS / DFS</td>
                 <td>O(V + E)</td>
-                <td>Graph traversal</td>
+                <td data-i18n="table.row10.usecase">Graph traversal</td>
               </tr>
             </tbody>
           </table>
@@ -724,17 +756,13 @@ queue.<span class="function">shift</span>();             <span class="comment">/
     </main>
 
     <footer>
-      <p>Good luck with your interviews! <span>🚀</span></p>
+      <p data-i18n="footer.message">Good luck with your interviews! <span>🚀</span></p>
     </footer>
 
     <!-- Back to Top Button -->
-    <button
-      class="back-to-top"
-      id="backToTop"
-      aria-label="Scroll to top"
-      title="Back to top"
-    ></button>
+    <button class="back-to-top" id="backToTop" aria-label="Scroll to top" data-i18n-title="footer.backToTop" title="Back to top"></button>
 
+    <script src="language.js"></script>
     <script src="index.js"></script>
   </body>
 </html>

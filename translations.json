@@ -1,0 +1,462 @@
+{
+  "en": {
+    "nav": {
+      "arrays": "Arrays",
+      "strings": "Strings",
+      "objects": "Objects",
+      "map": "Map",
+      "set": "Set",
+      "math": "Math",
+      "patterns": "Patterns",
+      "reference": "Reference"
+    },
+    "sections": {
+      "arrays": {
+        "title": "Arrays"
+      },
+      "strings": {
+        "title": "Strings"
+      },
+      "objects": {
+        "title": "Objects"
+      },
+      "map": {
+        "title": "Map"
+      },
+      "set": {
+        "title": "Set"
+      },
+      "math": {
+        "title": "Math & Number"
+      },
+      "patterns": {
+        "title": "DSA Patterns"
+      },
+      "reference": {
+        "title": "Quick Reference"
+      }
+    },
+    "cards": {
+      "arrays": {
+        "adding": {
+          "title": "Adding / Removing",
+          "badge": "mutates"
+        },
+        "searching": {
+          "title": "Searching"
+        },
+        "transforming": {
+          "title": "Transforming",
+          "badge": "new array"
+        },
+        "sorting": {
+          "title": "Sorting & Slicing"
+        },
+        "iteration": {
+          "title": "Iteration & Utilities",
+          "badge": "boolean"
+        }
+      },
+      "strings": {
+        "accessing": {
+          "title": "Accessing & Searching"
+        },
+        "extracting": {
+          "title": "Extracting & Transforming",
+          "badge": "new string"
+        },
+        "regex": {
+          "title": "Regex",
+          "badge": "pattern"
+        }
+      },
+      "objects": {
+        "methods": {
+          "title": "Object Methods",
+          "badge": "static"
+        }
+      },
+      "map": {
+        "basic": {
+          "title": "Map (ordered key-value, any key type)"
+        }
+      },
+      "set": {
+        "basic": {
+          "title": "Set (unique values)"
+        }
+      },
+      "math": {
+        "methods": {
+          "title": "Math Methods",
+          "badge": "static"
+        },
+        "number": {
+          "title": "Number Methods",
+          "badge": "parsing"
+        }
+      },
+      "patterns": {
+        "stack": {
+          "title": "Stack & Queue"
+        },
+        "frequency": {
+          "title": "Frequency Counter",
+          "badge": "Map"
+        },
+        "twopointers": {
+          "title": "Two Pointers"
+        },
+        "sliding": {
+          "title": "Sliding Window"
+        },
+        "binary": {
+          "title": "Binary Search"
+        },
+        "bfs": {
+          "title": "Graph Traversal - BFS"
+        },
+        "dfs": {
+          "title": "Graph Traversal - DFS"
+        }
+      }
+    },
+    "hero": {
+      "title1": "JavaScript",
+      "title2": "Methods",
+      "title3": "Cheatsheet",
+      "description": "Essential methods and patterns for DSA interviews. Copy, learn, and ace your technical interviews 🚀",
+      "tag1": "Arrays",
+      "tag2": "Strings",
+      "tag3": "Map & Set",
+      "tag4": "DSA Patterns",
+      "helpBtn": "How to Use",
+      "helpBtnAria": "Open help dialog with instructions on how to use this website"
+    },
+    "popup": {
+      "title": "How to Use This Website",
+      "close": "Close help dialog",
+      "instruction1": {
+        "title": "Browse Methods by Category",
+        "desc": "Use the navigation links at the top to jump to different sections: Arrays, Strings, Objects, Map, Set, Math, Patterns, and Reference."
+      },
+      "instruction2": {
+        "title": "Copy Code Examples",
+        "desc": "Hover over any code block to reveal the Copy button. Click it to copy the entire code snippet to your clipboard."
+      },
+      "instruction3": {
+        "title": "Learn Method Details",
+        "desc": "Hover over any highlighted method name (like push(), map(), etc.) to see a tooltip with a description and a link to the official MDN documentation."
+      },
+      "instruction4": {
+        "title": "Understand Complexity",
+        "desc": "Check the colored badges on each card to see time complexity (O(1), O(n), O(n log n), etc.) and whether methods mutate the original array or return a new one."
+      },
+      "instruction5": {
+        "title": "Quick Reference Table",
+        "desc": "Scroll to the bottom to see the Quick Reference table with time complexities and use cases for all major methods and patterns."
+      },
+      "instruction6": {
+        "title": "Practice DSA Patterns",
+        "desc": "Explore the DSA Patterns section for common interview patterns like Two Pointers, Sliding Window, Binary Search, and Graph Traversal with ready-to-use code examples."
+      }
+    },
+    "table": {
+      "header1": "Method / Pattern",
+      "header2": "Time Complexity",
+      "header3": "Use Case",
+      "row1": {
+        "usecase": "Stack operations"
+      },
+      "row2": {
+        "usecase": "Queue (use linked list for O(1))"
+      },
+      "row3": {
+        "usecase": "Sorting arrays"
+      },
+      "row4": {
+        "usecase": "Linear search"
+      },
+      "row5": {
+        "usecase": "Sorted array search"
+      },
+      "row6": {
+        "usecase": "Pairs, palindromes, sorted arrays"
+      },
+      "row7": {
+        "usecase": "Subarrays, consecutive elements"
+      },
+      "row8": {
+        "usecase": "Frequency counting, lookups"
+      },
+      "row9": {
+        "usecase": "Uniqueness, membership"
+      },
+      "row10": {
+        "usecase": "Graph traversal"
+      }
+    },
+    "footer": {
+      "message": "Good luck with your interviews!",
+      "backToTop": "Back to top"
+    },
+    "buttons": {
+      "copy": "Copy",
+      "copyAria": "Copy code to clipboard",
+      "copied": "Copied!",
+      "failed": "Failed"
+    },
+    "code": {
+      "arrays.adding": "<span class=\"keyword\">const</span> arr = [<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>];\narr.<span class=\"function\">push</span>(<span class=\"number\">4</span>);           <span class=\"comment\">// [1, 2, 3, 4]</span>\narr.<span class=\"function\">pop</span>();             <span class=\"comment\">// [1, 2, 3], returns 4</span>\narr.<span class=\"function\">unshift</span>(<span class=\"number\">0</span>);        <span class=\"comment\">// [0, 1, 2, 3]</span>\narr.<span class=\"function\">shift</span>();           <span class=\"comment\">// [1, 2, 3], returns 0</span>\narr.<span class=\"function\">splice</span>(<span class=\"number\">1</span>, <span class=\"number\">1</span>, <span class=\"string\">'a'</span>); <span class=\"comment\">// [1, 'a', 3]</span>",
+      "arrays.searching": "<span class=\"keyword\">const</span> nums = [<span class=\"number\">10</span>, <span class=\"number\">20</span>, <span class=\"number\">30</span>, <span class=\"number\">20</span>];\nnums.<span class=\"function\">indexOf</span>(<span class=\"number\">20</span>);           <span class=\"comment\">// 1</span>\nnums.<span class=\"function\">lastIndexOf</span>(<span class=\"number\">20</span>);       <span class=\"comment\">// 3</span>\nnums.<span class=\"function\">includes</span>(<span class=\"number\">30</span>);          <span class=\"comment\">// true</span>\nnums.<span class=\"function\">find</span>(x <span class=\"operator\">=></span> x > <span class=\"number\">15</span>);     <span class=\"comment\">// 20</span>\nnums.<span class=\"function\">findIndex</span>(x <span class=\"operator\">=></span> x > <span class=\"number\">15</span>); <span class=\"comment\">// 1</span>",
+      "arrays.transforming": "[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>].<span class=\"function\">map</span>(x <span class=\"operator\">=></span> x * <span class=\"number\">2</span>);             <span class=\"comment\">// [2, 4, 6]</span>\n[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>, <span class=\"number\">4</span>].<span class=\"function\">filter</span>(x <span class=\"operator\">=></span> x % <span class=\"number\">2</span> === <span class=\"number\">0</span>); <span class=\"comment\">// [2, 4]</span>\n[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>].<span class=\"function\">reduce</span>((sum, x) <span class=\"operator\">=></span> sum + x, <span class=\"number\">0</span>); <span class=\"comment\">// 6</span>\n[[<span class=\"number\">1</span>, <span class=\"number\">2</span>], [<span class=\"number\">3</span>, [<span class=\"number\">4</span>]]].<span class=\"function\">flat</span>(<span class=\"number\">2</span>);         <span class=\"comment\">// [1, 2, 3, 4]</span>",
+      "arrays.sorting": "<span class=\"keyword\">const</span> unsorted = [<span class=\"number\">3</span>, <span class=\"number\">1</span>, <span class=\"number\">4</span>, <span class=\"number\">1</span>, <span class=\"number\">5</span>];\nunsorted.<span class=\"function\">sort</span>((a, b) <span class=\"operator\">=></span> a - b);  <span class=\"comment\">// ascending</span>\nunsorted.<span class=\"function\">sort</span>((a, b) <span class=\"operator\">=></span> b - a);  <span class=\"comment\">// descending</span>\n\n<span class=\"keyword\">const</span> letters = [<span class=\"string\">'a'</span>, <span class=\"string\">'b'</span>, <span class=\"string\">'c'</span>, <span class=\"string\">'d'</span>];\nletters.<span class=\"function\">slice</span>(<span class=\"number\">1</span>, <span class=\"number\">3</span>);   <span class=\"comment\">// ['b', 'c']</span>\nletters.<span class=\"function\">concat</span>([<span class=\"string\">'e'</span>]); <span class=\"comment\">// ['a','b','c','d','e']</span>\nletters.<span class=\"function\">join</span>(<span class=\"string\">'-'</span>);     <span class=\"comment\">// 'a-b-c-d'</span>",
+      "arrays.iteration": "[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>].<span class=\"function\">every</span>(x <span class=\"operator\">=></span> x > <span class=\"number\">0</span>);  <span class=\"comment\">// true (all pass)</span>\n[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>].<span class=\"function\">some</span>(x <span class=\"operator\">=></span> x > <span class=\"number\">2</span>);   <span class=\"comment\">// true (any passes)</span>\n\n<span class=\"property\">Array</span>.<span class=\"function\">from</span>(<span class=\"string\">'abc'</span>);                     <span class=\"comment\">// ['a','b','c']</span>\n<span class=\"property\">Array</span>.<span class=\"function\">from</span>({<span class=\"property\">length</span>: <span class=\"number\">3</span>}, (_, i) <span class=\"operator\">=></span> i);  <span class=\"comment\">// [0, 1, 2]</span>\n[...<span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">1</span>, <span class=\"number\">1</span>, <span class=\"number\">2</span>])];               <span class=\"comment\">// [1, 2]</span>",
+      "strings.accessing": "<span class=\"keyword\">const</span> str = <span class=\"string\">'hello'</span>;\nstr[<span class=\"number\">0</span>];                <span class=\"comment\">// 'h'</span>\nstr.<span class=\"function\">charAt</span>(<span class=\"number\">1</span>);         <span class=\"comment\">// 'e'</span>\nstr.<span class=\"function\">charCodeAt</span>(<span class=\"number\">0</span>);     <span class=\"comment\">// 104</span>\n\n<span class=\"string\">'javascript'</span>.<span class=\"function\">indexOf</span>(<span class=\"string\">'script'</span>);   <span class=\"comment\">// 4</span>\n<span class=\"string\">'hello world'</span>.<span class=\"function\">includes</span>(<span class=\"string\">'world'</span>);  <span class=\"comment\">// true</span>\n<span class=\"string\">'filename.js'</span>.<span class=\"function\">startsWith</span>(<span class=\"string\">'file'</span>); <span class=\"comment\">// true</span>\n<span class=\"string\">'filename.js'</span>.<span class=\"function\">endsWith</span>(<span class=\"string\">'.js'</span>);    <span class=\"comment\">// true</span>",
+      "strings.extracting": "<span class=\"string\">'hello world'</span>.<span class=\"function\">slice</span>(<span class=\"number\">0</span>, <span class=\"number\">5</span>);      <span class=\"comment\">// 'hello'</span>\n<span class=\"string\">'hello world'</span>.<span class=\"function\">split</span>(<span class=\"string\">' '</span>);       <span class=\"comment\">// ['hello', 'world']</span>\n<span class=\"string\">'a,b,c'</span>.<span class=\"function\">split</span>(<span class=\"string\">','</span>);             <span class=\"comment\">// ['a', 'b', 'c']</span>\n\n<span class=\"string\">'Hello'</span>.<span class=\"function\">toLowerCase</span>();          <span class=\"comment\">// 'hello'</span>\n<span class=\"string\">'  trim me  '</span>.<span class=\"function\">trim</span>();          <span class=\"comment\">// 'trim me'</span>\n<span class=\"string\">'foo bar'</span>.<span class=\"function\">replace</span>(<span class=\"string\">'bar'</span>, <span class=\"string\">'baz'</span>);<span class=\"comment\">// 'foo baz'</span>\n<span class=\"string\">'ha'</span>.<span class=\"function\">repeat</span>(<span class=\"number\">3</span>);                 <span class=\"comment\">// 'hahaha'</span>\n<span class=\"string\">'5'</span>.<span class=\"function\">padStart</span>(<span class=\"number\">3</span>, <span class=\"string\">'0'</span>);           <span class=\"comment\">// '005'</span>",
+      "strings.regex": "<span class=\"string\">'test123'</span>.<span class=\"function\">match</span>(<span class=\"operator\">/d+/</span>);         <span class=\"comment\">// ['123']</span>\n<span class=\"string\">'abc123def456'</span>.<span class=\"function\">match</span>(<span class=\"operator\">/d+/g</span>);   <span class=\"comment\">// ['123', '456']</span>\n<span class=\"string\">'hello'</span>.<span class=\"function\">search</span>(<span class=\"operator\">/l+/</span>);           <span class=\"comment\">// 2</span>\n<span class=\"string\">'a1b2c3'</span>.<span class=\"function\">replace</span>(<span class=\"operator\">/d/g</span>, <span class=\"string\">'X'</span>);  <span class=\"comment\">// 'aXbXcX'</span>",
+      "objects.methods": "<span class=\"keyword\">const</span> obj = { <span class=\"property\">a</span>: <span class=\"number\">1</span>, <span class=\"property\">b</span>: <span class=\"number\">2</span>, <span class=\"property\">c</span>: <span class=\"number\">3</span> };\n\n<span class=\"property\">Object</span>.<span class=\"function\">keys</span>(obj);      <span class=\"comment\">// ['a', 'b', 'c']</span>\n<span class=\"property\">Object</span>.<span class=\"function\">values</span>(obj);    <span class=\"comment\">// [1, 2, 3]</span>\n<span class=\"property\">Object</span>.<span class=\"function\">entries</span>(obj);   <span class=\"comment\">// [['a',1], ['b',2], ['c',3]]</span>\n\n<span class=\"property\">Object</span>.<span class=\"function\">fromEntries</span>([[<span class=\"string\">'x'</span>, <span class=\"number\">10</span>], [<span class=\"string\">'y'</span>, <span class=\"number\">20</span>]]); <span class=\"comment\">// {x:10, y:20}</span>\n\nobj.<span class=\"function\">hasOwnProperty</span>(<span class=\"string\">'a'</span>);  <span class=\"comment\">// true</span>\n<span class=\"string\">'a'</span> <span class=\"keyword\">in</span> obj;               <span class=\"comment\">// true</span>\n\n<span class=\"keyword\">const</span> clone = { ...obj };\n<span class=\"keyword\">const</span> merged = <span class=\"property\">Object</span>.<span class=\"function\">assign</span>({}, obj, { <span class=\"property\">d</span>: <span class=\"number\">4</span> });\n<span class=\"keyword\">delete</span> obj.<span class=\"property\">c</span>;          <span class=\"comment\">// removes property c</span>",
+      "map.basic": "<span class=\"keyword\">const</span> map = <span class=\"keyword\">new</span> <span class=\"function\">Map</span>();\n\nmap.<span class=\"function\">set</span>(<span class=\"string\">'name'</span>, <span class=\"string\">'Burak'</span>);\nmap.<span class=\"function\">set</span>(<span class=\"string\">'age'</span>, <span class=\"number\">25</span>);\nmap.<span class=\"function\">set</span>({ <span class=\"property\">id</span>: <span class=\"number\">1</span> }, <span class=\"string\">'object key'</span>); <span class=\"comment\">// any type as key</span>\n\nmap.<span class=\"function\">get</span>(<span class=\"string\">'name'</span>);       <span class=\"comment\">// 'Burak'</span>\nmap.<span class=\"function\">has</span>(<span class=\"string\">'age'</span>);        <span class=\"comment\">// true</span>\nmap.<span class=\"property\">size</span>;              <span class=\"comment\">// 3</span>\nmap.<span class=\"function\">delete</span>(<span class=\"string\">'age'</span>);\n\n<span class=\"comment\">// Iteration</span>\n<span class=\"keyword\">for</span> (<span class=\"keyword\">const</span> [key, value] <span class=\"keyword\">of</span> map) {\n  <span class=\"property\">console</span>.<span class=\"function\">log</span>(key, value);\n}\n\n<span class=\"comment\">// From/To object</span>\n<span class=\"keyword\">const</span> fromObj = <span class=\"keyword\">new</span> <span class=\"function\">Map</span>(<span class=\"property\">Object</span>.<span class=\"function\">entries</span>({ <span class=\"property\">a</span>: <span class=\"number\">1</span> }));\n<span class=\"keyword\">const</span> toObj = <span class=\"property\">Object</span>.<span class=\"function\">fromEntries</span>(map);",
+      "set.basic": "<span class=\"keyword\">const</span> set = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>]); <span class=\"comment\">// {1, 2, 3}</span>\n\nset.<span class=\"function\">add</span>(<span class=\"number\">4</span>);            <span class=\"comment\">// {1, 2, 3, 4}</span>\nset.<span class=\"function\">has</span>(<span class=\"number\">2</span>);            <span class=\"comment\">// true</span>\nset.<span class=\"function\">delete</span>(<span class=\"number\">1</span>);         <span class=\"comment\">// {2, 3, 4}</span>\nset.<span class=\"property\">size</span>;              <span class=\"comment\">// 3</span>\n\n<span class=\"comment\">// Remove duplicates</span>\n<span class=\"keyword\">const</span> unique = [...<span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">1</span>, <span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>])]; <span class=\"comment\">// [1,2,3]</span>\n\n<span class=\"comment\">// Set operations</span>\n<span class=\"keyword\">const</span> a = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>]);\n<span class=\"keyword\">const</span> b = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">2</span>, <span class=\"number\">3</span>, <span class=\"number\">4</span>]);\n\n<span class=\"keyword\">const</span> union = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([...a, ...b]);            <span class=\"comment\">// {1,2,3,4}</span>\n<span class=\"keyword\">const</span> intersect = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([...a].<span class=\"function\">filter</span>(x <span class=\"operator\">=></span> b.<span class=\"function\">has</span>(x))); <span class=\"comment\">// {2,3}</span>\n<span class=\"keyword\">const</span> diff = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([...a].<span class=\"function\">filter</span>(x <span class=\"operator\">=></span> !b.<span class=\"function\">has</span>(x))); <span class=\"comment\">// {1}</span>",
+      "math.methods": "<span class=\"property\">Math</span>.<span class=\"function\">max</span>(<span class=\"number\">1</span>, <span class=\"number\">5</span>, <span class=\"number\">3</span>);     <span class=\"comment\">// 5</span>\n<span class=\"property\">Math</span>.<span class=\"function\">min</span>(...[<span class=\"number\">1</span>, <span class=\"number\">5</span>, <span class=\"number\">3</span>]); <span class=\"comment\">// 1 (spread for arrays)</span>\n<span class=\"property\">Math</span>.<span class=\"function\">abs</span>(<span class=\"number\">-5</span>);          <span class=\"comment\">// 5</span>\n<span class=\"property\">Math</span>.<span class=\"function\">floor</span>(<span class=\"number\">3.7</span>);       <span class=\"comment\">// 3</span>\n<span class=\"property\">Math</span>.<span class=\"function\">ceil</span>(<span class=\"number\">3.2</span>);        <span class=\"comment\">// 4</span>\n<span class=\"property\">Math</span>.<span class=\"function\">round</span>(<span class=\"number\">3.5</span>);       <span class=\"comment\">// 4</span>\n<span class=\"property\">Math</span>.<span class=\"function\">trunc</span>(<span class=\"number\">-3.7</span>);      <span class=\"comment\">// -3</span>\n\n<span class=\"property\">Math</span>.<span class=\"function\">sqrt</span>(<span class=\"number\">16</span>);         <span class=\"comment\">// 4</span>\n<span class=\"property\">Math</span>.<span class=\"function\">pow</span>(<span class=\"number\">2</span>, <span class=\"number\">3</span>);        <span class=\"comment\">// 8  (or 2 ** 3)</span>\n\n<span class=\"comment\">// Random int in range [min, max]</span>\n<span class=\"property\">Math</span>.<span class=\"function\">floor</span>(<span class=\"property\">Math</span>.<span class=\"function\">random</span>() * (max - min + <span class=\"number\">1</span>)) + min;",
+      "math.number": "<span class=\"property\">Number</span>.<span class=\"function\">isInteger</span>(<span class=\"number\">5</span>);   <span class=\"comment\">// true</span>\n<span class=\"property\">Number</span>.<span class=\"function\">isNaN</span>(<span class=\"property\">NaN</span>);     <span class=\"comment\">// true</span>\n<span class=\"property\">Number</span>.<span class=\"function\">isFinite</span>(<span class=\"number\">100</span>);  <span class=\"comment\">// true</span>\n\n<span class=\"function\">parseInt</span>(<span class=\"string\">'42px'</span>);      <span class=\"comment\">// 42</span>\n<span class=\"function\">parseInt</span>(<span class=\"string\">'1010'</span>, <span class=\"number\">2</span>);   <span class=\"comment\">// 10 (binary)</span>\n<span class=\"function\">parseFloat</span>(<span class=\"string\">'3.14'</span>);    <span class=\"comment\">// 3.14</span>\n\n<span class=\"comment\">// BigInt for large numbers</span>\n<span class=\"keyword\">const</span> big = <span class=\"number\">9007199254740991n</span> + <span class=\"number\">1n</span>;",
+      "patterns.stack": "<span class=\"comment\">// Stack (LIFO)</span>\n<span class=\"keyword\">const</span> stack = [];\nstack.<span class=\"function\">push</span>(<span class=\"number\">1</span>);             <span class=\"comment\">// [1]</span>\nstack.<span class=\"function\">push</span>(<span class=\"number\">2</span>);             <span class=\"comment\">// [1, 2]</span>\nstack.<span class=\"function\">pop</span>();               <span class=\"comment\">// 2, stack is [1]</span>\nstack[stack.<span class=\"property\">length</span> - <span class=\"number\">1</span>];   <span class=\"comment\">// peek: 1</span>\n\n<span class=\"comment\">// Queue (FIFO) - simple O(n) dequeue</span>\n<span class=\"keyword\">const</span> queue = [];\nqueue.<span class=\"function\">push</span>(<span class=\"number\">1</span>);             <span class=\"comment\">// enqueue</span>\nqueue.<span class=\"function\">push</span>(<span class=\"number\">2</span>);\nqueue.<span class=\"function\">shift</span>();             <span class=\"comment\">// dequeue: 1</span>",
+      "patterns.frequency": "<span class=\"keyword\">function</span> <span class=\"function\">charFrequency</span>(str) {\n  <span class=\"keyword\">const</span> freq = <span class=\"keyword\">new</span> <span class=\"function\">Map</span>();\n  <span class=\"keyword\">for</span> (<span class=\"keyword\">const</span> char <span class=\"keyword\">of</span> str) {\n    freq.<span class=\"function\">set</span>(char, (freq.<span class=\"function\">get</span>(char) || <span class=\"number\">0</span>) + <span class=\"number\">1</span>);\n  }\n  <span class=\"keyword\">return</span> freq;\n}\n<span class=\"function\">charFrequency</span>(<span class=\"string\">'hello'</span>);\n<span class=\"comment\">// Map { 'h'=>1, 'e'=>1, 'l'=>2, 'o'=>1 }</span>",
+      "patterns.twopointers": "<span class=\"comment\">// Palindrome Check</span>\n<span class=\"keyword\">function</span> <span class=\"function\">isPalindrome</span>(s) {\n  <span class=\"keyword\">let</span> left = <span class=\"number\">0</span>, right = s.<span class=\"property\">length</span> - <span class=\"number\">1</span>;\n  <span class=\"keyword\">while</span> (left < right) {\n    <span class=\"keyword\">if</span> (s[left] !== s[right]) <span class=\"keyword\">return</span> <span class=\"number\">false</span>;\n    left++;\n    right--;\n  }\n  <span class=\"keyword\">return</span> <span class=\"number\">true</span>;\n}\n\n<span class=\"comment\">// Two Sum (sorted array)</span>\n<span class=\"keyword\">function</span> <span class=\"function\">twoSumSorted</span>(arr, target) {\n  <span class=\"keyword\">let</span> left = <span class=\"number\">0</span>, right = arr.<span class=\"property\">length</span> - <span class=\"number\">1</span>;\n  <span class=\"keyword\">while</span> (left < right) {\n    <span class=\"keyword\">const</span> sum = arr[left] + arr[right];\n    <span class=\"keyword\">if</span> (sum === target) <span class=\"keyword\">return</span> [left, right];\n    <span class=\"keyword\">if</span> (sum < target) left++;\n    <span class=\"keyword\">else</span> right--;\n  }\n  <span class=\"keyword\">return</span> [<span class=\"number\">-1</span>, <span class=\"number\">-1</span>];\n}",
+      "patterns.sliding": "<span class=\"comment\">// Max Sum of K consecutive elements</span>\n<span class=\"keyword\">function</span> <span class=\"function\">maxSumSubarray</span>(arr, k) {\n  <span class=\"keyword\">let</span> windowSum = <span class=\"number\">0</span>;\n  <span class=\"keyword\">for</span> (<span class=\"keyword\">let</span> i = <span class=\"number\">0</span>; i < k; i++) windowSum += arr[i];\n  <span class=\"keyword\">let</span> maxSum = windowSum;\n  <span class=\"keyword\">for</span> (<span class=\"keyword\">let</span> i = k; i < arr.<span class=\"property\">length</span>; i++) {\n    windowSum += arr[i] - arr[i - k];\n    maxSum = <span class=\"property\">Math</span>.<span class=\"function\">max</span>(maxSum, windowSum);\n  }\n  <span class=\"keyword\">return</span> maxSum;\n}",
+      "patterns.binary": "<span class=\"keyword\">function</span> <span class=\"function\">binarySearch</span>(arr, target) {\n  <span class=\"keyword\">let</span> lo = <span class=\"number\">0</span>, hi = arr.<span class=\"property\">length</span> - <span class=\"number\">1</span>;\n  <span class=\"keyword\">while</span> (lo <= hi) {\n    <span class=\"keyword\">const</span> mid = <span class=\"property\">Math</span>.<span class=\"function\">floor</span>((lo + hi) / <span class=\"number\">2</span>);\n    <span class=\"keyword\">if</span> (arr[mid] === target) <span class=\"keyword\">return</span> mid;\n    <span class=\"keyword\">if</span> (arr[mid] < target) lo = mid + <span class=\"number\">1</span>;\n    <span class=\"keyword\">else</span> hi = mid - <span class=\"number\">1</span>;\n  }\n  <span class=\"keyword\">return</span> <span class=\"number\">-1</span>;\n}",
+      "patterns.bfs": "<span class=\"keyword\">function</span> <span class=\"function\">bfs</span>(graph, start) {\n  <span class=\"keyword\">const</span> visited = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([start]);\n  <span class=\"keyword\">const</span> queue = [start];\n  <span class=\"keyword\">while</span> (queue.<span class=\"property\">length</span> > <span class=\"number\">0</span>) {\n    <span class=\"keyword\">const</span> node = queue.<span class=\"function\">shift</span>();\n    <span class=\"keyword\">for</span> (<span class=\"keyword\">const</span> neighbor <span class=\"keyword\">of</span> graph[node] || []) {\n      <span class=\"keyword\">if</span> (!visited.<span class=\"function\">has</span>(neighbor)) {\n        visited.<span class=\"function\">add</span>(neighbor);\n        queue.<span class=\"function\">push</span>(neighbor);\n      }\n    }\n  }\n  <span class=\"keyword\">return</span> visited;\n}",
+      "patterns.dfs": "<span class=\"keyword\">function</span> <span class=\"function\">dfs</span>(graph, start, visited = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>()) {\n  visited.<span class=\"function\">add</span>(start);\n  <span class=\"keyword\">for</span> (<span class=\"keyword\">const</span> neighbor <span class=\"keyword\">of</span> graph[start] || []) {\n    <span class=\"keyword\">if</span> (!visited.<span class=\"function\">has</span>(neighbor)) {\n      <span class=\"function\">dfs</span>(graph, neighbor, visited);\n    }\n  }\n  <span class=\"keyword\">return</span> visited;\n}"
+    }
+  },
+  "tr": {
+    "nav": {
+      "arrays": "Diziler",
+      "strings": "Dizeler",
+      "objects": "Nesneler",
+      "map": "Map",
+      "set": "Set",
+      "math": "Matematik",
+      "patterns": "Desenler",
+      "reference": "Referans"
+    },
+    "sections": {
+      "arrays": {
+        "title": "Diziler"
+      },
+      "strings": {
+        "title": "Dizeler"
+      },
+      "objects": {
+        "title": "Nesneler"
+      },
+      "map": {
+        "title": "Map"
+      },
+      "set": {
+        "title": "Set"
+      },
+      "math": {
+        "title": "Matematik & Sayı"
+      },
+      "patterns": {
+        "title": "DSA Desenleri"
+      },
+      "reference": {
+        "title": "Hızlı Referans"
+      }
+    },
+    "cards": {
+      "arrays": {
+        "adding": {
+          "title": "Ekleme / Çıkarma",
+          "badge": "değiştirir"
+        },
+        "searching": {
+          "title": "Arama"
+        },
+        "transforming": {
+          "title": "Dönüştürme",
+          "badge": "yeni dizi"
+        },
+        "sorting": {
+          "title": "Sıralama & Dilimleme"
+        },
+        "iteration": {
+          "title": "Yineleme & Yardımcılar",
+          "badge": "boolean"
+        }
+      },
+      "strings": {
+        "accessing": {
+          "title": "Erişim & Arama"
+        },
+        "extracting": {
+          "title": "Çıkarma & Dönüştürme",
+          "badge": "yeni dize"
+        },
+        "regex": {
+          "title": "Regex",
+          "badge": "desen"
+        }
+      },
+      "objects": {
+        "methods": {
+          "title": "Nesne Metodları",
+          "badge": "statik"
+        }
+      },
+      "map": {
+        "basic": {
+          "title": "Map (sıralı anahtar-değer, herhangi bir anahtar tipi)"
+        }
+      },
+      "set": {
+        "basic": {
+          "title": "Set (benzersiz değerler)"
+        }
+      },
+      "math": {
+        "methods": {
+          "title": "Matematik Metodları",
+          "badge": "statik"
+        },
+        "number": {
+          "title": "Sayı Metodları",
+          "badge": "ayrıştırma"
+        }
+      },
+      "patterns": {
+        "stack": {
+          "title": "Yığın & Kuyruk"
+        },
+        "frequency": {
+          "title": "Frekans Sayacı",
+          "badge": "Map"
+        },
+        "twopointers": {
+          "title": "İki İşaretçi"
+        },
+        "sliding": {
+          "title": "Kayan Pencere"
+        },
+        "binary": {
+          "title": "İkili Arama"
+        },
+        "bfs": {
+          "title": "Graf Gezinme - BFS"
+        },
+        "dfs": {
+          "title": "Graf Gezinme - DFS"
+        }
+      }
+    },
+    "hero": {
+      "title1": "JavaScript",
+      "title2": "Metodları",
+      "title3": "Rehberi",
+      "description": "DSA mülakatları için temel metodlar ve desenler. Kopyala, öğren ve teknik mülakatlarında başarılı ol 🚀",
+      "tag1": "Diziler",
+      "tag2": "Dizeler",
+      "tag3": "Map & Set",
+      "tag4": "DSA Desenleri",
+      "helpBtn": "Nasıl Kullanılır",
+      "helpBtnAria": "Bu web sitesinin nasıl kullanılacağına dair talimatları içeren yardım diyaloğunu aç"
+    },
+    "popup": {
+      "title": "Bu Web Sitesi Nasıl Kullanılır",
+      "close": "Yardım diyaloğunu kapat",
+      "instruction1": {
+        "title": "Kategoriye Göre Metodları Gözden Geçir",
+        "desc": "Farklı bölümlere atlamak için üstteki navigasyon bağlantılarını kullanın: Diziler, Dizeler, Nesneler, Map, Set, Matematik, Desenler ve Referans."
+      },
+      "instruction2": {
+        "title": "Kod Örneklerini Kopyala",
+        "desc": "Herhangi bir kod bloğunun üzerine gelerek Kopyala düğmesini görün. Tıklayarak tüm kod parçasını panonuza kopyalayın."
+      },
+      "instruction3": {
+        "title": "Metod Detaylarını Öğren",
+        "desc": "Herhangi bir vurgulanmış metod adının (push(), map() vb.) üzerine gelerek açıklama ve resmi MDN dokümantasyonuna bağlantı içeren bir ipucu görün."
+      },
+      "instruction4": {
+        "title": "Karmaşıklığı Anla",
+        "desc": "Her karttaki renkli rozetlere bakarak zaman karmaşıklığını (O(1), O(n), O(n log n) vb.) ve metodların orijinal diziyi değiştirip değiştirmediğini veya yeni bir tane döndürdüğünü görün."
+      },
+      "instruction5": {
+        "title": "Hızlı Referans Tablosu",
+        "desc": "Tüm önemli metodlar ve desenler için zaman karmaşıklıkları ve kullanım durumlarıyla Hızlı Referans tablosunu görmek için aşağı kaydırın."
+      },
+      "instruction6": {
+        "title": "DSA Desenlerini Uygula",
+        "desc": "İki İşaretçi, Kayan Pencere, İkili Arama ve Graf Gezinme gibi yaygın mülakat desenleri için hazır kullanımlı kod örnekleriyle DSA Desenleri bölümünü keşfedin."
+      }
+    },
+    "table": {
+      "header1": "Metod / Desen",
+      "header2": "Zaman Karmaşıklığı",
+      "header3": "Kullanım Durumu",
+      "row1": {
+        "usecase": "Yığın işlemleri"
+      },
+      "row2": {
+        "usecase": "Kuyruk (O(1) için bağlı liste kullan)"
+      },
+      "row3": {
+        "usecase": "Dizileri sıralama"
+      },
+      "row4": {
+        "usecase": "Doğrusal arama"
+      },
+      "row5": {
+        "usecase": "Sıralı dizi arama"
+      },
+      "row6": {
+        "usecase": "Çiftler, palindromlar, sıralı diziler"
+      },
+      "row7": {
+        "usecase": "Alt diziler, ardışık öğeler"
+      },
+      "row8": {
+        "usecase": "Frekans sayma, aramalar"
+      },
+      "row9": {
+        "usecase": "Benzersizlik, üyelik"
+      },
+      "row10": {
+        "usecase": "Graf gezinme"
+      }
+    },
+    "footer": {
+      "message": "Mülakatlarında başarılar!",
+      "backToTop": "Yukarı çık"
+    },
+    "buttons": {
+      "copy": "Kopyala",
+      "copyAria": "Kodu panoya kopyala",
+      "copied": "Kopyalandı!",
+      "failed": "Başarısız"
+    },
+    "code": {
+      "arrays.adding": "<span class=\"keyword\">const</span> arr = [<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>];\narr.<span class=\"function\">push</span>(<span class=\"number\">4</span>);           <span class=\"comment\">// [1, 2, 3, 4]</span>\narr.<span class=\"function\">pop</span>();             <span class=\"comment\">// [1, 2, 3], 4 döndürür</span>\narr.<span class=\"function\">unshift</span>(<span class=\"number\">0</span>);        <span class=\"comment\">// [0, 1, 2, 3]</span>\narr.<span class=\"function\">shift</span>();           <span class=\"comment\">// [1, 2, 3], 0 döndürür</span>\narr.<span class=\"function\">splice</span>(<span class=\"number\">1</span>, <span class=\"number\">1</span>, <span class=\"string\">'a'</span>); <span class=\"comment\">// [1, 'a', 3]</span>",
+      "arrays.searching": "<span class=\"keyword\">const</span> nums = [<span class=\"number\">10</span>, <span class=\"number\">20</span>, <span class=\"number\">30</span>, <span class=\"number\">20</span>];\nnums.<span class=\"function\">indexOf</span>(<span class=\"number\">20</span>);           <span class=\"comment\">// 1</span>\nnums.<span class=\"function\">lastIndexOf</span>(<span class=\"number\">20</span>);       <span class=\"comment\">// 3</span>\nnums.<span class=\"function\">includes</span>(<span class=\"number\">30</span>);          <span class=\"comment\">// true</span>\nnums.<span class=\"function\">find</span>(x <span class=\"operator\">=></span> x > <span class=\"number\">15</span>);     <span class=\"comment\">// 20</span>\nnums.<span class=\"function\">findIndex</span>(x <span class=\"operator\">=></span> x > <span class=\"number\">15</span>); <span class=\"comment\">// 1</span>",
+      "arrays.transforming": "[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>].<span class=\"function\">map</span>(x <span class=\"operator\">=></span> x * <span class=\"number\">2</span>);             <span class=\"comment\">// [2, 4, 6]</span>\n[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>, <span class=\"number\">4</span>].<span class=\"function\">filter</span>(x <span class=\"operator\">=></span> x % <span class=\"number\">2</span> === <span class=\"number\">0</span>); <span class=\"comment\">// [2, 4]</span>\n[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>].<span class=\"function\">reduce</span>((sum, x) <span class=\"operator\">=></span> sum + x, <span class=\"number\">0</span>); <span class=\"comment\">// 6</span>\n[[<span class=\"number\">1</span>, <span class=\"number\">2</span>], [<span class=\"number\">3</span>, [<span class=\"number\">4</span>]]].<span class=\"function\">flat</span>(<span class=\"number\">2</span>);         <span class=\"comment\">// [1, 2, 3, 4]</span>",
+      "arrays.sorting": "<span class=\"keyword\">const</span> unsorted = [<span class=\"number\">3</span>, <span class=\"number\">1</span>, <span class=\"number\">4</span>, <span class=\"number\">1</span>, <span class=\"number\">5</span>];\nunsorted.<span class=\"function\">sort</span>((a, b) <span class=\"operator\">=></span> a - b);  <span class=\"comment\">// artan</span>\nunsorted.<span class=\"function\">sort</span>((a, b) <span class=\"operator\">=></span> b - a);  <span class=\"comment\">// azalan</span>\n\n<span class=\"keyword\">const</span> letters = [<span class=\"string\">'a'</span>, <span class=\"string\">'b'</span>, <span class=\"string\">'c'</span>, <span class=\"string\">'d'</span>];\nletters.<span class=\"function\">slice</span>(<span class=\"number\">1</span>, <span class=\"number\">3</span>);   <span class=\"comment\">// ['b', 'c']</span>\nletters.<span class=\"function\">concat</span>([<span class=\"string\">'e'</span>]); <span class=\"comment\">// ['a','b','c','d','e']</span>\nletters.<span class=\"function\">join</span>(<span class=\"string\">'-'</span>);     <span class=\"comment\">// 'a-b-c-d'</span>",
+      "arrays.iteration": "[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>].<span class=\"function\">every</span>(x <span class=\"operator\">=></span> x > <span class=\"number\">0</span>);  <span class=\"comment\">// true (hepsi geçer)</span>\n[<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>].<span class=\"function\">some</span>(x <span class=\"operator\">=></span> x > <span class=\"number\">2</span>);   <span class=\"comment\">// true (herhangi biri geçer)</span>\n\n<span class=\"property\">Array</span>.<span class=\"function\">from</span>(<span class=\"string\">'abc'</span>);                     <span class=\"comment\">// ['a','b','c']</span>\n<span class=\"property\">Array</span>.<span class=\"function\">from</span>({<span class=\"property\">length</span>: <span class=\"number\">3</span>}, (_, i) <span class=\"operator\">=></span> i);  <span class=\"comment\">// [0, 1, 2]</span>\n[...<span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">1</span>, <span class=\"number\">1</span>, <span class=\"number\">2</span>])];               <span class=\"comment\">// [1, 2]</span>",
+      "strings.accessing": "<span class=\"keyword\">const</span> str = <span class=\"string\">'hello'</span>;\nstr[<span class=\"number\">0</span>];                <span class=\"comment\">// 'h'</span>\nstr.<span class=\"function\">charAt</span>(<span class=\"number\">1</span>);         <span class=\"comment\">// 'e'</span>\nstr.<span class=\"function\">charCodeAt</span>(<span class=\"number\">0</span>);     <span class=\"comment\">// 104</span>\n\n<span class=\"string\">'javascript'</span>.<span class=\"function\">indexOf</span>(<span class=\"string\">'script'</span>);   <span class=\"comment\">// 4</span>\n<span class=\"string\">'hello world'</span>.<span class=\"function\">includes</span>(<span class=\"string\">'world'</span>);  <span class=\"comment\">// true</span>\n<span class=\"string\">'filename.js'</span>.<span class=\"function\">startsWith</span>(<span class=\"string\">'file'</span>); <span class=\"comment\">// true</span>\n<span class=\"string\">'filename.js'</span>.<span class=\"function\">endsWith</span>(<span class=\"string\">'.js'</span>);    <span class=\"comment\">// true</span>",
+      "strings.extracting": "<span class=\"string\">'hello world'</span>.<span class=\"function\">slice</span>(<span class=\"number\">0</span>, <span class=\"number\">5</span>);      <span class=\"comment\">// 'hello'</span>\n<span class=\"string\">'hello world'</span>.<span class=\"function\">split</span>(<span class=\"string\">' '</span>);       <span class=\"comment\">// ['hello', 'world']</span>\n<span class=\"string\">'a,b,c'</span>.<span class=\"function\">split</span>(<span class=\"string\">','</span>);             <span class=\"comment\">// ['a', 'b', 'c']</span>\n\n<span class=\"string\">'Hello'</span>.<span class=\"function\">toLowerCase</span>();          <span class=\"comment\">// 'hello'</span>\n<span class=\"string\">'  trim me  '</span>.<span class=\"function\">trim</span>();          <span class=\"comment\">// 'trim me'</span>\n<span class=\"string\">'foo bar'</span>.<span class=\"function\">replace</span>(<span class=\"string\">'bar'</span>, <span class=\"string\">'baz'</span>);<span class=\"comment\">// 'foo baz'</span>\n<span class=\"string\">'ha'</span>.<span class=\"function\">repeat</span>(<span class=\"number\">3</span>);                 <span class=\"comment\">// 'hahaha'</span>\n<span class=\"string\">'5'</span>.<span class=\"function\">padStart</span>(<span class=\"number\">3</span>, <span class=\"string\">'0'</span>);           <span class=\"comment\">// '005'</span>",
+      "strings.regex": "<span class=\"string\">'test123'</span>.<span class=\"function\">match</span>(<span class=\"operator\">/d+/</span>);         <span class=\"comment\">// ['123']</span>\n<span class=\"string\">'abc123def456'</span>.<span class=\"function\">match</span>(<span class=\"operator\">/d+/g</span>);   <span class=\"comment\">// ['123', '456']</span>\n<span class=\"string\">'hello'</span>.<span class=\"function\">search</span>(<span class=\"operator\">/l+/</span>);           <span class=\"comment\">// 2</span>\n<span class=\"string\">'a1b2c3'</span>.<span class=\"function\">replace</span>(<span class=\"operator\">/d/g</span>, <span class=\"string\">'X'</span>);  <span class=\"comment\">// 'aXbXcX'</span>",
+      "objects.methods": "<span class=\"keyword\">const</span> obj = { <span class=\"property\">a</span>: <span class=\"number\">1</span>, <span class=\"property\">b</span>: <span class=\"number\">2</span>, <span class=\"property\">c</span>: <span class=\"number\">3</span> };\n\n<span class=\"property\">Object</span>.<span class=\"function\">keys</span>(obj);      <span class=\"comment\">// ['a', 'b', 'c']</span>\n<span class=\"property\">Object</span>.<span class=\"function\">values</span>(obj);    <span class=\"comment\">// [1, 2, 3]</span>\n<span class=\"property\">Object</span>.<span class=\"function\">entries</span>(obj);   <span class=\"comment\">// [['a',1], ['b',2], ['c',3]]</span>\n\n<span class=\"property\">Object</span>.<span class=\"function\">fromEntries</span>([[<span class=\"string\">'x'</span>, <span class=\"number\">10</span>], [<span class=\"string\">'y'</span>, <span class=\"number\">20</span>]]); <span class=\"comment\">// {x:10, y:20}</span>\n\nobj.<span class=\"function\">hasOwnProperty</span>(<span class=\"string\">'a'</span>);  <span class=\"comment\">// true</span>\n<span class=\"string\">'a'</span> <span class=\"keyword\">in</span> obj;               <span class=\"comment\">// true</span>\n\n<span class=\"keyword\">const</span> clone = { ...obj };\n<span class=\"keyword\">const</span> merged = <span class=\"property\">Object</span>.<span class=\"function\">assign</span>({}, obj, { <span class=\"property\">d</span>: <span class=\"number\">4</span> });\n<span class=\"keyword\">delete</span> obj.<span class=\"property\">c</span>;          <span class=\"comment\">// c özelliğini kaldırır</span>",
+      "map.basic": "<span class=\"keyword\">const</span> map = <span class=\"keyword\">new</span> <span class=\"function\">Map</span>();\n\nmap.<span class=\"function\">set</span>(<span class=\"string\">'name'</span>, <span class=\"string\">'Burak'</span>);\nmap.<span class=\"function\">set</span>(<span class=\"string\">'age'</span>, <span class=\"number\">25</span>);\nmap.<span class=\"function\">set</span>({ <span class=\"property\">id</span>: <span class=\"number\">1</span> }, <span class=\"string\">'object key'</span>); <span class=\"comment\">// herhangi bir tip anahtar</span>\n\nmap.<span class=\"function\">get</span>(<span class=\"string\">'name'</span>);       <span class=\"comment\">// 'Burak'</span>\nmap.<span class=\"function\">has</span>(<span class=\"string\">'age'</span>);        <span class=\"comment\">// true</span>\nmap.<span class=\"property\">size</span>;              <span class=\"comment\">// 3</span>\nmap.<span class=\"function\">delete</span>(<span class=\"string\">'age'</span>);\n\n<span class=\"comment\">// Yineleme</span>\n<span class=\"keyword\">for</span> (<span class=\"keyword\">const</span> [key, value] <span class=\"keyword\">of</span> map) {\n  <span class=\"property\">console</span>.<span class=\"function\">log</span>(key, value);\n}\n\n<span class=\"comment\">// Nesneden/nesneye</span>\n<span class=\"keyword\">const</span> fromObj = <span class=\"keyword\">new</span> <span class=\"function\">Map</span>(<span class=\"property\">Object</span>.<span class=\"function\">entries</span>({ <span class=\"property\">a</span>: <span class=\"number\">1</span> }));\n<span class=\"keyword\">const</span> toObj = <span class=\"property\">Object</span>.<span class=\"function\">fromEntries</span>(map);",
+      "set.basic": "<span class=\"keyword\">const</span> set = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>]); <span class=\"comment\">// {1, 2, 3}</span>\n\nset.<span class=\"function\">add</span>(<span class=\"number\">4</span>);            <span class=\"comment\">// {1, 2, 3, 4}</span>\nset.<span class=\"function\">has</span>(<span class=\"number\">2</span>);            <span class=\"comment\">// true</span>\nset.<span class=\"function\">delete</span>(<span class=\"number\">1</span>);         <span class=\"comment\">// {2, 3, 4}</span>\nset.<span class=\"property\">size</span>;              <span class=\"comment\">// 3</span>\n\n<span class=\"comment\">// Tekrarları kaldır</span>\n<span class=\"keyword\">const</span> unique = [...<span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">1</span>, <span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>])]; <span class=\"comment\">// [1,2,3]</span>\n\n<span class=\"comment\">// Set işlemleri</span>\n<span class=\"keyword\">const</span> a = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">1</span>, <span class=\"number\">2</span>, <span class=\"number\">3</span>]);\n<span class=\"keyword\">const</span> b = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([<span class=\"number\">2</span>, <span class=\"number\">3</span>, <span class=\"number\">4</span>]);\n\n<span class=\"keyword\">const</span> union = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([...a, ...b]);            <span class=\"comment\">// {1,2,3,4}</span>\n<span class=\"keyword\">const</span> intersect = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([...a].<span class=\"function\">filter</span>(x <span class=\"operator\">=></span> b.<span class=\"function\">has</span>(x))); <span class=\"comment\">// {2,3}</span>\n<span class=\"keyword\">const</span> diff = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([...a].<span class=\"function\">filter</span>(x <span class=\"operator\">=></span> !b.<span class=\"function\">has</span>(x))); <span class=\"comment\">// {1}</span>",
+      "math.methods": "<span class=\"property\">Math</span>.<span class=\"function\">max</span>(<span class=\"number\">1</span>, <span class=\"number\">5</span>, <span class=\"number\">3</span>);     <span class=\"comment\">// 5</span>\n<span class=\"property\">Math</span>.<span class=\"function\">min</span>(...[<span class=\"number\">1</span>, <span class=\"number\">5</span>, <span class=\"number\">3</span>]); <span class=\"comment\">// 1 (diziler için yayma)</span>\n<span class=\"property\">Math</span>.<span class=\"function\">abs</span>(<span class=\"number\">-5</span>);          <span class=\"comment\">// 5</span>\n<span class=\"property\">Math</span>.<span class=\"function\">floor</span>(<span class=\"number\">3.7</span>);       <span class=\"comment\">// 3</span>\n<span class=\"property\">Math</span>.<span class=\"function\">ceil</span>(<span class=\"number\">3.2</span>);        <span class=\"comment\">// 4</span>\n<span class=\"property\">Math</span>.<span class=\"function\">round</span>(<span class=\"number\">3.5</span>);       <span class=\"comment\">// 4</span>\n<span class=\"property\">Math</span>.<span class=\"function\">trunc</span>(<span class=\"number\">-3.7</span>);      <span class=\"comment\">// -3</span>\n\n<span class=\"property\">Math</span>.<span class=\"function\">sqrt</span>(<span class=\"number\">16</span>);         <span class=\"comment\">// 4</span>\n<span class=\"property\">Math</span>.<span class=\"function\">pow</span>(<span class=\"number\">2</span>, <span class=\"number\">3</span>);        <span class=\"comment\">// 8  (veya 2 ** 3)</span>\n\n<span class=\"comment\">// [min, max] aralığında rastgele tam sayı</span>\n<span class=\"property\">Math</span>.<span class=\"function\">floor</span>(<span class=\"property\">Math</span>.<span class=\"function\">random</span>() * (max - min + <span class=\"number\">1</span>)) + min;",
+      "math.number": "<span class=\"property\">Number</span>.<span class=\"function\">isInteger</span>(<span class=\"number\">5</span>);   <span class=\"comment\">// true</span>\n<span class=\"property\">Number</span>.<span class=\"function\">isNaN</span>(<span class=\"property\">NaN</span>);     <span class=\"comment\">// true</span>\n<span class=\"property\">Number</span>.<span class=\"function\">isFinite</span>(<span class=\"number\">100</span>);  <span class=\"comment\">// true</span>\n\n<span class=\"function\">parseInt</span>(<span class=\"string\">'42px'</span>);      <span class=\"comment\">// 42</span>\n<span class=\"function\">parseInt</span>(<span class=\"string\">'1010'</span>, <span class=\"number\">2</span>);   <span class=\"comment\">// 10 (ikili)</span>\n<span class=\"function\">parseFloat</span>(<span class=\"string\">'3.14'</span>);    <span class=\"comment\">// 3.14</span>\n\n<span class=\"comment\">// Büyük sayılar için BigInt</span>\n<span class=\"keyword\">const</span> big = <span class=\"number\">9007199254740991n</span> + <span class=\"number\">1n</span>;",
+      "patterns.stack": "<span class=\"comment\">// Yığın (LIFO)</span>\n<span class=\"keyword\">const</span> stack = [];\nstack.<span class=\"function\">push</span>(<span class=\"number\">1</span>);             <span class=\"comment\">// [1]</span>\nstack.<span class=\"function\">push</span>(<span class=\"number\">2</span>);             <span class=\"comment\">// [1, 2]</span>\nstack.<span class=\"function\">pop</span>();               <span class=\"comment\">// 2, yığın [1]</span>\nstack[stack.<span class=\"property\">length</span> - <span class=\"number\">1</span>];   <span class=\"comment\">// peek: 1</span>\n\n<span class=\"comment\">// Kuyruk (FIFO) - basit O(n) dequeue</span>\n<span class=\"keyword\">const</span> queue = [];\nqueue.<span class=\"function\">push</span>(<span class=\"number\">1</span>);             <span class=\"comment\">// enqueue</span>\nqueue.<span class=\"function\">push</span>(<span class=\"number\">2</span>);\nqueue.<span class=\"function\">shift</span>();             <span class=\"comment\">// dequeue: 1</span>",
+      "patterns.frequency": "<span class=\"keyword\">function</span> <span class=\"function\">charFrequency</span>(str) {\n  <span class=\"keyword\">const</span> freq = <span class=\"keyword\">new</span> <span class=\"function\">Map</span>();\n  <span class=\"keyword\">for</span> (<span class=\"keyword\">const</span> char <span class=\"keyword\">of</span> str) {\n    freq.<span class=\"function\">set</span>(char, (freq.<span class=\"function\">get</span>(char) || <span class=\"number\">0</span>) + <span class=\"number\">1</span>);\n  }\n  <span class=\"keyword\">return</span> freq;\n}\n<span class=\"function\">charFrequency</span>(<span class=\"string\">'hello'</span>);\n<span class=\"comment\">// Map { 'h'=>1, 'e'=>1, 'l'=>2, 'o'=>1 }</span>",
+      "patterns.twopointers": "<span class=\"comment\">// Palindrom Kontrolü</span>\n<span class=\"keyword\">function</span> <span class=\"function\">isPalindrome</span>(s) {\n  <span class=\"keyword\">let</span> left = <span class=\"number\">0</span>, right = s.<span class=\"property\">length</span> - <span class=\"number\">1</span>;\n  <span class=\"keyword\">while</span> (left < right) {\n    <span class=\"keyword\">if</span> (s[left] !== s[right]) <span class=\"keyword\">return</span> <span class=\"number\">false</span>;\n    left++;\n    right--;\n  }\n  <span class=\"keyword\">return</span> <span class=\"number\">true</span>;\n}\n\n<span class=\"comment\">// İki Toplam (sıralı dizi)</span>\n<span class=\"keyword\">function</span> <span class=\"function\">twoSumSorted</span>(arr, target) {\n  <span class=\"keyword\">let</span> left = <span class=\"number\">0</span>, right = arr.<span class=\"property\">length</span> - <span class=\"number\">1</span>;\n  <span class=\"keyword\">while</span> (left < right) {\n    <span class=\"keyword\">const</span> sum = arr[left] + arr[right];\n    <span class=\"keyword\">if</span> (sum === target) <span class=\"keyword\">return</span> [left, right];\n    <span class=\"keyword\">if</span> (sum < target) left++;\n    <span class=\"keyword\">else</span> right--;\n  }\n  <span class=\"keyword\">return</span> [<span class=\"number\">-1</span>, <span class=\"number\">-1</span>];\n}",
+      "patterns.sliding": "<span class=\"comment\">// K ardışık öğenin maksimum toplamı</span>\n<span class=\"keyword\">function</span> <span class=\"function\">maxSumSubarray</span>(arr, k) {\n  <span class=\"keyword\">let</span> windowSum = <span class=\"number\">0</span>;\n  <span class=\"keyword\">for</span> (<span class=\"keyword\">let</span> i = <span class=\"number\">0</span>; i < k; i++) windowSum += arr[i];\n  <span class=\"keyword\">let</span> maxSum = windowSum;\n  <span class=\"keyword\">for</span> (<span class=\"keyword\">let</span> i = k; i < arr.<span class=\"property\">length</span>; i++) {\n    windowSum += arr[i] - arr[i - k];\n    maxSum = <span class=\"property\">Math</span>.<span class=\"function\">max</span>(maxSum, windowSum);\n  }\n  <span class=\"keyword\">return</span> maxSum;\n}",
+      "patterns.binary": "<span class=\"keyword\">function</span> <span class=\"function\">binarySearch</span>(arr, target) {\n  <span class=\"keyword\">let</span> lo = <span class=\"number\">0</span>, hi = arr.<span class=\"property\">length</span> - <span class=\"number\">1</span>;\n  <span class=\"keyword\">while</span> (lo <= hi) {\n    <span class=\"keyword\">const</span> mid = <span class=\"property\">Math</span>.<span class=\"function\">floor</span>((lo + hi) / <span class=\"number\">2</span>);\n    <span class=\"keyword\">if</span> (arr[mid] === target) <span class=\"keyword\">return</span> mid;\n    <span class=\"keyword\">if</span> (arr[mid] < target) lo = mid + <span class=\"number\">1</span>;\n    <span class=\"keyword\">else</span> hi = mid - <span class=\"number\">1</span>;\n  }\n  <span class=\"keyword\">return</span> <span class=\"number\">-1</span>;\n}",
+      "patterns.bfs": "<span class=\"keyword\">function</span> <span class=\"function\">bfs</span>(graph, start) {\n  <span class=\"keyword\">const</span> visited = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>([start]);\n  <span class=\"keyword\">const</span> queue = [start];\n  <span class=\"keyword\">while</span> (queue.<span class=\"property\">length</span> > <span class=\"number\">0</span>) {\n    <span class=\"keyword\">const</span> node = queue.<span class=\"function\">shift</span>();\n    <span class=\"keyword\">for</span> (<span class=\"keyword\">const</span> neighbor <span class=\"keyword\">of</span> graph[node] || []) {\n      <span class=\"keyword\">if</span> (!visited.<span class=\"function\">has</span>(neighbor)) {\n        visited.<span class=\"function\">add</span>(neighbor);\n        queue.<span class=\"function\">push</span>(neighbor);\n      }\n    }\n  }\n  <span class=\"keyword\">return</span> visited;\n}",
+      "patterns.dfs": "<span class=\"keyword\">function</span> <span class=\"function\">dfs</span>(graph, start, visited = <span class=\"keyword\">new</span> <span class=\"function\">Set</span>()) {\n  visited.<span class=\"function\">add</span>(start);\n  <span class=\"keyword\">for</span> (<span class=\"keyword\">const</span> neighbor <span class=\"keyword\">of</span> graph[start] || []) {\n    <span class=\"keyword\">if</span> (!visited.<span class=\"function\">has</span>(neighbor)) {\n      <span class=\"function\">dfs</span>(graph, neighbor, visited);\n    }\n  }\n  <span class=\"keyword\">return</span> visited;\n}"
+    }
+  }
+}
