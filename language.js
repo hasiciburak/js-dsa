@@ -584,8 +584,15 @@ function updatePageContent() {
     const code = t.code?.[codeKey];
     if (code !== undefined) {
       pre.innerHTML = code;
+      // Remove tooltip attachment markers since content was replaced
+      pre.querySelectorAll('.function, .property').forEach((el) => {
+        el.removeAttribute('data-tooltip-attached');
+      });
     }
   });
+  
+  // Re-attach tooltip listeners after content update
+  attachTooltipListeners();
 
   // Update current language indicator
   const currentLangEl = document.getElementById('currentLang');
@@ -699,75 +706,85 @@ tooltip.addEventListener('mouseleave', () => {
   hideTooltip(100);
 });
 
-// Add event listeners to function and property elements
-document.querySelectorAll('.function, .property').forEach((el) => {
-  const methodName = getMethodName(el);
-  const methodDocs = window.currentMethodDocs || methodDocsEn;
+// Function to attach tooltip event listeners
+function attachTooltipListeners() {
+  // Remove existing listeners by cloning elements (this removes all event listeners)
+  // Actually, we'll use a different approach - check if listener already attached
+  document.querySelectorAll('.function, .property').forEach((el) => {
+    // Skip if already has tooltip listener (check for data attribute)
+    if (el.dataset.tooltipAttached === 'true') return;
+    
+    const methodName = getMethodName(el);
+    const methodDocs = window.currentMethodDocs || methodDocsEn;
 
-  if (methodDocs[methodName]) {
-    el.addEventListener('mouseenter', (e) => {
-      // Don't show tooltip if hovering over copy button
-      if (e.target.closest('.copy-btn')) return;
+    if (methodDocs[methodName]) {
+      el.addEventListener('mouseenter', (e) => {
+        // Don't show tooltip if hovering over copy button
+        if (e.target.closest('.copy-btn')) return;
 
-      // Clear any existing timeouts
-      if (tooltipTimeout) {
-        clearTimeout(tooltipTimeout);
-      }
-      if (hideTooltipTimeout) {
-        clearTimeout(hideTooltipTimeout);
-        hideTooltipTimeout = null;
-      }
+        // Clear any existing timeouts
+        if (tooltipTimeout) {
+          clearTimeout(tooltipTimeout);
+        }
+        if (hideTooltipTimeout) {
+          clearTimeout(hideTooltipTimeout);
+          hideTooltipTimeout = null;
+        }
 
-      currentElement = el;
+        currentElement = el;
 
-      // Show tooltip after a short delay
-      tooltipTimeout = setTimeout(() => {
-        showTooltip(el, methodName);
-      }, 300);
-    });
+        // Show tooltip after a short delay
+        tooltipTimeout = setTimeout(() => {
+          showTooltip(el, methodName);
+        }, 300);
+      });
 
-    el.addEventListener('mouseleave', () => {
-      if (tooltipTimeout) {
-        clearTimeout(tooltipTimeout);
-        tooltipTimeout = null;
-      }
-      // Don't hide immediately - give time to move to tooltip
-      hideTooltip(150);
-    });
-
-    el.addEventListener('mousemove', (e) => {
-      // Don't update tooltip if hovering over copy button
-      if (e.target.closest('.copy-btn')) {
+      el.addEventListener('mouseleave', () => {
         if (tooltipTimeout) {
           clearTimeout(tooltipTimeout);
           tooltipTimeout = null;
         }
-        hideTooltip(0);
-        return;
-      }
+        // Don't hide immediately - give time to move to tooltip
+        hideTooltip(150);
+      });
 
-      // Update position on mouse move for better UX
-      if (tooltip.classList.contains('show')) {
-        const rect = el.getBoundingClientRect();
-        const tooltipRect = tooltip.getBoundingClientRect();
-        let top = rect.top - tooltipRect.height - 4;
-        let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
-
-        if (top < 0) {
-          top = rect.bottom + 4;
-        }
-        if (left < 0) {
-          left = 8;
-        } else if (left + tooltipRect.width > window.innerWidth) {
-          left = window.innerWidth - tooltipRect.width - 8;
+      el.addEventListener('mousemove', (e) => {
+        // Don't update tooltip if hovering over copy button
+        if (e.target.closest('.copy-btn')) {
+          if (tooltipTimeout) {
+            clearTimeout(tooltipTimeout);
+            tooltipTimeout = null;
+          }
+          hideTooltip(0);
+          return;
         }
 
-        tooltip.style.top = `${top + window.scrollY}px`;
-        tooltip.style.left = `${left}px`;
-      }
-    });
-  }
-});
+        // Update position on mouse move for better UX
+        if (tooltip.classList.contains('show')) {
+          const rect = el.getBoundingClientRect();
+          const tooltipRect = tooltip.getBoundingClientRect();
+          let top = rect.top - tooltipRect.height - 4;
+          let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
+
+          if (top < 0) {
+            top = rect.bottom + 4;
+          }
+          if (left < 0) {
+            left = 8;
+          } else if (left + tooltipRect.width > window.innerWidth) {
+            left = window.innerWidth - tooltipRect.width - 8;
+          }
+
+          tooltip.style.top = `${top + window.scrollY}px`;
+          tooltip.style.left = `${left}px`;
+        }
+      });
+      
+      // Mark as having tooltip listener attached
+      el.dataset.tooltipAttached = 'true';
+    }
+  });
+}
 
 // Copy button functionality
 document.querySelectorAll('.copy-btn').forEach((btn) => {
@@ -963,7 +980,7 @@ async function initializeLanguage() {
   
   // Set initial methodDocs
   window.currentMethodDocs = getMethodDocs(currentLanguage);
-  // Update page content
+  // Update page content (this will also attach tooltip listeners)
   updatePageContent();
   // Set HTML lang attribute
   document.documentElement.lang = currentLanguage;
