@@ -1,5 +1,6 @@
 {
   "en": {
+    "skipLink": "Skip to main content",
     "nav": {
       "arrays": "Arrays",
       "strings": "Strings",
@@ -230,6 +231,7 @@
     }
   },
   "tr": {
+    "skipLink": "Ana içeriğe geç",
     "nav": {
       "arrays": "Diziler",
       "strings": "String Değerler",
