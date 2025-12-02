@@ -1032,6 +1032,13 @@ footer span {
   color: var(--accent-yellow);
 }
 
+.footer-attribution {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 /* Back to Top Button */
 .back-to-top {
   position: fixed;
