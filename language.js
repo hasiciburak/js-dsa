@@ -581,7 +581,7 @@ function updatePageContent() {
   // Update code blocks
   document.querySelectorAll('pre[data-code]').forEach((pre) => {
     const codeKey = pre.getAttribute('data-code');
-    const code = getNestedValue(t, `code.${codeKey}`);
+    const code = t.code?.[codeKey];
     if (code !== undefined) {
       pre.innerHTML = code;
     }
