@@ -924,7 +924,8 @@ function initLanguageSelector() {
 
     // Handle language selection
     langOptions.forEach((option) => {
-      option.addEventListener('click', () => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
         const lang = option.getAttribute('data-lang');
         setLanguage(lang);
         langBtn.setAttribute('aria-expanded', 'false');
