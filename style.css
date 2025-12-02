@@ -169,6 +169,18 @@ nav {
   background: var(--glow-yellow);
 }
 
+/* Scroll Progress Bar */
+.scroll-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--accent-cyan);
+  transition: width 0.1s ease-out;
+  z-index: 101;
+}
+
 /* Theme Toggle Button */
 .theme-toggle-btn {
   display: flex;
