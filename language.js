@@ -851,57 +851,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Mobile Menu functionality
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-function openMobileMenu() {
-  mobileMenuOverlay.setAttribute('aria-hidden', 'false');
-  mobileMenuBtn.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeMobileMenu() {
-  mobileMenuOverlay.setAttribute('aria-hidden', 'true');
-  mobileMenuBtn.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-}
-
-// Toggle menu on button click
-mobileMenuBtn.addEventListener('click', () => {
-  const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-  if (isOpen) {
-    closeMobileMenu();
-  } else {
-    openMobileMenu();
-  }
-});
-
-// Close menu when clicking overlay (outside menu)
-mobileMenuOverlay.addEventListener('click', (e) => {
-  if (e.target === mobileMenuOverlay) {
-    closeMobileMenu();
-  }
-});
-
-// Close menu when clicking a navigation link
-mobileNavLinks.forEach((link) => {
-  link.addEventListener('click', () => {
-    closeMobileMenu();
-    // Update active state
-    const sectionId = link.getAttribute('href').substring(1);
-    mobileNavLinks.forEach((l) => l.classList.remove('active'));
-    link.classList.add('active');
-  });
-});
-
-// Close menu with Escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && mobileMenuOverlay.getAttribute('aria-hidden') === 'false') {
-    closeMobileMenu();
-  }
-});
+// Mobile Menu functionality is handled in index.js
 
 // Update active state for mobile nav links on scroll
 function updateActiveMobileNav() {
@@ -948,50 +898,60 @@ window.addEventListener('scroll', toggleBackToTop);
 toggleBackToTop();
 
 // Language selector functionality
-const langBtn = document.getElementById('langBtn');
-const langDropdown = document.getElementById('langDropdown');
-const langOptions = document.querySelectorAll('.lang-option');
-const mobileLangBtns = document.querySelectorAll('.mobile-lang-btn');
+function initLanguageSelector() {
+  const langBtn = document.getElementById('langBtn');
+  const langDropdown = document.getElementById('langDropdown');
+  const langOptions = document.querySelectorAll('.lang-option');
+  const mobileLangBtns = document.querySelectorAll('.mobile-lang-btn');
 
-// Toggle dropdown
-if (langBtn && langDropdown) {
-  langBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isExpanded = langBtn.getAttribute('aria-expanded') === 'true';
-    langBtn.setAttribute('aria-expanded', !isExpanded);
-    langDropdown.setAttribute('aria-hidden', isExpanded);
-  });
+  // Toggle dropdown
+  if (langBtn && langDropdown) {
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = langBtn.getAttribute('aria-expanded') === 'true';
+      const newState = !isExpanded;
+      langBtn.setAttribute('aria-expanded', String(newState));
+      langDropdown.setAttribute('aria-hidden', newState ? 'false' : 'true');
+    });
 
-  // Close dropdown when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
-      langBtn.setAttribute('aria-expanded', 'false');
-      langDropdown.setAttribute('aria-hidden', 'true');
-    }
-  });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
+        langBtn.setAttribute('aria-expanded', 'false');
+        langDropdown.setAttribute('aria-hidden', 'true');
+      }
+    });
 
-  // Handle language selection
-  langOptions.forEach((option) => {
-    option.addEventListener('click', () => {
-      const lang = option.getAttribute('data-lang');
+    // Handle language selection
+    langOptions.forEach((option) => {
+      option.addEventListener('click', () => {
+        const lang = option.getAttribute('data-lang');
+        setLanguage(lang);
+        langBtn.setAttribute('aria-expanded', 'false');
+        langDropdown.setAttribute('aria-hidden', 'true');
+      });
+    });
+  }
+
+  // Mobile language selector
+  mobileLangBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
       setLanguage(lang);
-      langBtn.setAttribute('aria-expanded', 'false');
-      langDropdown.setAttribute('aria-hidden', 'true');
+      // Close mobile menu if function exists (defined in index.js)
+      if (typeof window.closeMobileMenu === 'function') {
+        window.closeMobileMenu();
+      }
     });
   });
 }
 
-// Mobile language selector
-mobileLangBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const lang = btn.getAttribute('data-lang');
-    setLanguage(lang);
-    // Close mobile menu if function exists (defined in index.js)
-    if (typeof window.closeMobileMenu === 'function') {
-      window.closeMobileMenu();
-    }
-  });
-});
+// Initialize language selector when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLanguageSelector);
+} else {
+  initLanguageSelector();
+}
 
 // Initialize language on page load
 async function initializeLanguage() {

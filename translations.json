@@ -232,7 +232,7 @@
   "tr": {
     "nav": {
       "arrays": "Diziler",
-      "strings": "Dizeler",
+      "strings": "String Değerler",
       "objects": "Nesneler",
       "map": "Map",
       "set": "Set",
@@ -245,7 +245,7 @@
         "title": "Diziler"
       },
       "strings": {
-        "title": "Dizeler"
+        "title": "String Değerler"
       },
       "objects": {
         "title": "Nesneler"
@@ -260,7 +260,7 @@
         "title": "Matematik & Sayı"
       },
       "patterns": {
-        "title": "DSA Desenleri"
+        "title": "Veri Yapıları ve Algoritma Desenleri"
       },
       "reference": {
         "title": "Hızlı Referans"
@@ -355,9 +355,9 @@
       "title1": "JavaScript",
       "title2": "Metodları",
       "title3": "Rehberi",
-      "description": "DSA mülakatları için temel metodlar ve desenler. Kopyala, öğren ve teknik mülakatlarında başarılı ol 🚀",
+      "description": "Veri yapıları ve algoritmalar mülakatları için temel metodlar ve desenler. Kopyala, öğren ve teknik mülakatlarında başarılı ol 🚀",
       "tag1": "Diziler",
-      "tag2": "Dizeler",
+      "tag2": "String Değerler",
       "tag3": "Map & Set",
       "tag4": "DSA Desenleri",
       "helpBtn": "Nasıl Kullanılır",
@@ -368,7 +368,7 @@
       "close": "Yardım diyaloğunu kapat",
       "instruction1": {
         "title": "Kategoriye Göre Metodları Gözden Geçir",
-        "desc": "Farklı bölümlere atlamak için üstteki navigasyon bağlantılarını kullanın: Diziler, Dizeler, Nesneler, Map, Set, Matematik, Desenler ve Referans."
+        "desc": "Farklı bölümlere atlamak için üstteki navigasyon bağlantılarını kullanın: Diziler, String Değerler, Nesneler, Map, Set, Matematik, Desenler ve Referans."
       },
       "instruction2": {
         "title": "Kod Örneklerini Kopyala",

@@ -254,59 +254,74 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Mobile Menu functionality
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+function initMobileMenu() {
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-function openMobileMenu() {
-  mobileMenuOverlay.setAttribute('aria-hidden', 'false');
-  mobileMenuBtn.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeMobileMenu() {
-  mobileMenuOverlay.setAttribute('aria-hidden', 'true');
-  mobileMenuBtn.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-}
-
-// Expose closeMobileMenu for language.js
-window.closeMobileMenu = closeMobileMenu;
-
-// Toggle menu on button click
-mobileMenuBtn.addEventListener('click', () => {
-  const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-  if (isOpen) {
-    closeMobileMenu();
-  } else {
-    openMobileMenu();
+  if (!mobileMenuBtn || !mobileMenuOverlay) {
+    console.warn('Mobile menu elements not found');
+    return;
   }
-});
 
-// Close menu when clicking overlay (outside menu)
-mobileMenuOverlay.addEventListener('click', (e) => {
-  if (e.target === mobileMenuOverlay) {
-    closeMobileMenu();
+  function openMobileMenu() {
+    mobileMenuOverlay.setAttribute('aria-hidden', 'false');
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
   }
-});
 
-// Close menu when clicking a navigation link
-mobileNavLinks.forEach((link) => {
-  link.addEventListener('click', () => {
-    closeMobileMenu();
-    // Update active state
-    const sectionId = link.getAttribute('href').substring(1);
-    mobileNavLinks.forEach((l) => l.classList.remove('active'));
-    link.classList.add('active');
+  function closeMobileMenu() {
+    mobileMenuOverlay.setAttribute('aria-hidden', 'true');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  // Expose closeMobileMenu for language.js
+  window.closeMobileMenu = closeMobileMenu;
+
+  // Toggle menu on button click
+  mobileMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
   });
-});
 
-// Close menu with Escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && mobileMenuOverlay.getAttribute('aria-hidden') === 'false') {
-    closeMobileMenu();
-  }
-});
+  // Close menu when clicking overlay (outside menu)
+  mobileMenuOverlay.addEventListener('click', (e) => {
+    if (e.target === mobileMenuOverlay) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close menu when clicking a navigation link
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      closeMobileMenu();
+      // Update active state
+      const sectionId = link.getAttribute('href').substring(1);
+      mobileNavLinks.forEach((l) => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+
+  // Close menu with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenuOverlay.getAttribute('aria-hidden') === 'false') {
+      closeMobileMenu();
+    }
+  });
+}
+
+// Initialize mobile menu when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+} else {
+  initMobileMenu();
+}
 
 // Update active state for mobile nav links on scroll
 function updateActiveMobileNav() {
