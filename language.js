@@ -590,7 +590,9 @@ function updatePageContent() {
   // Update current language indicator
   const currentLangEl = document.getElementById('currentLang');
   if (currentLangEl) {
-    currentLangEl.textContent = currentLanguage.toUpperCase();
+    // Display only the flag emoji for current language
+    const flagEmoji = currentLanguage === 'en' ? '🇺🇸' : '🇹🇷';
+    currentLangEl.textContent = flagEmoji;
   }
 
   // Update methodDocs reference (will be used by tooltips)

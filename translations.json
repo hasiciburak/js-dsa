@@ -236,7 +236,7 @@
       "objects": "Nesneler",
       "map": "Map",
       "set": "Set",
-      "math": "Matematik",
+      "math": "Math",
       "patterns": "Desenler",
       "reference": "Referans"
     },
@@ -257,7 +257,7 @@
         "title": "Set"
       },
       "math": {
-        "title": "Matematik & Sayı"
+        "title": "Math Metodları"
       },
       "patterns": {
         "title": "Veri Yapıları ve Algoritma Desenleri"
@@ -318,7 +318,7 @@
       },
       "math": {
         "methods": {
-          "title": "Matematik Metodları",
+          "title": "Math Metodları",
           "badge": "statik"
         },
         "number": {
@@ -368,7 +368,7 @@
       "close": "Yardım diyaloğunu kapat",
       "instruction1": {
         "title": "Kategoriye Göre Metodları Gözden Geçir",
-        "desc": "Farklı bölümlere atlamak için üstteki navigasyon bağlantılarını kullanın: Diziler, String Değerler, Nesneler, Map, Set, Matematik, Desenler ve Referans."
+        "desc": "Farklı bölümlere atlamak için üstteki navigasyon bağlantılarını kullanın: Diziler, String Değerler, Nesneler, Map, Set, Math Metodları, Desenler ve Referans."
       },
       "instruction2": {
         "title": "Kod Örneklerini Kopyala",

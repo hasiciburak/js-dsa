@@ -190,6 +190,11 @@ nav {
   border-color: var(--accent-yellow);
 }
 
+#currentLang {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
 .lang-arrow {
   font-size: 0.7rem;
   transition: transform 0.2s ease;
@@ -235,6 +240,7 @@ nav {
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: 'Outfit', sans-serif;
+  line-height: 1.4;
 }
 
 .lang-option:first-child {
@@ -279,6 +285,7 @@ nav {
   font-family: 'Outfit', sans-serif;
   font-weight: 500;
   text-align: center;
+  line-height: 1.4;
 }
 
 .mobile-lang-btn:hover {
