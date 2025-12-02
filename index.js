@@ -367,4 +367,80 @@ backToTopBtn.addEventListener('click', () => {
 window.addEventListener('scroll', toggleBackToTop);
 toggleBackToTop();
 
+// Theme Management
+function getSystemPreference() {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    return 'light';
+  }
+  return 'dark';
+}
+
+function getStoredTheme() {
+  return localStorage.getItem('theme');
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  updateThemeIcon(theme);
+}
+
+function updateThemeIcon(theme) {
+  const themeIcon = document.getElementById('themeIcon');
+  const mobileThemeIcon = document.getElementById('mobileThemeIcon');
+  const icon = theme === 'light' ? '🌙' : '☀️';
+  
+  if (themeIcon) {
+    themeIcon.textContent = icon;
+  }
+  if (mobileThemeIcon) {
+    mobileThemeIcon.textContent = icon;
+  }
+  
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const mobileThemeToggleBtn = document.getElementById('mobileThemeToggleBtn');
+  const ariaLabel = theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
+  
+  if (themeToggleBtn) {
+    themeToggleBtn.setAttribute('aria-label', ariaLabel);
+    themeToggleBtn.setAttribute('title', ariaLabel);
+  }
+  if (mobileThemeToggleBtn) {
+    mobileThemeToggleBtn.setAttribute('aria-label', ariaLabel);
+  }
+}
+
+function initTheme() {
+  const storedTheme = getStoredTheme();
+  const theme = storedTheme || getSystemPreference();
+  setTheme(theme);
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  setTheme(newTheme);
+}
+
+// Initialize theme
+initTheme();
+
+// Theme toggle button event listeners
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+const mobileThemeToggleBtn = document.getElementById('mobileThemeToggleBtn');
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener('click', toggleTheme);
+}
+
+if (mobileThemeToggleBtn) {
+  mobileThemeToggleBtn.addEventListener('click', () => {
+    toggleTheme();
+    // Optionally close mobile menu after theme toggle
+    // if (typeof window.closeMobileMenu === 'function') {
+    //   window.closeMobileMenu();
+    // }
+  });
+}
+
 // Language selector functionality is now in language.js

@@ -32,6 +32,21 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <script>
+      // Initialize theme immediately to prevent flash
+      (function() {
+        const storedTheme = localStorage.getItem('theme');
+        let theme = storedTheme;
+        if (!theme) {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            theme = 'light';
+          } else {
+            theme = 'dark';
+          }
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -84,6 +99,14 @@
           <a href="#math" class="nav-link" data-i18n="nav.math">Math</a>
           <a href="#patterns" class="nav-link" data-i18n="nav.patterns">Patterns</a>
           <a href="#reference" class="nav-link" data-i18n="nav.reference">Reference</a>
+          <button
+            class="theme-toggle-btn"
+            id="themeToggleBtn"
+            aria-label="Toggle theme"
+            title="Toggle theme"
+          >
+            <span class="theme-icon" id="themeIcon">☀️</span>
+          </button>
           <div class="lang-selector">
             <button class="lang-btn" id="langBtn" aria-label="Select language" aria-expanded="false">
               <span id="currentLang">EN</span>
@@ -109,6 +132,12 @@
         <a href="#math" class="mobile-nav-link" data-i18n="nav.math">Math</a>
         <a href="#patterns" class="mobile-nav-link" data-i18n="nav.patterns">Patterns</a>
         <a href="#reference" class="mobile-nav-link" data-i18n="nav.reference">Reference</a>
+        <div class="mobile-theme-toggle">
+          <button class="mobile-theme-btn" id="mobileThemeToggleBtn" aria-label="Toggle theme">
+            <span class="mobile-theme-icon" id="mobileThemeIcon">☀️</span>
+            <span class="mobile-theme-text">Toggle Theme</span>
+          </button>
+        </div>
         <div class="mobile-lang-selector">
           <button class="mobile-lang-btn" data-lang="en">🇺🇸 English</button>
           <button class="mobile-lang-btn" data-lang="tr">🇹🇷 Türkçe</button>
