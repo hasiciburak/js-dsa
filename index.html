@@ -181,6 +181,131 @@
         background: var(--glow-yellow);
       }
 
+      /* Mobile Menu Button */
+      .mobile-menu-btn {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 28px;
+        height: 28px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 101;
+        position: relative;
+      }
+
+      .mobile-menu-btn span {
+        width: 100%;
+        height: 2px;
+        background: var(--text-primary);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        transform-origin: center;
+      }
+
+      .mobile-menu-btn[aria-expanded='true'] span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      .mobile-menu-btn[aria-expanded='true'] span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-menu-btn[aria-expanded='true'] span:nth-child(3) {
+        transform: rotate(-45deg) translate(8px, -8px);
+      }
+
+      .mobile-menu-btn:focus {
+        outline: 3px solid var(--accent-cyan);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      /* Mobile Menu Overlay */
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .mobile-menu-overlay[aria-hidden='false'] {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Mobile Menu Content */
+      .mobile-menu-content {
+        position: fixed;
+        top: 64px;
+        right: 0;
+        bottom: 0;
+        width: 280px;
+        max-width: 85vw;
+        background: var(--bg-card);
+        border-left: 1px solid var(--border-color);
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 100;
+      }
+
+      .mobile-menu-overlay[aria-hidden='false'] .mobile-menu-content {
+        transform: translateX(0);
+      }
+
+      .mobile-nav-link {
+        display: block;
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .mobile-nav-link:hover {
+        color: var(--text-primary);
+        background: var(--bg-secondary);
+      }
+
+      .mobile-nav-link:focus {
+        outline: 3px solid var(--accent-cyan);
+        outline-offset: 2px;
+        color: var(--text-primary);
+        background: var(--bg-secondary);
+      }
+
+      .mobile-nav-link.active {
+        color: var(--accent-yellow);
+        background: var(--glow-yellow);
+      }
+
+      .mobile-menu-content::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .mobile-menu-content::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+      }
+
+      .mobile-menu-content::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 3px;
+      }
+
       .help-btn {
         margin-top: 2rem;
         padding: 0.75rem 1.5rem;
@@ -909,6 +1034,10 @@
           padding: 0 1rem;
         }
 
+        .mobile-menu-btn {
+          display: flex;
+        }
+
         .nav-links {
           display: none;
         }
@@ -1016,6 +1145,11 @@
     <nav aria-label="Main navigation">
       <div class="nav-container">
         <div class="logo">JS<span>DSA</span></div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <div class="nav-links">
           <a href="#arrays" class="nav-link">Arrays</a>
           <a href="#strings" class="nav-link">Strings</a>
@@ -1028,6 +1162,20 @@
         </div>
       </div>
     </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" aria-hidden="true">
+      <div class="mobile-menu-content">
+        <a href="#arrays" class="mobile-nav-link">Arrays</a>
+        <a href="#strings" class="mobile-nav-link">Strings</a>
+        <a href="#objects" class="mobile-nav-link">Objects</a>
+        <a href="#map" class="mobile-nav-link">Map</a>
+        <a href="#set" class="mobile-nav-link">Set</a>
+        <a href="#math" class="mobile-nav-link">Math</a>
+        <a href="#patterns" class="mobile-nav-link">Patterns</a>
+        <a href="#reference" class="mobile-nav-link">Reference</a>
+      </div>
+    </div>
 
     <!-- Popup Modal -->
     <div
@@ -2168,6 +2316,81 @@ queue.<span class="function">shift</span>();             <span class="comment">/
           closePopup();
         }
       });
+
+      // Mobile Menu functionality
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      function openMobileMenu() {
+        mobileMenuOverlay.setAttribute('aria-hidden', 'false');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        mobileMenuOverlay.setAttribute('aria-hidden', 'true');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      // Toggle menu on button click
+      mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        if (isOpen) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+      });
+
+      // Close menu when clicking overlay (outside menu)
+      mobileMenuOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileMenuOverlay) {
+          closeMobileMenu();
+        }
+      });
+
+      // Close menu when clicking a navigation link
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          closeMobileMenu();
+          // Update active state
+          const sectionId = link.getAttribute('href').substring(1);
+          mobileNavLinks.forEach((l) => l.classList.remove('active'));
+          link.classList.add('active');
+        });
+      });
+
+      // Close menu with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenuOverlay.getAttribute('aria-hidden') === 'false') {
+          closeMobileMenu();
+        }
+      });
+
+      // Update active state for mobile nav links on scroll
+      function updateActiveMobileNav() {
+        const scrollPos = window.scrollY + 100;
+
+        sections.forEach((section) => {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          const id = section.getAttribute('id');
+
+          if (scrollPos >= top && scrollPos < top + height) {
+            mobileNavLinks.forEach((link) => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${id}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveMobileNav);
+      updateActiveMobileNav();
 
       // Back to Top Button
       const backToTopBtn = document.getElementById('backToTop');
