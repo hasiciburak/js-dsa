@@ -200,7 +200,14 @@
     "footer": {
       "message": "Good luck with your interviews!",
       "backToTop": "Back to top",
-      "attribution": "Created By Burak Haşıcı With Coffee and Protein Snacks ☕ 🍫"
+      "attribution": "Created By Burak Haşıcı With Coffee and Protein Snacks ☕ 🍫",
+      "socialLinks": {
+        "instagram": "Visit Instagram profile",
+        "x": "Visit X (Twitter) profile",
+        "linkedin": "Visit LinkedIn profile",
+        "medium": "Visit Medium profile",
+        "github": "Visit GitHub profile"
+      }
     },
     "buttons": {
       "copy": "Copy",
@@ -432,7 +439,14 @@
     "footer": {
       "message": "Mülakatlarında başarılar!",
       "backToTop": "Yukarı çık",
-      "attribution": "Kahve ve Protein Barları Eşliğinde Burak Haşıcı Tarafından Tasarlandı ☕ 🍫"
+      "attribution": "Kahve ve Protein Barları Eşliğinde Burak Haşıcı Tarafından Tasarlandı ☕ 🍫",
+      "socialLinks": {
+        "instagram": "Instagram profilini ziyaret et",
+        "x": "X (Twitter) profilini ziyaret et",
+        "linkedin": "LinkedIn profilini ziyaret et",
+        "medium": "Medium profilini ziyaret et",
+        "github": "GitHub profilini ziyaret et"
+      }
     },
     "buttons": {
       "copy": "Kopyala",
